@@ -1,8 +1,8 @@
 ﻿using TwoOneTwoGames.UIManager.ScreenNavigation;
 
-namespace UserInterface.Screens
+namespace UserInterface.Popups
 {
-    public class MainScreen: UIScreen
+    public class SettingsPopup: UIPopup
     {
         
     }
