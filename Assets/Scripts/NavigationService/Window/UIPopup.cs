@@ -96,7 +96,14 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             }
         }
 
-        protected abstract void CloseButtonClicked();
-        protected abstract void BackgroundClicked();
+        protected virtual void CloseButtonClicked()
+        {
+            Close();
+        }
+
+        protected virtual void BackgroundClicked()
+        {
+            OnBackTriggered();
+        }
     }
 }
