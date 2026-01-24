@@ -1,43 +1,54 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
+[Serializable]
 public class PackageModel : IPackageModel
 {
     public event Action<IChallengeCardModel> CardAdded;
     public event Action<IChallengeCardModel> CardRemoved;
+    public event Action<int> CardsNumberChanged;
     public event Action<string> TitleChanged;
+    public string Id { get; }
+    public string Title { get; set; }
+    public List<ChallengeCardModel> ChallengeCards { get; set; } = new();
     
-    public string Title { get; private set; }
-    public IReadOnlyList<IChallengeCardModel> ChallengeCards => _challengeCards;
-    
-    private readonly List<IChallengeCardModel> _challengeCards;
-
-    public PackageModel(string title)
+    public PackageModel()
     {
-        Title = title;
-        _challengeCards = new List<IChallengeCardModel>();
+        Id = Guid.NewGuid().ToString();
     }
 
+    public PackageModel(string title): this()
+    {
+        Title = title;
+    }
+    
     public bool AddChallengeCardModel(IChallengeCardModel card)
     {
-        if (card == null)
+        if (card is not ChallengeCardModel challengeCard)
         {
             return false;
         }
 
-        _challengeCards.Add(card);
+        ChallengeCards.Add(challengeCard);
         CardAdded?.Invoke(card);
+        CardsNumberChanged?.Invoke(ChallengeCards.Count);
         return true;
     }
 
     public bool RemoveChallengeCardModel(IChallengeCardModel card)
     {
-        if (!_challengeCards.Remove(card))
+        if (card is not ChallengeCardModel challengeCard)
+        {
+            return false;
+        }
+        
+        if (!ChallengeCards.Remove(challengeCard))
         {
             return false;
         }
 
         CardRemoved?.Invoke(card);
+        CardsNumberChanged?.Invoke(ChallengeCards.Count);
         return true;
     }
 

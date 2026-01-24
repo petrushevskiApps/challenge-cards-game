@@ -1,16 +1,23 @@
 using System;
 
+[Serializable]
 public class ChallengeCardModel : IChallengeCardModel
 {
     public event Action<string> TitleChanged;
     public event Action<string> DescriptionChanged;
     public event Action<bool> SelectionChanged;
-    public string Title { get; private set; }
-    public string Description { get; private set; }
-    public bool IsSelected { get; private set; }
 
+    public string Id { get; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public bool IsSelected { get; set; }
 
-    public ChallengeCardModel(string title, string description, bool isSelected = false)
+    public ChallengeCardModel()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+
+    public ChallengeCardModel(string title, string description, bool isSelected = false): this()
     {
         UpdateTitle(title);
         UpdateDescription(description);
@@ -35,11 +42,6 @@ public class ChallengeCardModel : IChallengeCardModel
 
     public void UpdateDescription(string description)
     {
-        if (string.IsNullOrWhiteSpace(description))
-        {
-            throw new ArgumentException("Title cannot be null, empty, or whitespace.", nameof(description));
-        }
-
         if (Description == description)
         {
             return;
