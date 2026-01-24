@@ -68,10 +68,10 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         public virtual void Hide()
         {
             PopupHiddenEvent?.Invoke(this, EventArgs.Empty);
-            _popupClickableBackground.onClick.AddListener(BackgroundClicked);
+            _popupClickableBackground.onClick.RemoveListener(BackgroundClicked);
             if (_closeButton != null)
             {
-                _closeButton.onClick.AddListener(CloseButtonClicked);
+                _closeButton.onClick.RemoveListener(CloseButtonClicked);
             }
             gameObject.SetActive(false);
             PauseGame(false);
@@ -98,12 +98,12 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         protected virtual void CloseButtonClicked()
         {
-            Close();
+            NavigationManager.GoBack();
         }
 
         protected virtual void BackgroundClicked()
         {
-            OnBackTriggered();
+            NavigationManager.GoBack();
         }
     }
 }
