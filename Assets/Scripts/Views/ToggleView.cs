@@ -18,6 +18,11 @@ public class ToggleView : MonoBehaviour
     
     private Toggle _toggle;
     private RectTransform _rectTransform;
+
+    public void UpdateToggleState(bool isOn)
+    {
+        OnValueChanged(isOn);
+    }
     
     private void Awake()
     {
@@ -39,17 +44,17 @@ public class ToggleView : MonoBehaviour
     {
         if (isOn)
         {
-            SetAnchorMinAndMax(1);
+            SetAnchorMinAndMax(1, -10);
             _checkmarkBackground.color = _toggleOnBackgroundColor;
         }
         else
         {
-            SetAnchorMinAndMax(0);
+            SetAnchorMinAndMax(0, 10);
             _checkmarkBackground.color = Color.white;
         }
     }
 
-    private void SetAnchorMinAndMax(float value)
+    private void SetAnchorMinAndMax(float value, float anchoredPos)
     {
         var min = _rectTransform.anchorMin;
         min.x = value;
@@ -60,7 +65,7 @@ public class ToggleView : MonoBehaviour
         _rectTransform.anchorMax = max;
 
         var anchoredPosition = _rectTransform.anchoredPosition;
-        anchoredPosition.x *= -1;
+        anchoredPosition.x = anchoredPos;
         _rectTransform.anchoredPosition = anchoredPosition;
     }
 }
