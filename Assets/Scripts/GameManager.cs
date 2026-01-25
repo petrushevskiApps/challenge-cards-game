@@ -1,4 +1,5 @@
 ﻿using System;
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using Zenject;
@@ -13,9 +14,19 @@ namespace DefaultNamespace
         public event Action<bool> GamePausedEvent;
         
         private bool _isGamePaused;
+        
+        // Injected
+        private IScreenNavigation _screenNavigation;
+        private ILocalizationService _localizationService;
 
         [Inject]
-        private IScreenNavigation _screenNavigation;
+        public void Initialize(
+            IScreenNavigation screenNavigation,
+            ILocalizationService localizationService)
+        {
+            _screenNavigation = screenNavigation;
+            _localizationService = localizationService;
+        }
         
         private void Awake()
         {
@@ -26,6 +37,7 @@ namespace DefaultNamespace
         {
             Input.multiTouchEnabled = false;
             SetupFrameRate();
+            _localizationService.Initialize();
             _screenNavigation.ShowMainScreen();
         }
 

@@ -52,6 +52,10 @@ public class MainInstaller : MonoInstaller
             .Bind<IChallengeCardListController>()
             .To<ChallengeCardListController>()
             .AsSingle();
+        Container
+            .Bind<ILocalizationService>()
+            .To<LocalizationService>()
+            .AsSingle();
         
         Container
             .BindMemoryPool<ChallengeCardListItemView, ChallengeCardListItemView.Pool>()
