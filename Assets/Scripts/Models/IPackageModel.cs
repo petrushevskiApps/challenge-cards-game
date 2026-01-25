@@ -12,5 +12,5 @@ public interface IPackageModel
     bool RemoveChallengeCardModel(IChallengeCardModel card);
     void UpdateTitle(string title);
     event Action<string> TitleChanged;
-    event Action<int> CardsNumberChanged;
+    event Action CardsNumberChanged;
 }

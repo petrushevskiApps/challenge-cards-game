@@ -6,7 +6,7 @@ public class PackageModel : IPackageModel
 {
     public event Action<IChallengeCardModel> CardAdded;
     public event Action<IChallengeCardModel> CardRemoved;
-    public event Action<int> CardsNumberChanged;
+    public event Action CardsNumberChanged;
     public event Action<string> TitleChanged;
     public string Id { get; }
     public string Title { get; set; }
@@ -31,7 +31,7 @@ public class PackageModel : IPackageModel
 
         ChallengeCards.Add(challengeCard);
         CardAdded?.Invoke(card);
-        CardsNumberChanged?.Invoke(ChallengeCards.Count);
+        CardsNumberChanged?.Invoke();
         return true;
     }
 
@@ -48,7 +48,7 @@ public class PackageModel : IPackageModel
         }
 
         CardRemoved?.Invoke(card);
-        CardsNumberChanged?.Invoke(ChallengeCards.Count);
+        CardsNumberChanged?.Invoke();
         return true;
     }
 

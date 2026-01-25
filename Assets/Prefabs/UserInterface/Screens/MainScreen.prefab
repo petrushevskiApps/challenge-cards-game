@@ -988,8 +988,11 @@ MonoBehaviour:
   _activateSafeArea: 1
   _isBackStackable: 1
   _globalUiElements: []
+  _packageListLabel: {fileID: 7266777928461947248}
   _createPackageButton: {fileID: 894259909866774145}
+  _createPackageButtonLabel: {fileID: 854830383382567679}
   _playButton: {fileID: 2982674076206102552}
+  _playButtonLabel: {fileID: 2603059414590055187}
   _settingsButton: {fileID: 9035017777817831408}
   _message: {fileID: 7339362857238801952}
   _listView: {fileID: 7718233058493744757}

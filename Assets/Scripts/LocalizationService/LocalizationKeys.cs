@@ -25,5 +25,6 @@ namespace Localization
         public const string CannotBeUndone = "CANNOT_BE_UNDONE";
         public const string No = "NO";
         public const string Yes = "YES";
+        public const string NewPackage = "NEW_PACKAGE";
     }
 }

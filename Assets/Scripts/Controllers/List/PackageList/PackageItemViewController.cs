@@ -1,18 +1,22 @@
-﻿using TwoOneTwoGames.UIManager.ScreenNavigation;
+﻿using Localization;
+using TwoOneTwoGames.UIManager.ScreenNavigation;
 
 namespace UserInterface.Views
 {
     public class PackageItemViewController: IPackageItemViewController
     {
+        private readonly ILocalizationService _localizationService;
         private readonly IScreenNavigation _screenNavigation;
         private readonly IPackageModel _packageModel;
         private readonly PackageListItemView _view;
 
         public PackageItemViewController(
+            ILocalizationService localizationService,
             IScreenNavigation screenNavigation,
             IPackageModel packageModel,
             PackageListItemView view)
         {
+            _localizationService = localizationService;
             _screenNavigation = screenNavigation;
             _packageModel = packageModel;
             _view = view;
@@ -20,7 +24,7 @@ namespace UserInterface.Views
             SubscribeToEvents();
             
             SetTitle(_packageModel.Title);
-            SetPackageInfo(_packageModel.ChallengeCards?.Count ?? 0);
+            SetPackageInfo();
         }
         
         public void Clear()
@@ -37,17 +41,25 @@ namespace UserInterface.Views
         {
             _packageModel.TitleChanged += SetTitle;
             _packageModel.CardsNumberChanged += SetPackageInfo;
+            _localizationService.LanguageChanged += OnLanguageChanged;
         }
 
         private void UnsubscribeFromEvents()
         {
             _packageModel.TitleChanged -= SetTitle;
             _packageModel.CardsNumberChanged -= SetPackageInfo;
+            _localizationService.LanguageChanged -= OnLanguageChanged;
         }
 
-        private void SetPackageInfo(int cardsCount)
+        private void OnLanguageChanged()
         {
-            _view.SetPackageInfo($"{cardsCount} cards");
+            SetPackageInfo();
+        }
+
+        private void SetPackageInfo()
+        {
+            int cardsCount = _packageModel.ChallengeCards?.Count ?? 0;
+            _view.SetPackageInfo($"{cardsCount} {_localizationService.GetLocalizedString(LocalizationKeys.Cards)}");
         }
 
         private void SetTitle(string title)

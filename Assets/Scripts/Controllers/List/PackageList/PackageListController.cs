@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UserInterface.Views;
@@ -11,15 +12,18 @@ public class PackageListController: IPackageListController
     private readonly Dictionary<string, PackageListItemView> _activeViews = new();
     
     // Injected
+    private readonly ILocalizationService _localizationService;
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPackageRepository _packageRepository;
     private readonly PackageListItemView.Pool _packagesPool;
     
     public PackageListController(
+        ILocalizationService localizationService,
         IScreenNavigation screenNavigation,
         IPackageRepository packageRepository,
         PackageListItemView.Pool packagesPool)
     {
+        _localizationService = localizationService;
         _screenNavigation = screenNavigation;
         _packageRepository = packageRepository;
         _packagesPool = packagesPool;
@@ -56,7 +60,7 @@ public class PackageListController: IPackageListController
             return;
         }
         PackageListItemView view = _packagesPool.Spawn(_listView.ContentContainer);
-        view.Setup(new PackageItemViewController(_screenNavigation, package, view));
+        view.Setup(new PackageItemViewController(_localizationService, _screenNavigation, package, view));
         _activeViews.Add(package.Id, view);
     }
 

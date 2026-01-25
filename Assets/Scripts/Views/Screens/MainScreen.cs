@@ -12,9 +12,15 @@ namespace UserInterface.Screens
     public class MainScreen: UIScreen, IMainScreenView
     {
         [SerializeField]
+        private TextMeshProUGUI _packageListLabel;
+        [SerializeField]
         private Button _createPackageButton;
         [SerializeField]
+        private TextMeshProUGUI _createPackageButtonLabel;
+        [SerializeField]
         private Button _playButton;
+        [SerializeField]
+        private TextMeshProUGUI _playButtonLabel;
         [SerializeField]
         private Button _settingsButton;
         [SerializeField]
@@ -60,19 +66,33 @@ namespace UserInterface.Screens
             _playButton.onClick.RemoveListener(_controller.PlayClicked);
             _settingsButton.onClick.RemoveListener(_controller.SettingsClicked);
         }
+        
+        public void SetMessage(string message)
+        {
+            _message.text = message;
+        }
 
-        public void SetMessage(bool isVisible, string message)
+        public void SetMessageVisibility(bool isVisible)
         {
             _message.gameObject.SetActive(isVisible);
-            if (isVisible)
-            {
-                _message.text = message;
-            }
         }
 
         public void SetPlayButton(bool isVisible)
         {
             _playButton.gameObject.SetActive(isVisible);
+        }
+
+        public void SetPackageListLabel(string label)
+        {
+            _packageListLabel.text = label;
+        }
+        public void SetCreatePackageButtonLabel(string label)
+        {
+            _createPackageButtonLabel.text = label;
+        }
+        public void SetPlayButtonLabel(string label)
+        {
+            _playButtonLabel.text = label;
         }
     }
 }
