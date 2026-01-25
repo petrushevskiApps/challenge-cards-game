@@ -980,9 +980,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45cd613262543f49d34773a8423b101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 2057473795387605951}
-  _backgroundColorOn: {r: 1, g: 0.53333336, b: 0, a: 1}
-  _backgroundColorOff: {r: 1, g: 1, b: 1, a: 1}
+  _toggle: {fileID: 3238260578044031588}
+  _imageColors:
+  - Graphic: {fileID: 2057473795387605951}
+    ColorOn: {r: 1, g: 0.53333336, b: 0, a: 1}
+    ColorOff: {r: 1, g: 1, b: 1, a: 1}
   _textColors:
   - Text: {fileID: 1827723741184348872}
     ColorOn: {r: 1, g: 1, b: 1, a: 1}

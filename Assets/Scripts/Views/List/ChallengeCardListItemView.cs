@@ -1,3 +1,4 @@
+using DefaultNamespace.Views;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,7 +14,7 @@ namespace UserInterface.Views
         [SerializeField]
         private TextMeshProUGUI _cardDescription;
         [SerializeField]
-        private Toggle _selectToggle;
+        private ToggleView _selectToggle;
         [FormerlySerializedAs("_toggleView")]
         [SerializeField]
         private SwitchView _switchView;
@@ -30,7 +31,7 @@ namespace UserInterface.Views
             
             if (_selectToggle != null)
             {
-                _selectToggle.onValueChanged.AddListener(OnToggleValueChanged);
+                _selectToggle.Toggle.onValueChanged.AddListener(OnToggleValueChanged);
             }
             
             if (_editButton != null)
@@ -50,7 +51,7 @@ namespace UserInterface.Views
             
             if (_selectToggle != null)
             {
-                _selectToggle.onValueChanged.RemoveListener(OnToggleValueChanged);
+                _selectToggle.Toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
             }
             
             if (_editButton != null)
@@ -84,7 +85,7 @@ namespace UserInterface.Views
         {
             if (_selectToggle != null)
             {
-                _selectToggle.SetIsOnWithoutNotify(isSelected);
+                _selectToggle.UpdateToggleState(isSelected);
                 _switchView.UpdateToggleState(isSelected);
             }
         }

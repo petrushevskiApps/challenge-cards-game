@@ -271,9 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45cd613262543f49d34773a8423b101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 5854422762751780990}
-  _backgroundColorOn: {r: 0.05490196, g: 0.05490196, b: 0.05490196, a: 1}
-  _backgroundColorOff: {r: 1, g: 1, b: 1, a: 1}
+  _toggle: {fileID: 2706368755730982863}
+  _imageColors:
+  - Graphic: {fileID: 5854422762751780990}
+    ColorOn: {r: 0.05490196, g: 0.05490196, b: 0.05490196, a: 1}
+    ColorOff: {r: 1, g: 1, b: 1, a: 1}
   _textColors:
   - Text: {fileID: 5732982401928798464}
     ColorOn: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
@@ -441,7 +443,7 @@ GameObject:
   - component: {fileID: 5605575114715682766}
   - component: {fileID: 9151193994269313853}
   m_Layer: 5
-  m_Name: EnglishButton
+  m_Name: English
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,9 +567,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45cd613262543f49d34773a8423b101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 4822104683077420125}
-  _backgroundColorOn: {r: 0.05490196, g: 0.05490196, b: 0.05490196, a: 1}
-  _backgroundColorOff: {r: 1, g: 1, b: 1, a: 1}
+  _toggle: {fileID: 5605575114715682766}
+  _imageColors:
+  - Graphic: {fileID: 4822104683077420125}
+    ColorOn: {r: 0.05490196, g: 0.05490196, b: 0.05490196, a: 1}
+    ColorOff: {r: 1, g: 1, b: 1, a: 1}
   _textColors:
   - Text: {fileID: 1910412521081369474}
     ColorOn: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}

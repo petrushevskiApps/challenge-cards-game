@@ -6,34 +6,21 @@ using UnityEngine.UI;
 
 namespace DefaultNamespace.Views
 {
-    [RequireComponent(typeof(Toggle))]
     public class ToggleView : MonoBehaviour
     {
-        [Header("Background")]
         [SerializeField]
-        private Image _background;
+        private Toggle _toggle;
         [SerializeField]
-        private Color _backgroundColorOn;
-        [SerializeField]
-        private Color _backgroundColorOff;
-
-        [Header("Text")]
+        private List<ImageColorData> _imageColors;
         [SerializeField]
         private List<TextColorData> _textColors;
         
-        private Toggle _toggle;
-
         public Toggle Toggle => _toggle;
         
         public void UpdateToggleState(bool isOn)
         {
             _toggle.SetIsOnWithoutNotify(isOn);
             OnValueChanged(isOn);
-        }
-        
-        private void Awake()
-        {
-            _toggle = GetComponent<Toggle>();
         }
         
         private void OnEnable()
@@ -50,7 +37,10 @@ namespace DefaultNamespace.Views
         {
             if (isOn)
             {
-                _background.color = _backgroundColorOn;
+                foreach (ImageColorData data in _imageColors)
+                {
+                    data.Graphic.color = data.ColorOn;
+                }
                 foreach (TextColorData data in _textColors)
                 {
                     data.Text.color = data.ColorOn;
@@ -58,7 +48,10 @@ namespace DefaultNamespace.Views
             }
             else
             {
-                _background.color = _backgroundColorOff;
+                foreach (ImageColorData data in _imageColors)
+                {
+                    data.Graphic.color = data.ColorOff;
+                }
                 foreach (TextColorData data in _textColors)
                 {
                     data.Text.color = data.ColorOff;
@@ -72,6 +65,17 @@ namespace DefaultNamespace.Views
     {
         [SerializeField]
         public TextMeshProUGUI Text;
+        [SerializeField]
+        public Color ColorOn;
+        [SerializeField]
+        public Color ColorOff;
+    }
+    
+    [Serializable]
+    public class ImageColorData
+    {
+        [SerializeField]
+        public Image Graphic;
         [SerializeField]
         public Color ColorOn;
         [SerializeField]

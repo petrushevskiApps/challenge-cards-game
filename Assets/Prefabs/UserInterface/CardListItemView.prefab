@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 8327145904984471386}
   - component: {fileID: 7690774089154394078}
   - component: {fileID: 1416214580798913863}
+  - component: {fileID: 8797551004581131918}
   m_Layer: 5
   m_Name: CardListItemView
   m_TagString: Untagged
@@ -563,10 +564,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardTitle: {fileID: 1057765976206239688}
   _cardDescription: {fileID: 5224301021823283795}
-  _selectToggle: {fileID: 8272210635487701802}
-  _toggleView: {fileID: 2314462429020015664}
+  _selectToggle: {fileID: 8797551004581131918}
+  _switchView: {fileID: 2314462429020015664}
   _editButton: {fileID: 8327145904984471386}
   _deleteButton: {fileID: 1535185495335527493}
+--- !u!114 &8797551004581131918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407064924788767788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45cd613262543f49d34773a8423b101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 8272210635487701802}
+  _imageColors:
+  - Graphic: {fileID: 8976933539224540629}
+    ColorOn: {r: 1, g: 0.5882353, b: 0.007843138, a: 1}
+    ColorOff: {r: 1, g: 1, b: 1, a: 1}
+  - Graphic: {fileID: 5420704865870663861}
+    ColorOn: {r: 1, g: 1, b: 1, a: 1}
+    ColorOff: {r: 0, g: 0, b: 0, a: 1}
+  _textColors:
+  - Text: {fileID: 1057765976206239688}
+    ColorOn: {r: 1, g: 1, b: 1, a: 1}
+    ColorOff: {r: 0, g: 0, b: 0, a: 1}
+  - Text: {fileID: 5224301021823283795}
+    ColorOn: {r: 1, g: 1, b: 1, a: 1}
+    ColorOff: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6854877254936902784
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,14 +655,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee3b9078125acba49adaa6709be99b6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bbea93a162b9ab408d3bfd31930bcaf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
