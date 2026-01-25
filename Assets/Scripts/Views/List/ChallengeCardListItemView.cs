@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -13,8 +14,9 @@ namespace UserInterface.Views
         private TextMeshProUGUI _cardDescription;
         [SerializeField]
         private Toggle _selectToggle;
+        [FormerlySerializedAs("_toggleView")]
         [SerializeField]
-        private ToggleView _toggleView;
+        private SwitchView _switchView;
         [SerializeField]
         private Button _editButton;
         [SerializeField]
@@ -83,7 +85,7 @@ namespace UserInterface.Views
             if (_selectToggle != null)
             {
                 _selectToggle.SetIsOnWithoutNotify(isSelected);
-                _toggleView.UpdateToggleState(isSelected);
+                _switchView.UpdateToggleState(isSelected);
             }
         }
 
