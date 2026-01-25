@@ -1,71 +1,80 @@
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Toggle))]
-public class ToggleView : MonoBehaviour
+namespace DefaultNamespace.Views
 {
-    [SerializeField]
-    private Image _checkmark;
-
-    [SerializeField]
-    private Image _checkmarkBackground;
-
-    [SerializeField]
-    private Color _toggleOnBackgroundColor;
-    
-    private Toggle _toggle;
-    private RectTransform _rectTransform;
-
-    public void UpdateToggleState(bool isOn)
+    [RequireComponent(typeof(Toggle))]
+    public class ToggleView : MonoBehaviour
     {
-        OnValueChanged(isOn);
-    }
-    
-    private void Awake()
-    {
-        _toggle = GetComponent<Toggle>();
-        _rectTransform = _checkmark.GetComponent<RectTransform>();
-    }
+        [Header("Background")]
+        [SerializeField]
+        private Image _background;
+        [SerializeField]
+        private Color _backgroundColorOn;
+        [SerializeField]
+        private Color _backgroundColorOff;
 
-    private void OnEnable()
-    {
-        _toggle.onValueChanged.AddListener(OnValueChanged);
-    }
-
-    private void OnDisable()
-    {
-        _toggle.onValueChanged.RemoveListener(OnValueChanged);
-    }
-
-    private void OnValueChanged(bool isOn)
-    {
-        if (isOn)
-        {
-            SetAnchorMinAndMax(1, -10);
-            _checkmarkBackground.color = _toggleOnBackgroundColor;
-        }
-        else
-        {
-            SetAnchorMinAndMax(0, 10);
-            _checkmarkBackground.color = Color.white;
-        }
-    }
-
-    private void SetAnchorMinAndMax(float value, float anchoredPos)
-    {
-        var min = _rectTransform.anchorMin;
-        min.x = value;
-        _rectTransform.anchorMin = min;
+        [Header("Text")]
+        [SerializeField]
+        private List<TextColorData> _textColors;
         
-        var max = _rectTransform.anchorMax;
-        max.x = value;
-        _rectTransform.anchorMax = max;
+        private Toggle _toggle;
 
-        var anchoredPosition = _rectTransform.anchoredPosition;
-        anchoredPosition.x = anchoredPos;
-        _rectTransform.anchoredPosition = anchoredPosition;
+        public Toggle Toggle => _toggle;
+        
+        public void UpdateToggleState(bool isOn)
+        {
+            _toggle.SetIsOnWithoutNotify(isOn);
+            OnValueChanged(isOn);
+        }
+        
+        private void Awake()
+        {
+            _toggle = GetComponent<Toggle>();
+        }
+        
+        private void OnEnable()
+        {
+            _toggle.onValueChanged.AddListener(OnValueChanged);
+        }
+
+        private void OnDisable()
+        {
+            _toggle.onValueChanged.RemoveListener(OnValueChanged);
+        }
+        
+        private void OnValueChanged(bool isOn)
+        {
+            if (isOn)
+            {
+                _background.color = _backgroundColorOn;
+                foreach (TextColorData data in _textColors)
+                {
+                    data.Text.color = data.ColorOn;
+                }
+            }
+            else
+            {
+                _background.color = _backgroundColorOff;
+                foreach (TextColorData data in _textColors)
+                {
+                    data.Text.color = data.ColorOff;
+                }
+            }
+        }
+    }
+
+    [Serializable]
+    public class TextColorData
+    {
+        [SerializeField]
+        public TextMeshProUGUI Text;
+        [SerializeField]
+        public Color ColorOn;
+        [SerializeField]
+        public Color ColorOff;
     }
 }
