@@ -5,7 +5,7 @@ using DefaultNamespace.Extensions;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class ChallengeRepository : IChallengeRepository
+public class RandomChallengeRepository : IRandomChallengeRepository
 {
     private const string CHALLENGES_FILE_PATH = "random_challenges";
     

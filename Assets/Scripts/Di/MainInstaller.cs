@@ -24,8 +24,8 @@ public class MainInstaller : MonoInstaller
             .AsSingle();
         
         Container
-            .Bind<IChallengeRepository>()
-            .To<ChallengeRepository>()
+            .Bind<IRandomChallengeRepository>()
+            .To<RandomChallengeRepository>()
             .AsSingle();
         
         Container

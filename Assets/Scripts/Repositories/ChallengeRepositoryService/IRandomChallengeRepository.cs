@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public interface IChallengeRepository
+public interface IRandomChallengeRepository
 {
     List<string> GetRandomChallenges(int count, string language);
 }
