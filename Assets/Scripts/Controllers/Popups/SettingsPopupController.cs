@@ -21,6 +21,7 @@ namespace DefaultNamespace.Controllers
         {
             SetupLanguageSelection();
             SetTitle();
+            SetToggleLabels();
         }
 
         public void Setup(ISettingsPopupView view)
@@ -28,6 +29,7 @@ namespace DefaultNamespace.Controllers
             _view = view;
             SetupLanguageSelection();
             SetTitle();
+            SetToggleLabels();
         }
 
         public void EnglishToggleChanged(bool isOn)
@@ -69,6 +71,12 @@ namespace DefaultNamespace.Controllers
         private void SetTitle()
         {
             _view?.SetTitle(_localizationService.GetLocalizedString(LocalizationKeys.SelectLanguage));
+        }
+
+        private void SetToggleLabels()
+        {
+            _view?.SetEnglishToggleLabel(_localizationService.GetLocalizedString(LocalizationKeys.LanguageEnglish));
+            _view?.SetRussianToggleLabel(_localizationService.GetLocalizedString(LocalizationKeys.LanguageRussian));
         }
     }
 }

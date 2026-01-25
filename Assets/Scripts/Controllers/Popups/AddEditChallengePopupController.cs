@@ -1,4 +1,5 @@
 ﻿using System;
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UserInterface.Popups;
@@ -13,11 +14,17 @@ namespace DefaultNamespace.Controllers
         private IPackageModel _packageModel;
         private IChallengeCardModel _challengeCardModel;
         private string _challengeDescription;
+        private bool _isEdit;
         
+        // Injected
+        private readonly ILocalizationService _localizationService;
         private readonly INavigationManager _navigationManager;
 
-        public AddEditChallengePopupController(INavigationManager navigationManager)
+        public AddEditChallengePopupController(
+            ILocalizationService localizationService,
+            INavigationManager navigationManager)
         {
+            _localizationService = localizationService;
             _navigationManager = navigationManager;
         }
         
@@ -31,9 +38,29 @@ namespace DefaultNamespace.Controllers
             _packageModel = packageModel;
             _challengeCardModel = challengeCardModel;
             _view.SetInputFieldLimit(DESCRIPTION_MAX_CHARACTERS);
-
+            _isEdit = challengeDescriptionText != null;
+            
             InputTextUpdated(challengeDescriptionText);
-            SetButtonText(challengeDescriptionText);
+            SetButtonText();
+            SetTitle();
+            SetInputFieldPlaceholder();
+        }
+
+        public void PopupShown()
+        {
+            _localizationService.LanguageChanged += OnLanguageChanged;
+        }
+
+        public void PopupClosed()
+        {
+            _localizationService.LanguageChanged -= OnLanguageChanged;
+        }
+
+        private void OnLanguageChanged()
+        {
+            SetButtonText();
+            SetTitle();
+            SetInputFieldPlaceholder();
         }
 
         public void ActionButtonClicked()
@@ -45,7 +72,9 @@ namespace DefaultNamespace.Controllers
             }
             else
             {
-                _challengeCardModel = new ChallengeCardModel("Who’s most likely to", _challengeDescription);
+                _challengeCardModel = new ChallengeCardModel(
+                    _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
+                    _challengeDescription);
                 _packageModel.AddChallengeCardModel(_challengeCardModel);
                 _navigationManager.GoBack();
             }
@@ -54,18 +83,28 @@ namespace DefaultNamespace.Controllers
         public void InputTextUpdated(string challengeDescriptionText)
         {
             _challengeDescription = challengeDescriptionText;
-            _view.SetChallengeDescription(_challengeDescription);
+            _view?.SetChallengeDescription(_challengeDescription);
             int challengeDescriptionLength = _challengeDescription.Length;
 
-            _view.SetCharacterCountText($"{challengeDescriptionLength} / {DESCRIPTION_MAX_CHARACTERS}");
-            _view.SetAddEditButtonInteractivity(!string.IsNullOrWhiteSpace(challengeDescriptionText));
+            _view?.SetCharacterCountText($"{challengeDescriptionLength} / {DESCRIPTION_MAX_CHARACTERS}");
+            _view?.SetAddEditButtonInteractivity(!string.IsNullOrWhiteSpace(challengeDescriptionText));
         }
 
-        private void SetButtonText(string descriptionText)
+        private void SetButtonText()
         {
-            _view.SetAddEditButtonTitle(string.IsNullOrWhiteSpace(descriptionText)
-                ? "Add"
-                : "Update");
+            _view?.SetAddEditButtonTitle(_isEdit
+                ? _localizationService.GetLocalizedString(LocalizationKeys.Update)
+                : _localizationService.GetLocalizedString(LocalizationKeys.Add));
+        }
+
+        private void SetInputFieldPlaceholder()
+        {
+            _view?.SetInputFieldPlaceholder(_localizationService.GetLocalizedString(LocalizationKeys.WriteCustomChallenge));
+        }
+
+        private void SetTitle()
+        {
+            _view?.SetTitle(_localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely));
         }
     }
 }

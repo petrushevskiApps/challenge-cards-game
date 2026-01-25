@@ -1235,7 +1235,9 @@ MonoBehaviour:
   _actionButton: {fileID: 2679494858143551460}
   _actionButtonTitle: {fileID: 8139548949679283783}
   _inputField: {fileID: 285746516289273485}
+  _inputFieldPlaceholderLabel: {fileID: 7590260875898475991}
   _characterCount: {fileID: 4173453147894730283}
+  _title: {fileID: 8597413921548424087}
 --- !u!1 &8983545728677158304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1347,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

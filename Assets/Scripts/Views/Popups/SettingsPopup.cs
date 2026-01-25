@@ -16,9 +16,13 @@ namespace UserInterface.Popups
         
         [SerializeField]
         private ToggleView _englishToggle;
+        [SerializeField]
+        private TextMeshProUGUI _englishToggleLabel;
         
         [SerializeField]
         private ToggleView _russianToggle;
+        [SerializeField]
+        private TextMeshProUGUI _russianToggleLabel;
         
         // Injected
         private ISettingsPopupController _controller;
@@ -60,6 +64,14 @@ namespace UserInterface.Popups
         public void SetTitle(string title)
         {
             _title.text = title;
+        }
+        public void SetEnglishToggleLabel(string label)
+        {
+            _englishToggleLabel.text = label;
+        }
+        public void SetRussianToggleLabel(string label)
+        {
+            _russianToggleLabel.text = label;
         }
         
         private void EnglishToggleValueChanged(bool isOn)

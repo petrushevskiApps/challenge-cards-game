@@ -1152,7 +1152,9 @@ MonoBehaviour:
   _closeButton: {fileID: 2703490947486878993}
   _title: {fileID: 8215665479561438797}
   _englishToggle: {fileID: 9151193994269313853}
+  _englishToggleLabel: {fileID: 1910412521081369474}
   _russianToggle: {fileID: 3064912628943805772}
+  _russianToggleLabel: {fileID: 5732982401928798464}
 --- !u!1 &8503966882476173940
 GameObject:
   m_ObjectHideFlags: 0

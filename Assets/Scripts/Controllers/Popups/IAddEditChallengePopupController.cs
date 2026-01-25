@@ -13,5 +13,7 @@ namespace DefaultNamespace.Controllers
             string challengeDescriptionText = null);
         
         void ActionButtonClicked();
+        void PopupShown();
+        void PopupClosed();
     }
 }

@@ -17,9 +17,13 @@ namespace UserInterface.Popups
 
         [SerializeField]
         private TMP_InputField _inputField;
+        [SerializeField]
+        private TextMeshProUGUI _inputFieldPlaceholderLabel;
 
         [SerializeField]
         private TextMeshProUGUI _characterCount;
+        [SerializeField]
+        private TextMeshProUGUI _title;
         
         // Injected
         private IAddEditChallengePopupController _controller;
@@ -39,11 +43,14 @@ namespace UserInterface.Popups
             {
                 _controller.Setup(this, args.PackageModel,args.ChallengeCardModel, args.ChallengeDescription);
             }
-        }
 
+            _controller.PopupShown();
+        }
+        
         public override void Close()
         {
             base.Close();
+            _controller.PopupClosed();
             _actionButton.onClick.RemoveListener(_controller.ActionButtonClicked);
             _inputField.onValueChanged.RemoveListener(_controller.InputTextUpdated);
         }
@@ -72,6 +79,16 @@ namespace UserInterface.Popups
         public void SetAddEditButtonTitle(string buttonTitle)
         {
             _actionButtonTitle.text = buttonTitle;
+        }
+
+        public void SetInputFieldPlaceholder(string placeholder)
+        {
+            _inputFieldPlaceholderLabel.text = placeholder;
+        }
+
+        public void SetTitle(string title)
+        {
+            _title.text = title;
         }
     }
 }

@@ -7,5 +7,7 @@
         void SetCharacterCountText(string characterCounterText);
         void SetAddEditButtonInteractivity(bool isCharacterCountOverLimit);
         void SetInputFieldLimit(int limit);
+        void SetInputFieldPlaceholder(string placeholder);
+        void SetTitle(string title);
     }
 }
