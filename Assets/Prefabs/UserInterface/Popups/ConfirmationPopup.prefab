@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 3053808684254779426}
   - component: {fileID: 4650005291564629421}
   m_Layer: 5
-  m_Name: ActionButton
+  m_Name: NegativeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 1083001694851116514}
   - component: {fileID: 8550851474255389248}
   m_Layer: 5
-  m_Name: ActionButton (1)
+  m_Name: PositiveButton (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -887,10 +887,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce34310f73a44bbab3d599f502318ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isBackStackable: 0
+  _isBackStackable: 1
   _pauseGameWhenActive: 1
   _popupClickableBackground: {fileID: 2301759377837715354}
   _closeButton: {fileID: 0}
+  _title: {fileID: 4406036030245375919}
+  _description: {fileID: 887498070903038741}
+  _positiveButton: {fileID: 1083001694851116514}
+  _positiveButtonLabel: {fileID: 2788297890603710116}
+  _negativeButton: {fileID: 3053808684254779426}
+  _negativeButtonLabel: {fileID: 3677576860150585462}
 --- !u!1 &6199876109110749610
 GameObject:
   m_ObjectHideFlags: 0

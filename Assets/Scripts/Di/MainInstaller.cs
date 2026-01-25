@@ -50,6 +50,10 @@ public class MainInstaller : MonoInstaller
             .To<SettingsPopupController>()
             .AsSingle();
         Container
+            .Bind<IConfirmationPopupController>()
+            .To<ConfirmationPopupController>()
+            .AsSingle();
+        Container
             .Bind<IPackageListController>()
             .To<PackageListController>()
             .AsSingle();

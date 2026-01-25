@@ -2755,10 +2755,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1284131302}
     m_Modifications:
-    - target: {fileID: 2234105324690086457, guid: 718fad30d7007b149bb3fab5f1ad8edb, type: 3}
-      propertyPath: _isBackStackable
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2361097312079050472, guid: 718fad30d7007b149bb3fab5f1ad8edb, type: 3}
       propertyPath: m_Material
       value: 

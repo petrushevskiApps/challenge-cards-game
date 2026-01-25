@@ -1,4 +1,5 @@
-﻿using TwoOneTwoGames.UIManager.ScreenNavigation;
+﻿using Localization;
+using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UserInterface.Popups;
 
 namespace UserInterface.Views
@@ -46,9 +47,18 @@ namespace UserInterface.Views
 
         public void DeleteClicked()
         {
-            _packageModel.RemoveChallengeCardModel(_cardModel);
+            _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
+                DeleteCard,
+                () => { },
+                LocalizationKeys.ConfirmRemoveChallenge,
+                LocalizationKeys.CannotBeUndone));
         }
 
+        private void DeleteCard()
+        {
+            _packageModel.RemoveChallengeCardModel(_cardModel);
+        }
+        
         private void SubscribeToEvents()
         {
             _cardModel.TitleChanged += _view.SetTitle;

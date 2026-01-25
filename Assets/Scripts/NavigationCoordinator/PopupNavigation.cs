@@ -11,9 +11,9 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             _navigationManager = navigationManager;
         }
 
-        public void ShowConfirmationPopup()
+        public void ShowConfirmationPopup(ConfirmationPopupNavigationArguments navArguments)
         {
-            _navigationManager.ShowPopup<ConfirmationPopup>();
+            _navigationManager.ShowPopup<ConfirmationPopup, ConfirmationPopupNavigationArguments>(navArguments);
         }
 
         public void ShowEditChallengePopup(EditChallengeNavigationArguments navArguments)

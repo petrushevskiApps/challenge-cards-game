@@ -11,6 +11,7 @@ public class ChallengeScreenController : IChallengeScreenController
     private IPackageModel _packageModel;
     
     // Injected
+    private readonly IPackageRepository _packageRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPopupNavigation _popupNavigation;
@@ -18,12 +19,14 @@ public class ChallengeScreenController : IChallengeScreenController
     private readonly IRandomChallengeRepository _randomChallengeRepository;
 
     public ChallengeScreenController(
+        IPackageRepository packageRepository,
         ILocalizationService localizationService,
         IScreenNavigation screenNavigation,
         IPopupNavigation popupNavigation,
         IChallengeCardListController challengeCardListController,
         IRandomChallengeRepository randomChallengeRepository)
     {
+        _packageRepository = packageRepository;
         _localizationService = localizationService;
         _screenNavigation = screenNavigation;
         _popupNavigation = popupNavigation;
@@ -70,7 +73,17 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void DeletePackageClicked()
     {
-        _popupNavigation.ShowConfirmationPopup();
+        _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
+            DeletePackage,
+            () => { },
+            LocalizationKeys.ConfirmRemovePackage,
+            LocalizationKeys.CannotBeUndone));
+    }
+
+    private void DeletePackage()
+    {
+        _packageRepository.DeletePackage(_packageModel);
+        _screenNavigation.NavigateBack();
     }
 
     public void CreateCustomChallengeClicked()
