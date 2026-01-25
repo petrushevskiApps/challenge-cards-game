@@ -13,15 +13,18 @@ public class ChallengeScreenController : IChallengeScreenController
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPopupNavigation _popupNavigation;
     private readonly IChallengeCardListController _challengeCardListController;
+    private readonly IRandomChallengeRepository _randomChallengeRepository;
 
     public ChallengeScreenController(
         IScreenNavigation screenNavigation,
         IPopupNavigation popupNavigation,
-        IChallengeCardListController challengeCardListController)
+        IChallengeCardListController challengeCardListController,
+        IRandomChallengeRepository randomChallengeRepository)
     {
         _screenNavigation = screenNavigation;
         _popupNavigation = popupNavigation;
         _challengeCardListController = challengeCardListController;
+        _randomChallengeRepository = randomChallengeRepository;
     }
 
     public void Setup(IChallengeScreenView view, IPackageModel packageModel)
@@ -65,7 +68,17 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void CreateRandomChallengeClicked()
     {
-        _popupNavigation.ShowRandomChallengePopup();
+        _popupNavigation.ShowRandomChallengePopup(new RandomChallengePopupNavigationArguments(OnRandomChallengeResult));
+    }
+
+    private void OnRandomChallengeResult(int challengesCount)
+    {
+        var challenges = _randomChallengeRepository.GetRandomChallenges(challengesCount, "english");
+        foreach (string challenge in challenges)
+        {
+            var challengeModel = new ChallengeCardModel("Who’s most likely to", challenge);
+            _packageModel.AddChallengeCardModel(challengeModel);
+        }
     }
 
     public void SelectAllCardsToggled(bool isOn)

@@ -21,9 +21,9 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             _navigationManager.ShowPopup<AddEditChallengePopupView, EditChallengeNavigationArguments>(navArguments);
         }
 
-        public void ShowRandomChallengePopup()
+        public void ShowRandomChallengePopup(RandomChallengePopupNavigationArguments navArguments)
         {
-            _navigationManager.ShowPopup<RandomChallengePopup>();
+            _navigationManager.ShowPopup<RandomChallengePopup, RandomChallengePopupNavigationArguments>(navArguments);
         }
 
         public void ShowSettingsPopup()

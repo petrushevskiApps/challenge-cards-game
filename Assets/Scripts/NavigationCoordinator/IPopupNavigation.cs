@@ -6,7 +6,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
     {
         public void ShowConfirmationPopup();
         public void ShowEditChallengePopup(EditChallengeNavigationArguments navArguments);
-        public void ShowRandomChallengePopup();
+        public void ShowRandomChallengePopup(RandomChallengePopupNavigationArguments navArguments);
         public void ShowSettingsPopup();
         void ShowExitGamePopup();
     }

@@ -41,6 +41,10 @@ public class MainInstaller : MonoInstaller
             .To<AddEditChallengePopupController>()
             .AsSingle();
         Container
+            .Bind<IRandomChallengePopupController>()
+            .To<RandomChallengePopupController>()
+            .AsSingle();
+        Container
             .Bind<IPackageListController>()
             .To<PackageListController>()
             .AsSingle();
