@@ -28,7 +28,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public void ShowSettingsPopup()
         {
-            _navigationManager.ShowPopup<SettingsPopup>();
+            _navigationManager.ShowPopup<SettingsPopupView>();
         }
 
         public void ShowExitGamePopup()

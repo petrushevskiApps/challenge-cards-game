@@ -1,5 +1,6 @@
 using DefaultNamespace;
 using DefaultNamespace.Controllers;
+using Localization;
 using UnityEngine;
 using UserInterface.Views;
 using Zenject;
@@ -43,6 +44,10 @@ public class MainInstaller : MonoInstaller
         Container
             .Bind<IRandomChallengePopupController>()
             .To<RandomChallengePopupController>()
+            .AsSingle();
+        Container
+            .Bind<ISettingsPopupController>()
+            .To<SettingsPopupController>()
             .AsSingle();
         Container
             .Bind<IPackageListController>()
