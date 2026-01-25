@@ -887,8 +887,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce34310f73a44bbab3d599f502318ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isBackStackable: 1
-  _pauseGameWhenActive: 0
+  _isBackStackable: 0
+  _pauseGameWhenActive: 1
   _popupClickableBackground: {fileID: 2301759377837715354}
   _closeButton: {fileID: 0}
 --- !u!1 &6199876109110749610

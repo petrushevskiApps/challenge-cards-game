@@ -131,7 +131,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -944,7 +944,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -16.00002, y: 22.205}
-  m_SizeDelta: {x: 32.85, y: 16.41}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5476886005352333693
 CanvasRenderer:
@@ -1156,9 +1156,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.4509804, g: 0.03137255, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.50538546, g: 0.1273585, b: 1, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4509804, g: 0.03137255, b: 1, a: 1}
+    m_PressedColor: {r: 0.36078432, g: 0.02745098, b: 0.8, a: 1}
+    m_SelectedColor: {r: 0.4509804, g: 0.03137255, b: 1, a: 1}
     m_DisabledColor: {r: 0.8980392, g: 0.81960785, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1229,9 +1229,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isBackStackable: 1
-  _pauseGameWhenActive: 0
-  _popupClickableBackground: {fileID: 0}
-  _closeButton: {fileID: 0}
+  _pauseGameWhenActive: 1
+  _popupClickableBackground: {fileID: 1476558654574981639}
+  _closeButton: {fileID: 1487479566799027333}
+  _actionButton: {fileID: 2679494858143551460}
+  _actionButtonTitle: {fileID: 8139548949679283783}
+  _inputField: {fileID: 285746516289273485}
+  _characterCount: {fileID: 4173453147894730283}
 --- !u!1 &8983545728677158304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,6 +1622,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8757d085486dc2d4c828f38b7180130d, type: 3}
+--- !u!114 &1476558654574981639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7146939119139697355, guid: 8757d085486dc2d4c828f38b7180130d, type: 3}
+  m_PrefabInstance: {fileID: 8598160067148267724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9089275248028627468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 680424700407280320, guid: 8757d085486dc2d4c828f38b7180130d, type: 3}
