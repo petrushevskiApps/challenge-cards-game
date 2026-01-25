@@ -1,8 +1,6 @@
-using System;
 using TMPro;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UserInterface.Views;
 using Zenject;
@@ -24,11 +22,15 @@ namespace UserInterface.Screens
         [SerializeField]
         private Button _settingsButton;
         [SerializeField]
+        private GameObject _messageGroup;
+        [SerializeField]
         private TextMeshProUGUI _message;
         [SerializeField]
         private ListView _listView;
-        
+        [SerializeField]
+        private ToggleGroup _toggleGroup;
         public IListView ListView => _listView;
+        public ToggleGroup PackagesToggleGroup => _toggleGroup;
         
         private IMainScreenController _controller;
 
@@ -43,6 +45,7 @@ namespace UserInterface.Screens
             _createPackageButton.onClick.AddListener(_controller.CreatePackageClicked);
             _playButton.onClick.AddListener(_controller.PlayClicked);
             _settingsButton.onClick.AddListener(_controller.SettingsClicked);
+
             _controller.Setup(this);
             base.Show(navArguments);
         }
@@ -66,15 +69,14 @@ namespace UserInterface.Screens
             _playButton.onClick.RemoveListener(_controller.PlayClicked);
             _settingsButton.onClick.RemoveListener(_controller.SettingsClicked);
         }
-        
+
+        public void SetMessageGroupVisibility(bool isVisible)
+        {
+            _messageGroup.SetActive(isVisible);
+        }
         public void SetMessage(string message)
         {
             _message.text = message;
-        }
-
-        public void SetMessageVisibility(bool isVisible)
-        {
-            _message.gameObject.SetActive(isVisible);
         }
 
         public void SetPlayButton(bool isVisible)

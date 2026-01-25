@@ -994,8 +994,10 @@ MonoBehaviour:
   _playButton: {fileID: 2982674076206102552}
   _playButtonLabel: {fileID: 2603059414590055187}
   _settingsButton: {fileID: 9035017777817831408}
+  _messageGroup: {fileID: 3036502883314219789}
   _message: {fileID: 7339362857238801952}
   _listView: {fileID: 7718233058493744757}
+  _toggleGroup: {fileID: 817953801736300445}
 --- !u!1 &7092821470990150378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,6 +1715,7 @@ GameObject:
   - component: {fileID: 6363982904760308922}
   - component: {fileID: 2026146110146206039}
   - component: {fileID: 2705084021599921114}
+  - component: {fileID: 817953801736300445}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1780,6 +1783,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &817953801736300445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746550768580633168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 1
 --- !u!1001 &6453014145612154898
 PrefabInstance:
   m_ObjectHideFlags: 0

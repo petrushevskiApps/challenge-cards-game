@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Localization;
@@ -9,14 +10,15 @@ public class PackageListController: IPackageListController
 {
     // Internal
     private IListView _listView;
+    private Action<IPackageModel, bool> _onPackageSelected;
     private readonly Dictionary<string, PackageListItemView> _activeViews = new();
-    
+
     // Injected
     private readonly ILocalizationService _localizationService;
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPackageRepository _packageRepository;
     private readonly PackageListItemView.Pool _packagesPool;
-    
+
     public PackageListController(
         ILocalizationService localizationService,
         IScreenNavigation screenNavigation,
@@ -29,10 +31,12 @@ public class PackageListController: IPackageListController
         _packagesPool = packagesPool;
     }
     
-    public void Setup(IListView view, IReadOnlyList<IPackageModel> packages)
+    public void Setup(IListView view, IReadOnlyList<IPackageModel> packages,
+        Action<IPackageModel, bool> onPackageSelected)
     {
         _listView = view;
-
+        _onPackageSelected = onPackageSelected;
+        
         SubscribeToPackageEvents();
         
         foreach (IPackageModel package in packages)
@@ -60,7 +64,7 @@ public class PackageListController: IPackageListController
             return;
         }
         PackageListItemView view = _packagesPool.Spawn(_listView.ContentContainer);
-        view.Setup(new PackageItemViewController(_localizationService, _screenNavigation, package, view));
+        view.Setup(new PackageItemViewController(_localizationService, _screenNavigation, package, view, _onPackageSelected));
         _activeViews.Add(package.Id, view);
     }
 

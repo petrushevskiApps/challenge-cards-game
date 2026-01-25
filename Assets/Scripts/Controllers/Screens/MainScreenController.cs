@@ -5,6 +5,8 @@ using UserInterface.Screens;
 
 public class MainScreenController : IMainScreenController
 {
+    private const int MIN_ACTIVE_CARDS_REQUIRED = 10;
+
     // Internal
     private IMainScreenView _view;
     
@@ -41,11 +43,10 @@ public class MainScreenController : IMainScreenController
         _localizationService.LanguageChanged += OnLanguageChanged;
         if (_view.ListView != null)
         {
-            _packageListController.Setup(_view.ListView, _packageRepository.Packages);
+            _packageListController.Setup(_view.ListView, _packageRepository.Packages, PackageSelected);
         }
         
-        _view.SetMessageVisibility(true);
-        _view.SetPlayButton(false);
+        ToggleFooter(false);
         SetTexts();
     }
 
@@ -82,6 +83,25 @@ public class MainScreenController : IMainScreenController
     public void SettingsClicked()
     {
         _popupNavigation.ShowSettingsPopup();
+    }
+
+    private void PackageSelected(IPackageModel package, bool isOn)
+    {
+        if (!isOn && !_view.PackagesToggleGroup.AnyTogglesOn())
+        {
+            // Package was deselected.
+            ToggleFooter(false);
+        }
+        else if (isOn)
+        {
+            ToggleFooter(package.GetNumberOfActiveCards() >= MIN_ACTIVE_CARDS_REQUIRED);
+        }
+    }
+
+    private void ToggleFooter(bool isValidPackageSelected)
+    {
+        _view.SetMessageGroupVisibility(!isValidPackageSelected);
+        _view.SetPlayButton(isValidPackageSelected);
     }
 }
 

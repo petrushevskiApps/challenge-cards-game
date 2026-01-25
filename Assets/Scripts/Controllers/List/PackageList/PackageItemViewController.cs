@@ -1,4 +1,6 @@
-﻿using Localization;
+﻿using System;
+using System.Text;
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 
 namespace UserInterface.Views
@@ -9,17 +11,20 @@ namespace UserInterface.Views
         private readonly IScreenNavigation _screenNavigation;
         private readonly IPackageModel _packageModel;
         private readonly PackageListItemView _view;
+        private readonly Action<IPackageModel, bool> _onPackageSelected;
 
         public PackageItemViewController(
             ILocalizationService localizationService,
             IScreenNavigation screenNavigation,
             IPackageModel packageModel,
-            PackageListItemView view)
+            PackageListItemView view, 
+            Action<IPackageModel, bool> onPackageSelected)
         {
             _localizationService = localizationService;
             _screenNavigation = screenNavigation;
             _packageModel = packageModel;
             _view = view;
+            _onPackageSelected = onPackageSelected;
 
             SubscribeToEvents();
             
@@ -36,7 +41,12 @@ namespace UserInterface.Views
         {
             _screenNavigation?.ShowChallengeScreen(_packageModel);
         }
-        
+
+        public void ToggleSelected(bool isOn)
+        {
+            _onPackageSelected?.Invoke(_packageModel, isOn);
+        }
+
         private void SubscribeToEvents()
         {
             _packageModel.TitleChanged += SetTitle;
@@ -59,7 +69,18 @@ namespace UserInterface.Views
         private void SetPackageInfo()
         {
             int cardsCount = _packageModel.ChallengeCards?.Count ?? 0;
-            _view.SetPackageInfo($"{cardsCount} {_localizationService.GetLocalizedString(LocalizationKeys.Cards)}");
+            int activeCards = _packageModel.GetNumberOfActiveCards();
+
+            StringBuilder packageInfo = new StringBuilder();
+            packageInfo.Append(cardsCount);
+            packageInfo.Append(' ');
+            packageInfo.Append(_localizationService.GetLocalizedString(LocalizationKeys.Cards));
+            packageInfo.Append(" ( ");
+            packageInfo.Append(activeCards);
+            packageInfo.Append(" ");
+            packageInfo.Append(_localizationService.GetLocalizedString(LocalizationKeys.ActiveCards));
+            packageInfo.Append(" ) ");
+            _view.SetPackageInfo(packageInfo.ToString());
         }
 
         private void SetTitle(string title)

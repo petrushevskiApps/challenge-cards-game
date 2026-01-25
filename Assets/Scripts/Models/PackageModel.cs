@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class PackageModel : IPackageModel
@@ -64,5 +65,10 @@ public class PackageModel : IPackageModel
         }   
         Title = title;
         TitleChanged?.Invoke(title);
+    }
+
+    public int GetNumberOfActiveCards()
+    {
+        return ChallengeCards.Count(card => card.IsSelected);
     }
 }

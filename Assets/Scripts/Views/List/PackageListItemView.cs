@@ -17,11 +17,23 @@ namespace UserInterface.Views
         [SerializeField]
         private Button _clickButton;
 
+        private ToggleGroup _toggleGroup;
         private IPackageItemViewController _controller;
 
         public void Setup(IPackageItemViewController controller)
         {
             _controller = controller;
+            
+            if (_selectToggle != null)
+            {
+                _toggleGroup = GetComponentInParent<ToggleGroup>();
+                if (_toggleGroup != null)
+                {
+                    _toggleGroup.RegisterToggle(_selectToggle);
+                    _selectToggle.group = _toggleGroup;
+                }
+                _selectToggle.onValueChanged.AddListener(OnSelectionToggled);
+            }
             
             if (_clickButton != null)
             {
@@ -32,10 +44,25 @@ namespace UserInterface.Views
         public void Cleanup()
         {
             _controller.Clear();
+            if (_selectToggle != null)
+            {
+                if (_toggleGroup != null)
+                {
+                    _toggleGroup.UnregisterToggle(_selectToggle);
+                    _selectToggle.group = null;
+                }
+                _selectToggle.onValueChanged.RemoveListener(OnSelectionToggled);
+            }
+            
             if (_clickButton != null)
             {
                 _clickButton.onClick.RemoveListener(OnItemClicked);
             }
+        }
+
+        private void OnSelectionToggled(bool isOn)
+        {
+            _controller?.ToggleSelected(isOn);
         }
 
         public void SetTitle(string packageTitle)

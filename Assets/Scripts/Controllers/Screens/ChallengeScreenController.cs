@@ -109,6 +109,7 @@ public class ChallengeScreenController : IChallengeScreenController
     public void SelectAllCardsToggled(bool isOn)
     {
         _packageModel.ChallengeCards.ForEach(card => card.SetSelected(isOn));
+        _packageRepository.SavePackages();
     }
 
     public void SearchInputChanged(string searchText)

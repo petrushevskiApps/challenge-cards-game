@@ -4,5 +4,6 @@
     {
         void Clear();
         void ItemClicked();
+        void ToggleSelected(bool isOn);
     }
 }

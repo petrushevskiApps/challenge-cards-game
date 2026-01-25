@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserInterface.Views;
 
 public interface IPackageListController
 {
-    void Setup(IListView view, IReadOnlyList<IPackageModel> packages);
+    void Setup(IListView view, IReadOnlyList<IPackageModel> packages, Action<IPackageModel, bool> onPackageSelected);
     void Clear();
 }
