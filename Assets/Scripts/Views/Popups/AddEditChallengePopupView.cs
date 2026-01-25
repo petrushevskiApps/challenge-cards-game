@@ -37,7 +37,7 @@ namespace UserInterface.Popups
             _inputField.onValueChanged.AddListener(_controller.InputTextUpdated);
             if (navArguments is EditChallengeNavigationArguments args)
             {
-                _controller.SetView(this, args.PackageModel,args.ChallengeCardModel, args.ChallengeDescription);
+                _controller.Setup(this, args.PackageModel,args.ChallengeCardModel, args.ChallengeDescription);
             }
         }
 

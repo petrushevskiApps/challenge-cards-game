@@ -21,7 +21,7 @@ namespace DefaultNamespace.Controllers
             _navigationManager = navigationManager;
         }
         
-        public void SetView(
+        public void Setup(
             IEditChallengePopupView view, 
             IPackageModel packageModel,
             IChallengeCardModel challengeCardModel = null, 

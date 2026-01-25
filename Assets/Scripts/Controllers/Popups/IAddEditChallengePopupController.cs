@@ -6,11 +6,12 @@ namespace DefaultNamespace.Controllers
     {
         void InputTextUpdated(string inputFieldValue);
 
-        void SetView(
+        void Setup(
             IEditChallengePopupView view,
             IPackageModel packageModel,
             IChallengeCardModel challengeCardModel = null,
             string challengeDescriptionText = null);
+        
         void ActionButtonClicked();
     }
 }
