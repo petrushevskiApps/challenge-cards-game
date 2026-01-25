@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
@@ -9,7 +12,7 @@ public class ChallengeScreenController : IChallengeScreenController
     // Internal
     private IChallengeScreenView _view;
     private IPackageModel _packageModel;
-    
+
     // Injected
     private readonly IPackageRepository _packageRepository;
     private readonly ILocalizationService _localizationService;
@@ -43,10 +46,12 @@ public class ChallengeScreenController : IChallengeScreenController
     public void ScreenResumed()
     {
         _localizationService.LanguageChanged += OnLanguageChanged;
-        if (_packageModel != null)
+        if (_packageModel != null && _challengeCardListController != null)
         {
-            _challengeCardListController?.Setup(_view.ListView, _packageModel);
+            _challengeCardListController.Setup(_view.ListView, _packageModel);
+            _challengeCardListController.SetCards(_packageModel.ChallengeCards);
         }
+
         SetLabels();
     }
 
@@ -60,7 +65,7 @@ public class ChallengeScreenController : IChallengeScreenController
     {
         SetLabels();
     }
-    
+
     public void BackClicked()
     {
         _screenNavigation.NavigateBack();
@@ -68,14 +73,15 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void EditTitleClicked()
     {
-        
     }
 
     public void DeletePackageClicked()
     {
         _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
             DeletePackage,
-            () => { },
+            () =>
+            {
+            },
             LocalizationKeys.ConfirmRemovePackage,
             LocalizationKeys.CannotBeUndone));
     }
@@ -114,7 +120,12 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void SearchInputChanged(string searchText)
     {
-        Debug.Log($"Search input changed: {searchText}");
+        List<ChallengeCardModel> filteredList = _packageModel.ChallengeCards
+            .Where(card =>
+                card.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                || card.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        _challengeCardListController?.SetCards(filteredList);
     }
 
     private void SetLabels()

@@ -33,16 +33,25 @@ public class ChallengeCardListController :
         _packageModel = packageModel;
         
         SubscribeToPackageEvents();
-        
-        foreach (ChallengeCardModel card in _packageModel.ChallengeCards)
-        {
-            AddItemView(card);
-        }
     }
 
     public void Clear()
     {
         UnsubscribeFromPackageEvents();
+        ClearAllCards();
+    }
+
+    public void SetCards(List<ChallengeCardModel> challengeCards)
+    {
+        ClearAllCards();
+        foreach (ChallengeCardModel card in challengeCards)
+        {
+            AddItemView(card);
+        }
+    }
+
+    private void ClearAllCards()
+    {
         List<string> activeViewsKeys = _activeViews.Keys.ToList();
         foreach (string challengeCardId in activeViewsKeys)
         {
@@ -50,7 +59,7 @@ public class ChallengeCardListController :
         }
         _activeViews.Clear();
     }
-
+    
     private void AddItemView(IChallengeCardModel challengeCard)
     {
         if (_activeViews.ContainsKey(challengeCard.Id))

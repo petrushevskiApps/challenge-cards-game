@@ -1,23 +1,12 @@
 using TMPro;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UserInterface.Views;
 using Zenject;
 
 namespace UserInterface.Screens
 {
-    public struct ChallengeScreenNavigationArguments
-    {
-        public IPackageModel PackageModel { get; }
-
-        public ChallengeScreenNavigationArguments(IPackageModel packageModel)
-        {
-            PackageModel = packageModel;
-        }
-    }
-
     public class ChallengeScreen : UIScreen, IChallengeScreenView
     {
         [SerializeField]
@@ -37,7 +26,7 @@ namespace UserInterface.Screens
         [SerializeField]
         private SwitchView _selectAllCardsToggle;
         [SerializeField]
-        private InputField _searchInput;
+        private TMP_InputField _searchInput;
         [SerializeField]
         private ListView _listView;
 
@@ -69,7 +58,7 @@ namespace UserInterface.Screens
             _createCustomChallengeButton.onClick.AddListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.AddListener(_controller.CreateRandomChallengeClicked);
             _selectAllCardsToggle.Toggle.onValueChanged.AddListener(_controller.SelectAllCardsToggled);
-            // _searchInput.onValueChanged.AddListener(_controller.SearchInputChanged);
+            _searchInput.onValueChanged.AddListener(_controller.SearchInputChanged);
             base.Show(navArguments);
         }
 
@@ -84,6 +73,7 @@ namespace UserInterface.Screens
             base.Hide();
             _controller.ScreenHidden();
             _selectAllCardsToggle.UpdateToggleState(false);
+            _searchInput.text = string.Empty;
         }
 
         public override void Close()
@@ -95,7 +85,7 @@ namespace UserInterface.Screens
             _createCustomChallengeButton.onClick.RemoveListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.RemoveListener(_controller.CreateRandomChallengeClicked);
             _selectAllCardsToggle.Toggle.onValueChanged.RemoveListener(_controller.SelectAllCardsToggled);
-            // _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
+            _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
         }
 
         public void SetSelectAllLabel(string label)
