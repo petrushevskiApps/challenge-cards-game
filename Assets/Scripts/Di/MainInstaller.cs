@@ -24,6 +24,11 @@ public class MainInstaller : MonoInstaller
             .AsSingle();
         
         Container
+            .Bind<IChallengeRepository>()
+            .To<ChallengeRepository>()
+            .AsSingle();
+        
+        Container
             .Bind<IMainScreenController>()
             .To<MainScreenController>()
             .AsSingle();
