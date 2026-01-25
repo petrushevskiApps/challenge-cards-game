@@ -46,6 +46,7 @@ namespace UserInterface.Popups
             _tenElementsToggle.onValueChanged.AddListener(TenToggleSelected);
             _fifteenElementsToggle.onValueChanged.AddListener(FifteenToggleSelected);
             FiveToggleSelected(true);
+            _controller.ScreenShown();
         }
 
         public override void Close()
@@ -56,6 +57,7 @@ namespace UserInterface.Popups
             _fiveElementsToggle.onValueChanged.RemoveListener(FiveToggleSelected);
             _tenElementsToggle.onValueChanged.RemoveListener(TenToggleSelected);
             _fifteenElementsToggle.onValueChanged.RemoveListener(FifteenToggleSelected);
+            _controller.ScreenClosed();
         }
 
         public void SetTitle(string title)

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.Events;
 using UserInterface.Popups;
 
 namespace DefaultNamespace.Controllers
@@ -8,7 +7,8 @@ namespace DefaultNamespace.Controllers
     {
         void GenerateClicked();
         void CountSelected(int i);
-
         void Setup(IRandomChallengePopupView view, Action<int> onPopupResult);
+        void ScreenShown();
+        void ScreenClosed();
     }
 }
