@@ -1,0 +1,24 @@
+﻿Key,English,Russian
+PACKAGE_LIST,Package List,Список пакетов
+CREATE_PACKAGE,Create Package,Создать пакет
+NEEDS_MORE_CARDS,Needs more than 10 cards to start... or select a different package to play!,Нужно больше 10 карт для начала... или выберите другой пакет для игры!
+ACTIVE_CARDS, Active Cards,Активных карт
+CARDS,Cards,Карт
+PLAY,Play,Играть
+SELECT_LANGUAGE,Please Select a Language,"Пожалуйста, выберите язык"
+LANGUAGE_ENGLISH,English,English
+LANGUAGE_RUSSIAN,Русский,Русский
+FILTER_ALL,All,Все
+WHOS_MOST_LIKELY,Who’s most likely to,Кто скорее всего...
+CUSTOM_CHALLENGE,Custom Challenge,Пользовательский вызов
+RANDOM_CHALLENGE,Random Challenge,Случайный вызов
+WRITE_CUSTOM_CHALLENGE,Write Your Custom Challenge,Напишите свой пользовательский вызов
+ADD,Add,Добавить
+UPDATE,Update,Обновить
+GENERATE_COUNT_PROMPT,How many challenges do you want to generate?,Сколько вызовов вы хотите сгенерировать?
+GENERATE_NOW,Generate it now,Сгенерировать сейчас
+CONFIRM_REMOVE_PACKAGE,Are you sure you want to remove the Package?,"Вы уверены, что хотите удалить пакет?"
+CONFIRM_REMOVE_CHALLENGE,Are you sure you want to remove the challenge?,"Вы уверены, что хотите удалить вызов?"
+CANNOT_BE_UNDONE,This can’t be undone,Это нельзя отменить
+NO,No,Нет
+YES,Yes,Да
