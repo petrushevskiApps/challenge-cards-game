@@ -13,13 +13,16 @@ public class ChallengeCardListController :
     private readonly Dictionary<string, ChallengeCardListItemView> _activeViews = new();
     
     // Injected
+    private readonly IPackageRepository _packageRepository;
     private readonly IPopupNavigation _popupNavigation;
     private readonly ChallengeCardListItemView.Pool _itemViewPool;
 
     public ChallengeCardListController(
+        IPackageRepository packageRepository,
         IPopupNavigation popupNavigation,
         ChallengeCardListItemView.Pool itemViewPool)
     {
+        _packageRepository = packageRepository;
         _popupNavigation = popupNavigation;
         _itemViewPool = itemViewPool;
     }
@@ -56,7 +59,7 @@ public class ChallengeCardListController :
             return;
         }
         ChallengeCardListItemView view = _itemViewPool.Spawn(_listView.ContentContainer);
-        view.Setup(new CardItemViewController(challengeCard,_packageModel, view, _popupNavigation));
+        view.Setup(new CardItemViewController(_packageRepository, challengeCard,_packageModel, view, _popupNavigation));
         _activeViews.Add(challengeCard.Id, view);
     }
 

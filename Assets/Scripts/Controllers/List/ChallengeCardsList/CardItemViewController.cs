@@ -6,17 +6,20 @@ namespace UserInterface.Views
 {
     public class CardItemViewController : ICardItemViewController
     {
+        private readonly IPackageRepository _packageRepository;
         private readonly IChallengeCardModel _cardModel;
         private readonly IPackageModel _packageModel;
         private readonly ChallengeCardListItemView _view;
         private readonly IPopupNavigation _popupNavigation;
 
         public CardItemViewController(
+            IPackageRepository packageRepository,
             IChallengeCardModel cardModel, 
             IPackageModel packageModel,
             ChallengeCardListItemView view,
             IPopupNavigation popupNavigation)
         {
+            _packageRepository = packageRepository;
             _cardModel = cardModel;
             _packageModel = packageModel;
             _view = view;
@@ -37,6 +40,7 @@ namespace UserInterface.Views
         public void SelectionToggled(bool isOn)
         {
             _cardModel?.SetSelected(isOn);
+            _packageRepository.SavePackages();
         }
 
         public void ItemClicked()
