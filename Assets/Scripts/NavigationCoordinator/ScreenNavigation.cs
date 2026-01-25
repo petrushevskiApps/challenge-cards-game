@@ -1,4 +1,4 @@
-﻿using UserInterface.Screens;
+using UserInterface.Screens;
 
 namespace TwoOneTwoGames.UIManager.ScreenNavigation
 {
@@ -17,9 +17,10 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             _navigationManager.ShowScreen<MainScreen>();
         }
 
-        public void ShowChallengeScreen()
+        public void ShowChallengeScreen(IPackageModel packageModel)
         {
-            _navigationManager.ShowScreen<ChallengeScreen>();
+            _navigationManager.ShowScreen<ChallengeScreen, ChallengeScreenNavigationArguments>(
+                new ChallengeScreenNavigationArguments(packageModel));
         }
 
         public void NavigateBack()

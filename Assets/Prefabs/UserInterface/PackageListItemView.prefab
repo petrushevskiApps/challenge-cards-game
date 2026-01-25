@@ -826,8 +826,9 @@ GameObject:
   - component: {fileID: 3238260578044031588}
   - component: {fileID: 6267056175978046989}
   - component: {fileID: 8982003956955066312}
+  - component: {fileID: 1936394523522004678}
   m_Layer: 5
-  m_Name: PackageListView
+  m_Name: PackageListItemView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,6 +951,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1936394523522004678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7038871409581319176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51853404989f2c4e9c20fe33ea22fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _packageTitle: {fileID: 1827723741184348872}
+  _packageInfo: {fileID: 7494884672132314664}
+  _selectToggle: {fileID: 3238260578044031588}
+  _clickButton: {fileID: 6110342851012422798}
 --- !u!1 &7806578324236427148
 GameObject:
   m_ObjectHideFlags: 0

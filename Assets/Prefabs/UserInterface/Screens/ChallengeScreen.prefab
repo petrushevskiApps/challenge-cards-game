@@ -1825,6 +1825,7 @@ GameObject:
   - component: {fileID: 4186859375069464032}
   - component: {fileID: 8509856363757962954}
   - component: {fileID: 8944803221572514242}
+  - component: {fileID: 1088811163258987175}
   m_Layer: 5
   m_Name: CardsList
   m_TagString: Untagged
@@ -1890,6 +1891,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1088811163258987175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7086257901592303050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1416f50d10174574cbb527660890a63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contentContainer: {fileID: 6793574972814010120}
 --- !u!1 &7220292768486665864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +1959,14 @@ MonoBehaviour:
   _activateSafeArea: 1
   _isBackStackable: 1
   _globalUiElements: []
+  _backButton: {fileID: 9201587948570473914}
+  _editTitleButton: {fileID: 8751060884012348983}
+  _deletePackageButton: {fileID: 7379900524334707459}
+  _createCustomChallengeButton: {fileID: 2216358729430436662}
+  _createRandomChallengeButton: {fileID: 4959309298686132514}
+  _selectAllCardsToggle: {fileID: 4280301815279728896}
+  _searchInput: {fileID: 0}
+  _listView: {fileID: 1088811163258987175}
 --- !u!1 &7321467958343571182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,6 +2829,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3739349207638767658, guid: a825ee493f98301499cabda689b1f37f, type: 3}
   m_PrefabInstance: {fileID: 3668045643649814312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4280301815279728896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 684876749999158824, guid: a825ee493f98301499cabda689b1f37f, type: 3}
+  m_PrefabInstance: {fileID: 3668045643649814312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7711123044188060323
 PrefabInstance:
   m_ObjectHideFlags: 0

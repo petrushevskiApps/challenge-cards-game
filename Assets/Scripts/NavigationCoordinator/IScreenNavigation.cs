@@ -1,9 +1,9 @@
-﻿namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace TwoOneTwoGames.UIManager.ScreenNavigation
 {
     public interface IScreenNavigation
     {
         public void ShowMainScreen();
-        public void ShowChallengeScreen();
+        public void ShowChallengeScreen(IPackageModel packageModel);
         void NavigateBack();
     }
 }

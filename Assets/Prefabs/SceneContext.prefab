@@ -80,6 +80,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbfb91f7575a0740a1d60fa6ecce0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _challengeCardViewPrefab: {fileID: 4407064924788767788, guid: bbe6785be9e98e240a540a0578689340, type: 3}
+  _challengeCardParent: {fileID: 0}
+  _packageViewPrefab: {fileID: 7038871409581319176, guid: 72cf1972df3a4f843838999e1d2a6ccd, type: 3}
+  _packageViewParent: {fileID: 0}
 --- !u!114 &-2965552324397576690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,9 +16,9 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             _navigationManager.ShowPopup<ConfirmationPopup>();
         }
 
-        public void ShowEditChallengePopup()
+        public void ShowEditChallengePopup(EditChallengeNavigationArguments navArguments)
         {
-            _navigationManager.ShowPopup<EditChallengePopup>();
+            _navigationManager.ShowPopup<AddEditChallengePopupView, EditChallengeNavigationArguments>(navArguments);
         }
 
         public void ShowRandomChallengePopup()
@@ -33,7 +33,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public void ShowExitGamePopup()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

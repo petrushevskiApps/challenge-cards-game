@@ -1,0 +1,66 @@
+﻿using TwoOneTwoGames.UIManager.ScreenNavigation;
+using UserInterface.Popups;
+
+namespace UserInterface.Views
+{
+    public class CardItemViewController : ICardItemViewController
+    {
+        private readonly IChallengeCardModel _cardModel;
+        private readonly IPackageModel _packageModel;
+        private readonly ChallengeCardListItemView _view;
+        private readonly IPopupNavigation _popupNavigation;
+
+        public CardItemViewController(
+            IChallengeCardModel cardModel, 
+            IPackageModel packageModel,
+            ChallengeCardListItemView view,
+            IPopupNavigation popupNavigation)
+        {
+            _cardModel = cardModel;
+            _packageModel = packageModel;
+            _view = view;
+            _popupNavigation = popupNavigation;
+
+            SubscribeToEvents();
+
+            view.SetTitle(cardModel.Title);
+            view.SetDescription(cardModel.Description);
+            view.SetSelection(cardModel.IsSelected);
+        }
+
+        public void Clear()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        public void SelectionToggled(bool isOn)
+        {
+            _cardModel?.SetSelected(isOn);
+        }
+
+        public void ItemClicked()
+        {
+            _popupNavigation.ShowEditChallengePopup(
+                new EditChallengeNavigationArguments(_packageModel, _cardModel, _cardModel.Description));
+        }
+
+        public void DeleteClicked()
+        {
+            _packageModel.RemoveChallengeCardModel(_cardModel);
+        }
+
+        private void SubscribeToEvents()
+        {
+            _cardModel.TitleChanged += _view.SetTitle;
+            _cardModel.DescriptionChanged += _view.SetDescription;
+            _cardModel.SelectionChanged += _view.SetSelection;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            _cardModel.TitleChanged -= _view.SetTitle;
+            _cardModel.DescriptionChanged -= _view.SetDescription;
+            _cardModel.SelectionChanged -= _view.SetSelection;
+        }
+    }
+}

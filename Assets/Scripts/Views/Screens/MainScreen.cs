@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using TMPro;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UserInterface.Views;
 using Zenject;
 
 namespace UserInterface.Screens
@@ -17,8 +19,11 @@ namespace UserInterface.Screens
         private Button _settingsButton;
         [SerializeField]
         private TextMeshProUGUI _message;
+        [SerializeField]
+        private ListView _listView;
         
-        // Injected
+        public IListView ListView => _listView;
+        
         private IMainScreenController _controller;
 
         [Inject]
@@ -29,21 +34,28 @@ namespace UserInterface.Screens
 
         public override void Show<TArguments>(TArguments navArguments)
         {
+            _createPackageButton.onClick.AddListener(_controller.CreatePackageClicked);
+            _playButton.onClick.AddListener(_controller.PlayClicked);
+            _settingsButton.onClick.AddListener(_controller.SettingsClicked);
+            _controller.Setup(this);
             base.Show(navArguments);
-            _controller.SetView(this);
         }
 
         public override void Resume()
         {
             base.Resume();
-            _createPackageButton.onClick.AddListener(_controller.CreatePackageClicked);
-            _playButton.onClick.AddListener(_controller.PlayClicked);
-            _settingsButton.onClick.AddListener(_controller.SettingsClicked);
+            _controller.ScreenResumed();
         }
 
         public override void Hide()
         {
             base.Hide();
+            _controller.ScreenHidden();
+        }
+
+        public override void Close()
+        {
+            base.Close();
             _createPackageButton.onClick.RemoveListener(_controller.CreatePackageClicked);
             _playButton.onClick.RemoveListener(_controller.PlayClicked);
             _settingsButton.onClick.RemoveListener(_controller.SettingsClicked);
