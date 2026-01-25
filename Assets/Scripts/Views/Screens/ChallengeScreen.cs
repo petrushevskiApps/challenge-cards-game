@@ -1,3 +1,4 @@
+using TMPro;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,6 +17,7 @@ namespace UserInterface.Screens
             PackageModel = packageModel;
         }
     }
+
     public class ChallengeScreen : UIScreen, IChallengeScreenView
     {
         [SerializeField]
@@ -27,7 +29,11 @@ namespace UserInterface.Screens
         [SerializeField]
         private Button _createCustomChallengeButton;
         [SerializeField]
+        private TextMeshProUGUI _customChallengeButtonLabel;
+        [SerializeField]
         private Button _createRandomChallengeButton;
+        [SerializeField]
+        private TextMeshProUGUI _randomChallengeButtonLabel;
         [SerializeField]
         private Toggle _selectAllCardsToggle;
         [SerializeField]
@@ -35,6 +41,12 @@ namespace UserInterface.Screens
         [SerializeField]
         private ListView _listView;
 
+        [SerializeField]
+        private TextMeshProUGUI _selectAllLabel;
+
+        [SerializeField]
+        private TextMeshProUGUI _searchInputLabel;
+        
         public IListView ListView => _listView;
 
         private IChallengeScreenController _controller;
@@ -83,6 +95,23 @@ namespace UserInterface.Screens
             _createRandomChallengeButton.onClick.RemoveListener(_controller.CreateRandomChallengeClicked);
             _selectAllCardsToggle.onValueChanged.RemoveListener(_controller.SelectAllCardsToggled);
             // _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
+        }
+
+        public void SetSelectAllLabel(string label)
+        {
+            _selectAllLabel.text = label;
+        }
+        public void SetSearchInputLabel(string label)
+        {
+            _searchInputLabel.text = label;
+        }
+        public void SetCustomChallengeButtonLabel(string label)
+        {
+            _customChallengeButtonLabel.text = label;
+        }
+        public void SetRandomChallengeButtonLabel(string label)
+        {
+            _randomChallengeButtonLabel.text = label;
         }
     }
 }

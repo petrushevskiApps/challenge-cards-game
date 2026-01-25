@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 6267056175978046989}
   - component: {fileID: 8982003956955066312}
   - component: {fileID: 1936394523522004678}
+  - component: {fileID: 457388156322464129}
   m_Layer: 5
   m_Name: PackageListItemView
   m_TagString: Untagged
@@ -967,6 +968,28 @@ MonoBehaviour:
   _packageInfo: {fileID: 7494884672132314664}
   _selectToggle: {fileID: 3238260578044031588}
   _clickButton: {fileID: 6110342851012422798}
+--- !u!114 &457388156322464129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7038871409581319176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45cd613262543f49d34773a8423b101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _background: {fileID: 2057473795387605951}
+  _backgroundColorOn: {r: 1, g: 0.53333336, b: 0, a: 1}
+  _backgroundColorOff: {r: 1, g: 1, b: 1, a: 1}
+  _textColors:
+  - Text: {fileID: 1827723741184348872}
+    ColorOn: {r: 1, g: 1, b: 1, a: 1}
+    ColorOff: {r: 0.101960786, g: 0.101960786, b: 0.10980392, a: 1}
+  - Text: {fileID: 7494884672132314664}
+    ColorOn: {r: 1, g: 1, b: 1, a: 1}
+    ColorOff: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &7806578324236427148
 GameObject:
   m_ObjectHideFlags: 0

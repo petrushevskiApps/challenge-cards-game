@@ -2,6 +2,7 @@ namespace Localization
 {
     public static class LocalizationKeys
     {
+        public const string Search = "SEARCH";
         public const string PackageList = "PACKAGE_LIST";
         public const string CreatePackage = "CREATE_PACKAGE";
         public const string NeedsMoreCards = "NEEDS_MORE_CARDS";

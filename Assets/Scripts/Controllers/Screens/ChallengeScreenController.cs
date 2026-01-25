@@ -1,3 +1,4 @@
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UserInterface.Popups;
@@ -10,17 +11,20 @@ public class ChallengeScreenController : IChallengeScreenController
     private IPackageModel _packageModel;
     
     // Injected
+    private readonly ILocalizationService _localizationService;
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPopupNavigation _popupNavigation;
     private readonly IChallengeCardListController _challengeCardListController;
     private readonly IRandomChallengeRepository _randomChallengeRepository;
 
     public ChallengeScreenController(
+        ILocalizationService localizationService,
         IScreenNavigation screenNavigation,
         IPopupNavigation popupNavigation,
         IChallengeCardListController challengeCardListController,
         IRandomChallengeRepository randomChallengeRepository)
     {
+        _localizationService = localizationService;
         _screenNavigation = screenNavigation;
         _popupNavigation = popupNavigation;
         _challengeCardListController = challengeCardListController;
@@ -35,17 +39,25 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void ScreenResumed()
     {
+        _localizationService.LanguageChanged += OnLanguageChanged;
         if (_packageModel != null)
         {
             _challengeCardListController?.Setup(_view.ListView, _packageModel);
         }
+        SetLabels();
     }
 
     public void ScreenHidden()
     {
+        _localizationService.LanguageChanged -= OnLanguageChanged;
         _challengeCardListController?.Clear();
     }
 
+    private void OnLanguageChanged()
+    {
+        SetLabels();
+    }
+    
     public void BackClicked()
     {
         _screenNavigation.NavigateBack();
@@ -89,5 +101,13 @@ public class ChallengeScreenController : IChallengeScreenController
     public void SearchInputChanged(string searchText)
     {
         Debug.Log($"Search input changed: {searchText}");
+    }
+
+    private void SetLabels()
+    {
+        _view.SetSelectAllLabel(_localizationService.GetLocalizedString(LocalizationKeys.FilterAll));
+        _view.SetSearchInputLabel(_localizationService.GetLocalizedString(LocalizationKeys.Search));
+        _view.SetCustomChallengeButtonLabel(_localizationService.GetLocalizedString(LocalizationKeys.CustomChallenge));
+        _view.SetRandomChallengeButtonLabel(_localizationService.GetLocalizedString(LocalizationKeys.RandomChallenge));
     }
 }
