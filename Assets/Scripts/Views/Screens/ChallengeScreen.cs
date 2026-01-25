@@ -35,7 +35,7 @@ namespace UserInterface.Screens
         [SerializeField]
         private TextMeshProUGUI _randomChallengeButtonLabel;
         [SerializeField]
-        private Toggle _selectAllCardsToggle;
+        private SwitchView _selectAllCardsToggle;
         [SerializeField]
         private InputField _searchInput;
         [SerializeField]
@@ -68,7 +68,7 @@ namespace UserInterface.Screens
             _deletePackageButton.onClick.AddListener(_controller.DeletePackageClicked);
             _createCustomChallengeButton.onClick.AddListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.AddListener(_controller.CreateRandomChallengeClicked);
-            _selectAllCardsToggle.onValueChanged.AddListener(_controller.SelectAllCardsToggled);
+            _selectAllCardsToggle.Toggle.onValueChanged.AddListener(_controller.SelectAllCardsToggled);
             // _searchInput.onValueChanged.AddListener(_controller.SearchInputChanged);
             base.Show(navArguments);
         }
@@ -83,6 +83,7 @@ namespace UserInterface.Screens
         {
             base.Hide();
             _controller.ScreenHidden();
+            _selectAllCardsToggle.UpdateToggleState(false);
         }
 
         public override void Close()
@@ -93,7 +94,7 @@ namespace UserInterface.Screens
             _deletePackageButton.onClick.RemoveListener(_controller.DeletePackageClicked);
             _createCustomChallengeButton.onClick.RemoveListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.RemoveListener(_controller.CreateRandomChallengeClicked);
-            _selectAllCardsToggle.onValueChanged.RemoveListener(_controller.SelectAllCardsToggled);
+            _selectAllCardsToggle.Toggle.onValueChanged.RemoveListener(_controller.SelectAllCardsToggled);
             // _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
         }
 

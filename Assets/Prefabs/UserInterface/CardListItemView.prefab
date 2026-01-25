@@ -930,7 +930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5125782435753456575, guid: 4e91f53c7c0a6264d9093be3a633a30a, type: 3}
       propertyPath: m_Name
-      value: CleanToggle
+      value: Switch
       objectReference: {fileID: 0}
     - target: {fileID: 7270184749763256898, guid: 4e91f53c7c0a6264d9093be3a633a30a, type: 3}
       propertyPath: m_AnchorMax.y

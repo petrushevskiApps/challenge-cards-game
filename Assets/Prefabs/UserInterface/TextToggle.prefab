@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83557272ba809a44cb50559df8b9adf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _toggle: {fileID: 684876749999158824}
   _checkmark: {fileID: 6051526308510035237}
   _checkmarkBackground: {fileID: 7639012500841947629}
   _toggleOnBackgroundColor: {r: 0.5058824, g: 0.105882354, b: 0.99607843, a: 1}

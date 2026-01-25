@@ -8,25 +8,27 @@ using UnityEngine.UI;
 public class SwitchView : MonoBehaviour
 {
     [SerializeField]
+    private Toggle _toggle;
+    [SerializeField]
     private Image _checkmark;
-
     [SerializeField]
     private Image _checkmarkBackground;
-
     [SerializeField]
     private Color _toggleOnBackgroundColor;
     
-    private Toggle _toggle;
     private RectTransform _rectTransform;
 
+    public Toggle Toggle => _toggle;
+    
     public void UpdateToggleState(bool isOn)
     {
+        _toggle.SetIsOnWithoutNotify(isOn);
         OnValueChanged(isOn);
     }
     
     private void Awake()
     {
-        _toggle = GetComponent<Toggle>();
+        _toggle ??= GetComponent<Toggle>();
         _rectTransform = _checkmark.GetComponent<RectTransform>();
     }
 
