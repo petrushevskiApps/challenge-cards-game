@@ -674,7 +674,7 @@ MonoBehaviour:
     m_Left: 3
     m_Right: 3
     m_Top: 3
-    m_Bottom: 164
+    m_Bottom: 100
   m_ChildAlignment: 1
   m_Spacing: 12
   m_ChildForceExpandWidth: 1

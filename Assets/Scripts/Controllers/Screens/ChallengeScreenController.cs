@@ -50,6 +50,7 @@ public class ChallengeScreenController : IChallengeScreenController
         {
             _challengeCardListController.Setup(_view.ListView, _packageModel);
             _challengeCardListController.SetCards(_packageModel.ChallengeCards);
+            SetTitle();
         }
 
         SetLabels();
@@ -136,5 +137,10 @@ public class ChallengeScreenController : IChallengeScreenController
         _view.SetSearchInputLabel(_localizationService.GetLocalizedString(LocalizationKeys.Search));
         _view.SetCustomChallengeButtonLabel(_localizationService.GetLocalizedString(LocalizationKeys.CustomChallenge));
         _view.SetRandomChallengeButtonLabel(_localizationService.GetLocalizedString(LocalizationKeys.RandomChallenge));
+    }
+
+    private void SetTitle()
+    {
+        _view.SetPackageTitle(_packageModel.Title);
     }
 }
