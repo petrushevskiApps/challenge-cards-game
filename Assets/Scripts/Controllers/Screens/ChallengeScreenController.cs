@@ -82,9 +82,7 @@ public class ChallengeScreenController : IChallengeScreenController
     {
         _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
             DeletePackage,
-            () =>
-            {
-            },
+            () => { },
             LocalizationKeys.ConfirmRemovePackage,
             LocalizationKeys.CannotBeUndone));
     }
@@ -97,15 +95,25 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void CreateCustomChallengeClicked()
     {
-        _popupNavigation.ShowEditChallengePopup(new EditChallengeNavigationArguments(_packageModel));
+        _popupNavigation.ShowEditChallengePopup(
+            new EditChallengeNavigationArguments(OnCreateCustomChallengePopupResult));
     }
 
     public void CreateRandomChallengeClicked()
     {
-        _popupNavigation.ShowRandomChallengePopup(new RandomChallengePopupNavigationArguments(OnRandomChallengeResult));
+        _popupNavigation.ShowRandomChallengePopup(
+            new RandomChallengePopupNavigationArguments(OnRandomChallengePopupResult));
     }
 
-    private void OnRandomChallengeResult(int challengesCount)
+    private void OnCreateCustomChallengePopupResult(string challengeDescription)
+    {
+        var challengeCardModel = new ChallengeCardModel(
+            _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
+            challengeDescription);
+        _packageModel.AddChallengeCardModel(challengeCardModel);
+    }
+    
+    private void OnRandomChallengePopupResult(int challengesCount)
     {
         var challenges = _randomChallengeRepository.GetRandomChallenges(
             challengesCount, 
@@ -149,7 +157,6 @@ public class ChallengeScreenController : IChallengeScreenController
     
     private void SearchCards(string searchText)
     {
-        Debug.Log("SEARCH");
         if (string.IsNullOrWhiteSpace(searchText))
         {
             _challengeCardListController?.SetCards(_packageModel.ChallengeCards);

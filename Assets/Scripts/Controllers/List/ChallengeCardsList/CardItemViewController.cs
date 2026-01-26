@@ -1,4 +1,4 @@
-﻿using Localization;
+using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UserInterface.Popups;
 
@@ -46,9 +46,14 @@ namespace UserInterface.Views
         public void ItemClicked()
         {
             _popupNavigation.ShowEditChallengePopup(
-                new EditChallengeNavigationArguments(_packageModel, _cardModel, _cardModel.Description));
+                new EditChallengeNavigationArguments(OnEditChallengePopupResult, _cardModel.Description));
         }
 
+        private void OnEditChallengePopupResult(string description)
+        {
+            _cardModel.UpdateDescription(description);
+        }
+        
         public void DeleteClicked()
         {
             _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(

@@ -1,7 +1,6 @@
 ﻿using System;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
-using UnityEngine;
 using UserInterface.Popups;
 
 namespace DefaultNamespace.Controllers
@@ -11,8 +10,7 @@ namespace DefaultNamespace.Controllers
         private const int DESCRIPTION_MAX_CHARACTERS = 200;
 
         private IEditChallengePopupView _view;
-        private IPackageModel _packageModel;
-        private IChallengeCardModel _challengeCardModel;
+        private Action<string> _onPopupResult;
         private string _challengeDescription;
         private bool _isEdit;
         
@@ -30,13 +28,12 @@ namespace DefaultNamespace.Controllers
         
         public void Setup(
             IEditChallengePopupView view, 
-            IPackageModel packageModel,
-            IChallengeCardModel challengeCardModel = null, 
+            Action<string> onPopupResult, 
             string challengeDescriptionText = null)
         {
             _view = view;
-            _packageModel = packageModel;
-            _challengeCardModel = challengeCardModel;
+            _onPopupResult = onPopupResult;
+            
             _view.SetInputFieldLimit(DESCRIPTION_MAX_CHARACTERS);
             _isEdit = challengeDescriptionText != null;
             
@@ -65,19 +62,8 @@ namespace DefaultNamespace.Controllers
 
         public void ActionButtonClicked()
         {
-            if (_challengeCardModel != null)
-            {
-                _challengeCardModel.UpdateDescription(_challengeDescription);
-                _navigationManager.GoBack();
-            }
-            else
-            {
-                _challengeCardModel = new ChallengeCardModel(
-                    _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
-                    _challengeDescription);
-                _packageModel.AddChallengeCardModel(_challengeCardModel);
-                _navigationManager.GoBack();
-            }
+            _onPopupResult?.Invoke(_challengeDescription);
+            _navigationManager.GoBack();
         }
 
         public void InputTextUpdated(string challengeDescriptionText)

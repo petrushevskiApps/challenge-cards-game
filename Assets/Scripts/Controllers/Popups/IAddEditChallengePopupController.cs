@@ -1,3 +1,4 @@
+using System;
 using UserInterface.Popups;
 
 namespace DefaultNamespace.Controllers
@@ -8,8 +9,7 @@ namespace DefaultNamespace.Controllers
 
         void Setup(
             IEditChallengePopupView view,
-            IPackageModel packageModel,
-            IChallengeCardModel challengeCardModel = null,
+            Action<string> onPopupResult,
             string challengeDescriptionText = null);
         
         void ActionButtonClicked();
