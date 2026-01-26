@@ -105,7 +105,9 @@ public class ChallengeScreenController : IChallengeScreenController
 
     private void OnRandomChallengeResult(int challengesCount)
     {
-        var challenges = _randomChallengeRepository.GetRandomChallenges(challengesCount, "english");
+        var challenges = _randomChallengeRepository.GetRandomChallenges(
+            challengesCount, 
+            _localizationService.GetCurrentLanguage().ToString().ToLower());
         foreach (string challenge in challenges)
         {
             var challengeModel = new ChallengeCardModel("Who’s most likely to", challenge);
