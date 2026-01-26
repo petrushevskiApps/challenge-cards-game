@@ -126,7 +126,7 @@ public class ChallengeScreenController : IChallengeScreenController
         }
     }
 
-    public async void SelectAllCardsToggled(bool isOn)
+    public void SelectAllCardsToggled(bool isOn)
     {
         foreach (var card in _packageModel.ChallengeCards)
         {
