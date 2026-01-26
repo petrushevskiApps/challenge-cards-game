@@ -2154,6 +2154,7 @@ MonoBehaviour:
   _activateSafeArea: 1
   _isBackStackable: 1
   _globalUiElements: []
+  _packageTitle: {fileID: 3218802287750934710}
   _backButton: {fileID: 9201587948570473914}
   _editTitleButton: {fileID: 8751060884012348983}
   _deletePackageButton: {fileID: 7379900524334707459}

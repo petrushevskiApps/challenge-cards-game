@@ -10,6 +10,8 @@ namespace UserInterface.Screens
     public class ChallengeScreen : UIScreen, IChallengeScreenView
     {
         [SerializeField]
+        private TextMeshProUGUI _packageTitle;
+        [SerializeField]
         private Button _backButton; 
         [SerializeField]
         private Button _editTitleButton;
@@ -88,6 +90,10 @@ namespace UserInterface.Screens
             _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
         }
 
+        public void SetPackageTitle(string title)
+        {
+            _packageTitle.text = title;
+        }
         public void SetSelectAllLabel(string label)
         {
             _selectAllLabel.text = label;
