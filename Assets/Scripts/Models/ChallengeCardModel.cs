@@ -7,17 +7,17 @@ public class ChallengeCardModel : IChallengeCardModel
     public event Action<string> DescriptionChanged;
     public event Action<bool> SelectionChanged;
 
-    public string Id { get; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public bool IsSelected { get; set; }
+    public string Id { get; init; }
+    public string Title { get; private set; }
+    public string Description { get; private set; }
+    public bool IsSelected { get; private set; }
 
     public ChallengeCardModel()
     {
         Id = Guid.NewGuid().ToString();
     }
 
-    public ChallengeCardModel(string title, string description, bool isSelected = false): this()
+    public ChallengeCardModel(string title, string description, bool isSelected = false) : this()
     {
         UpdateTitle(title);
         UpdateDescription(description);

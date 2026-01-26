@@ -9,16 +9,19 @@ public class PackageModel : IPackageModel
     public event Action<IChallengeCardModel> CardRemoved;
     public event Action CardsNumberChanged;
     public event Action<string> TitleChanged;
-    public string Id { get; }
-    public string Title { get; set; }
-    public List<ChallengeCardModel> ChallengeCards { get; set; } = new();
-    
+
+    private readonly List<ChallengeCardModel> _challengeCards = new();
+
+    public string Id { get; init; }
+    public string Title { get; private set; }
+    public IReadOnlyList<IChallengeCardModel> ChallengeCards => _challengeCards;
+
     public PackageModel()
     {
         Id = Guid.NewGuid().ToString();
     }
 
-    public PackageModel(string title): this()
+    public PackageModel(string title) : this()
     {
         Title = title;
     }
@@ -30,7 +33,7 @@ public class PackageModel : IPackageModel
             return false;
         }
 
-        ChallengeCards.Add(challengeCard);
+        _challengeCards.Add(challengeCard);
         CardAdded?.Invoke(card);
         CardsNumberChanged?.Invoke();
         return true;
@@ -43,7 +46,7 @@ public class PackageModel : IPackageModel
             return false;
         }
         
-        if (!ChallengeCards.Remove(challengeCard))
+        if (!_challengeCards.Remove(challengeCard))
         {
             return false;
         }
@@ -69,6 +72,6 @@ public class PackageModel : IPackageModel
 
     public int GetNumberOfActiveCards()
     {
-        return ChallengeCards.Count(card => card.IsSelected);
+        return _challengeCards.Count(card => card.IsSelected);
     }
 }

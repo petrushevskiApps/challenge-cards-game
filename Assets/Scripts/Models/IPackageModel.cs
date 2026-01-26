@@ -10,7 +10,7 @@ public interface IPackageModel
     
     string Id { get; }
     string Title { get; }
-    List<ChallengeCardModel> ChallengeCards { get; }
+    IReadOnlyList<IChallengeCardModel> ChallengeCards { get; }
     bool AddChallengeCardModel(IChallengeCardModel card);
     bool RemoveChallengeCardModel(IChallengeCardModel card);
     void UpdateTitle(string title);

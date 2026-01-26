@@ -41,10 +41,10 @@ public class ChallengeCardListController :
         ClearAllCards();
     }
 
-    public void SetCards(List<ChallengeCardModel> challengeCards)
+    public void SetCards(IEnumerable<IChallengeCardModel> challengeCards)
     {
         ClearAllCards();
-        foreach (ChallengeCardModel card in challengeCards)
+        foreach (IChallengeCardModel card in challengeCards)
         {
             AddItemView(card);
         }

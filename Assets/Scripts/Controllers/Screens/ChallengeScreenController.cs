@@ -114,17 +114,19 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void SelectAllCardsToggled(bool isOn)
     {
-        _packageModel.ChallengeCards.ForEach(card => card.SetSelected(isOn));
+        foreach (var card in _packageModel.ChallengeCards)
+        {
+            card.SetSelected(isOn);
+        }
         _packageRepository.SavePackages();
     }
 
     public void SearchInputChanged(string searchText)
     {
-        List<ChallengeCardModel> filteredList = _packageModel.ChallengeCards
+        var filteredList = _packageModel.ChallengeCards
             .Where(card =>
                 card.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                || card.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+                || card.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase));
         _challengeCardListController?.SetCards(filteredList);
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DTOs;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -11,11 +12,10 @@ public class PackageRepository : IPackageRepository
     public event Action<IPackageModel> PackageAdded;
     public event Action<IPackageModel> PackageRemoved;
     public event Action PackagesChanged;
+    public IReadOnlyList<IPackageModel> Packages => _packages;
     
     private readonly List<IPackageModel> _packages = new();
     private string SaveFilePath => Path.Combine(Application.persistentDataPath, $"{SAVE_FILE_NAME}.json");
-
-    public IReadOnlyList<IPackageModel> Packages => _packages;
 
     public IPackageModel CreatePackage(string title)
     {
@@ -57,13 +57,22 @@ public class PackageRepository : IPackageRepository
     {
         try
         {
-            string json = JsonConvert.SerializeObject(_packages);
+            var packageDtos = _packages.ToDtoList();
+            
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            };
+            
+            string json = JsonConvert.SerializeObject(packageDtos, settings);
             File.WriteAllText(SaveFilePath, json);
-            Debug.Log($"Packages saved to: {SaveFilePath}");
+            
+            Debug.Log($"Packages saved successfully. Count: {packageDtos.Count}, Path: {SaveFilePath}");
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Failed to save packages: {ex}");
+            Debug.LogError($"Failed to save packages: {ex.Message}");
         }
     }
 
@@ -78,17 +87,18 @@ public class PackageRepository : IPackageRepository
             }
 
             string json = File.ReadAllText(SaveFilePath);
-            List<PackageModel> saveData = JsonConvert.DeserializeObject<List<PackageModel>>(json);
+            var packageDtos = JsonConvert.DeserializeObject<List<PackageDto>>(json);
 
-            if (saveData == null)
+            if (packageDtos == null)
             {
-                Debug.LogWarning("Save file exists but contains no packages.");
+                Debug.LogWarning("Save file exists but contains no valid data.");
                 return;
             }
 
             _packages.Clear();
 
-            foreach (var package in saveData)
+            var loadedPackages = packageDtos.ToModelList();
+            foreach (var package in loadedPackages)
             {
                 _packages.Add(package);
                 SubscribeToPackageEvents(package);
@@ -98,7 +108,7 @@ public class PackageRepository : IPackageRepository
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Failed to load packages: {ex}");
+            Debug.LogError($"Failed to load packages: {ex.Message}");
         }
     }
     
@@ -106,16 +116,24 @@ public class PackageRepository : IPackageRepository
     {
         package.CardAdded += OnCardUpdated;
         package.CardRemoved += OnCardUpdated;
+        package.TitleChanged += OnPackageTitleChanged;
     }
 
     private void UnsubscribeFromPackageEvents(IPackageModel package)
     {
         package.CardAdded -= OnCardUpdated;
         package.CardRemoved -= OnCardUpdated;
+        package.TitleChanged -= OnPackageTitleChanged;
     }
 
     private void OnCardUpdated(IChallengeCardModel card)
     {
         SavePackages();
     }
+
+    private void OnPackageTitleChanged(string title)
+    {
+        SavePackages();
+    }
 }
+
