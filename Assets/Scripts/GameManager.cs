@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
@@ -18,14 +19,17 @@ namespace DefaultNamespace
         // Injected
         private IScreenNavigation _screenNavigation;
         private ILocalizationService _localizationService;
+        private IPackageRepository _packageRepository;
 
         [Inject]
         public void Initialize(
+            IPackageRepository packageRepository,
             IScreenNavigation screenNavigation,
             ILocalizationService localizationService)
         {
             _screenNavigation = screenNavigation;
             _localizationService = localizationService;
+            _packageRepository = packageRepository;
         }
         
         private void Awake()
@@ -38,6 +42,7 @@ namespace DefaultNamespace
             Input.multiTouchEnabled = false;
             SetupFrameRate();
             _localizationService.Initialize();
+            _packageRepository.LoadPackagesAsync().Forget();
             _screenNavigation.ShowMainScreen();
         }
 

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UserInterface.Popups;
@@ -40,7 +41,7 @@ namespace UserInterface.Views
         public void SelectionToggled(bool isOn)
         {
             _cardModel?.SetSelected(isOn);
-            _packageRepository.SavePackages();
+            _packageRepository.SavePackagesAsync().Forget();
         }
 
         public void ItemClicked()

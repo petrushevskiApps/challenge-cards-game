@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using DTOs;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class PackageRepository : IPackageRepository
     public event Action<IPackageModel> PackageRemoved;
     public event Action PackagesChanged;
     public IReadOnlyList<IPackageModel> Packages => _packages;
+    public bool IsLoaded { get; private set; }
     
     private readonly List<IPackageModel> _packages = new();
     private string SaveFilePath => Path.Combine(Application.persistentDataPath, $"{SAVE_FILE_NAME}.json");
@@ -31,7 +33,7 @@ public class PackageRepository : IPackageRepository
         
         PackageAdded?.Invoke(package);
         PackagesChanged?.Invoke();
-        SavePackages();
+        SavePackagesAsync().Forget();
         
         return package;
     }
@@ -48,12 +50,12 @@ public class PackageRepository : IPackageRepository
         
         PackageRemoved?.Invoke(package);
         PackagesChanged?.Invoke();
-        SavePackages();
+        SavePackagesAsync().Forget();
         
         return true;
     }
 
-    public void SavePackages()
+    public async UniTask SavePackagesAsync()
     {
         try
         {
@@ -66,9 +68,7 @@ public class PackageRepository : IPackageRepository
             };
             
             string json = JsonConvert.SerializeObject(packageDtos, settings);
-            File.WriteAllText(SaveFilePath, json);
-            
-            Debug.Log($"Packages saved successfully. Count: {packageDtos.Count}, Path: {SaveFilePath}");
+            await File.WriteAllTextAsync(SaveFilePath, json);
         }
         catch (Exception ex)
         {
@@ -76,7 +76,7 @@ public class PackageRepository : IPackageRepository
         }
     }
 
-    public void LoadPackages()
+    public async UniTask LoadPackagesAsync()
     {
         try
         {
@@ -86,7 +86,7 @@ public class PackageRepository : IPackageRepository
                 return;
             }
 
-            string json = File.ReadAllText(SaveFilePath);
+            string json = await File.ReadAllTextAsync(SaveFilePath);
             var packageDtos = JsonConvert.DeserializeObject<List<PackageDto>>(json);
 
             if (packageDtos == null)
@@ -104,6 +104,7 @@ public class PackageRepository : IPackageRepository
                 SubscribeToPackageEvents(package);
             }
 
+            IsLoaded = true;
             Debug.Log($"Loaded {_packages.Count} packages from: {SaveFilePath}");
         }
         catch (Exception ex)
@@ -111,7 +112,7 @@ public class PackageRepository : IPackageRepository
             Debug.LogError($"Failed to load packages: {ex.Message}");
         }
     }
-    
+
     private void SubscribeToPackageEvents(IPackageModel package)
     {
         package.CardAdded += OnCardUpdated;
@@ -128,12 +129,12 @@ public class PackageRepository : IPackageRepository
 
     private void OnCardUpdated(IChallengeCardModel card)
     {
-        SavePackages();
+        SavePackagesAsync().Forget();
     }
 
     private void OnPackageTitleChanged(string title)
     {
-        SavePackages();
+        SavePackagesAsync().Forget();
     }
 }
 

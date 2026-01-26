@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class MainScreenController : IMainScreenController
 
     // Internal
     private IMainScreenView _view;
+    private UniTask _initializationTask;
     
     // Injected
     private readonly IScreenNavigation _screenNavigation;
@@ -29,10 +31,8 @@ public class MainScreenController : IMainScreenController
         _packageRepository = packageRepository;
         _packageListController = packageListController;
         _localizationService = localizationService;
-
-        _packageRepository.LoadPackages();
     }
-
+    
     public void Setup(IMainScreenView view)
     {
         _view = view;
@@ -41,10 +41,15 @@ public class MainScreenController : IMainScreenController
     public void ScreenResumed()
     {
         _localizationService.LanguageChanged += OnLanguageChanged;
-        if (_view.ListView != null)
+
+        UniTask.Create(async () =>
         {
-            _packageListController.Setup(_view.ListView, _packageRepository.Packages, PackageSelected);
-        }
+            await UniTask.WaitUntil(() => _packageRepository.IsLoaded);
+            if (_view.ListView != null)
+            {
+                _packageListController.Setup(_view.ListView, _packageRepository.Packages, PackageSelected);
+            }
+        });
         
         ToggleFooter(false);
         SetTexts();

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Localization;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
@@ -131,7 +132,7 @@ public class ChallengeScreenController : IChallengeScreenController
         {
             card.SetSelected(isOn);
         }
-        await _packageRepository.SavePackagesAsync();
+        _packageRepository.SavePackagesAsync().Forget();
     }
 
     public void SearchInputChanged(string searchText, MonoBehaviour view)
