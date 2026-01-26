@@ -1,3 +1,4 @@
+using UnityEngine;
 using UserInterface.Screens;
 
 public interface IChallengeScreenController
@@ -8,7 +9,7 @@ public interface IChallengeScreenController
     void CreateCustomChallengeClicked();
     void CreateRandomChallengeClicked();
     void SelectAllCardsToggled(bool isOn);
-    void SearchInputChanged(string searchText);
+    void SearchInputChanged(string searchText, MonoBehaviour view);
     void Setup(IChallengeScreenView view, IPackageModel argumentsPackageModel);
     void ScreenResumed();
     void ScreenHidden();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Localization;
@@ -20,6 +21,7 @@ public class ChallengeScreenController : IChallengeScreenController
     private readonly IPopupNavigation _popupNavigation;
     private readonly IChallengeCardListController _challengeCardListController;
     private readonly IRandomChallengeRepository _randomChallengeRepository;
+    private Coroutine _debounceCoroutine;
 
     public ChallengeScreenController(
         IPackageRepository packageRepository,
@@ -115,24 +117,66 @@ public class ChallengeScreenController : IChallengeScreenController
         }
     }
 
-    public void SelectAllCardsToggled(bool isOn)
+    public async void SelectAllCardsToggled(bool isOn)
     {
         foreach (var card in _packageModel.ChallengeCards)
         {
             card.SetSelected(isOn);
         }
-        _packageRepository.SavePackages();
+        await _packageRepository.SavePackagesAsync();
     }
 
-    public void SearchInputChanged(string searchText)
+    public void SearchInputChanged(string searchText, MonoBehaviour view)
     {
-        var filteredList = _packageModel.ChallengeCards
-            .Where(card =>
-                card.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                || card.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase));
-        _challengeCardListController?.SetCards(filteredList);
+        if (!view.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        if (_debounceCoroutine != null)
+        {
+            view.StopCoroutine(_debounceCoroutine);
+        }
+
+        _debounceCoroutine = view.StartCoroutine(DebounceRoutine(searchText));
     }
 
+    private IEnumerator DebounceRoutine(string text)
+    {
+        yield return new WaitForSeconds(0.3f);
+        SearchCards(text);
+    }
+    
+    private void SearchCards(string searchText)
+    {
+        Debug.Log("SEARCH");
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            _challengeCardListController?.SetCards(_packageModel.ChallengeCards);
+            return;
+        }
+        
+        searchText = searchText.Trim();
+
+        var results = new List<IChallengeCardModel>();
+
+        foreach (var card in _packageModel.ChallengeCards)
+        {
+            var title = card.Title;
+            var description = card.Description;
+
+            if ((!string.IsNullOrEmpty(title) &&
+                 title.Contains(searchText, StringComparison.OrdinalIgnoreCase)) ||
+
+                (!string.IsNullOrEmpty(description) &&
+                 description.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+            {
+                results.Add(card);
+            }
+        }
+
+        _challengeCardListController?.SetCards(results);
+    }
     private void SetLabels()
     {
         _view.SetSelectAllLabel(_localizationService.GetLocalizedString(LocalizationKeys.FilterAll));

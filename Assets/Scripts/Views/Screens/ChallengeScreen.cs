@@ -1,6 +1,7 @@
 using TMPro;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UserInterface.Views;
 using Zenject;
@@ -60,7 +61,7 @@ namespace UserInterface.Screens
             _createCustomChallengeButton.onClick.AddListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.AddListener(_controller.CreateRandomChallengeClicked);
             _selectAllCardsToggle.Toggle.onValueChanged.AddListener(_controller.SelectAllCardsToggled);
-            _searchInput.onValueChanged.AddListener(_controller.SearchInputChanged);
+            _searchInput.onValueChanged.AddListener(InputFieldValueChanged);
             base.Show(navArguments);
         }
 
@@ -87,7 +88,7 @@ namespace UserInterface.Screens
             _createCustomChallengeButton.onClick.RemoveListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.RemoveListener(_controller.CreateRandomChallengeClicked);
             _selectAllCardsToggle.Toggle.onValueChanged.RemoveListener(_controller.SelectAllCardsToggled);
-            _searchInput.onValueChanged.RemoveListener(_controller.SearchInputChanged);
+            _searchInput.onValueChanged.RemoveListener(InputFieldValueChanged);
         }
 
         public void SetPackageTitle(string title)
@@ -109,6 +110,11 @@ namespace UserInterface.Screens
         public void SetRandomChallengeButtonLabel(string label)
         {
             _randomChallengeButtonLabel.text = label;
+        }
+
+        private void InputFieldValueChanged(string text)
+        {
+            _controller.SearchInputChanged(text, this);
         }
     }
 }
