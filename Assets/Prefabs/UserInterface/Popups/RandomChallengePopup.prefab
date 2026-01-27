@@ -1593,10 +1593,9 @@ MonoBehaviour:
   _isBackStackable: 1
   _pauseGameWhenActive: 1
   _popupClickableBackground: {fileID: 4437823971442058399}
-  _contentGroup: {fileID: 6985578789983285995}
   _closeButton: {fileID: 9098358404393796644}
+  _contentGroup: {fileID: 6985578789983285995}
   _animationDuration: 0.3
-  _maxScale: 1.1
   _canvasGroup: {fileID: 1301166844065018704}
   _title: {fileID: 3449388495967727978}
   _description: {fileID: 6337647115090258597}
