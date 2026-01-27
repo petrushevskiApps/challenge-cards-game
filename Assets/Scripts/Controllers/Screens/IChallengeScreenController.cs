@@ -7,10 +7,10 @@ public interface IChallengeScreenController
     void ScreenShown();
     void ScreenHidden();
     void BackClicked();
-    void EditTitleClicked();
     void DeletePackageClicked();
     void CreateCustomChallengeClicked();
     void CreateRandomChallengeClicked();
     void SelectAllCardsToggled(bool isOn);
     void SearchInputChanged(string searchText, MonoBehaviour view);
+    void PackageTitleChanged(string text);
 }

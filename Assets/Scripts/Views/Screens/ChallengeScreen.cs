@@ -2,23 +2,38 @@ using TMPro;
 using TwoOneTwoGames.UIManager.InfiniteScrollList;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UserInterface.Views;
 using Zenject;
 
 namespace UserInterface.Screens
 {
     public class ChallengeScreen : UIScreen, IChallengeScreenView
     {
-        [SerializeField]
-        private TextMeshProUGUI _packageTitle;
+        [Header("Header")]
         [SerializeField]
         private Button _backButton; 
         [SerializeField]
-        private Button _editTitleButton;
+        private TMP_InputField _editTitle;
         [SerializeField]
         private Button _deletePackageButton;
+
+        [Header("Toolbar")]
+        [SerializeField]
+        private SwitchView _selectAllCardsToggle;
+        [SerializeField]
+        private TextMeshProUGUI _selectAllLabel;
+        [SerializeField]
+        private TMP_InputField _searchInput;
+        [SerializeField]
+        private TextMeshProUGUI _searchInputLabel;
+
+        [Header("Content")]
+        [SerializeField]
+        private InfiniteScrollList _listView;
+        [SerializeField]
+        private InfiniteScrollController _scrollController;
+
+        [Header("Footer")]
         [SerializeField]
         private Button _createCustomChallengeButton;
         [SerializeField]
@@ -27,18 +42,6 @@ namespace UserInterface.Screens
         private Button _createRandomChallengeButton;
         [SerializeField]
         private TextMeshProUGUI _randomChallengeButtonLabel;
-        [SerializeField]
-        private SwitchView _selectAllCardsToggle;
-        [SerializeField]
-        private TMP_InputField _searchInput;
-        [SerializeField]
-        private InfiniteScrollList _listView;
-        [SerializeField]
-        private TextMeshProUGUI _selectAllLabel;
-        [SerializeField]
-        private TextMeshProUGUI _searchInputLabel;
-        [SerializeField]
-        private InfiniteScrollController _scrollController;
 
         public InfiniteScrollController InfiniteListScrollController => _scrollController;
 
@@ -57,7 +60,7 @@ namespace UserInterface.Screens
                 _controller.Setup(this, arguments.PackageModel);
             }
             _backButton.onClick.AddListener(_controller.BackClicked);
-            _editTitleButton.onClick.AddListener(_controller.EditTitleClicked); 
+            _editTitle.onValueChanged.AddListener(_controller.PackageTitleChanged); 
             _deletePackageButton.onClick.AddListener(_controller.DeletePackageClicked);
             _createCustomChallengeButton.onClick.AddListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.AddListener(_controller.CreateRandomChallengeClicked);
@@ -79,7 +82,7 @@ namespace UserInterface.Screens
         {
             base.Close();
             _backButton.onClick.RemoveListener(_controller.BackClicked);
-            _editTitleButton.onClick.RemoveListener(_controller.EditTitleClicked);
+            _editTitle.onValueChanged.RemoveListener(_controller.PackageTitleChanged); 
             _deletePackageButton.onClick.RemoveListener(_controller.DeletePackageClicked);
             _createCustomChallengeButton.onClick.RemoveListener(_controller.CreateCustomChallengeClicked);
             _createRandomChallengeButton.onClick.RemoveListener(_controller.CreateRandomChallengeClicked);
@@ -89,7 +92,7 @@ namespace UserInterface.Screens
 
         public void SetPackageTitle(string title)
         {
-            _packageTitle.text = title;
+            _editTitle.SetTextWithoutNotify(title);
         }
 
         public void ScrollToBottom()

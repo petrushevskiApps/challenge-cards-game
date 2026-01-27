@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Localization;
 using TwoOneTwoGames.UIManager.InfiniteScrollList;
@@ -12,6 +13,8 @@ using UserInterface.Screens;
 
 public class ChallengeScreenController : IChallengeScreenController
 {
+    private const float DEBOUNCE_PERIOD = 0.3f;
+
     // Internal
     private IChallengeScreenView _view;
     private IPackageModel _packageModel;
@@ -75,10 +78,6 @@ public class ChallengeScreenController : IChallengeScreenController
         _screenNavigation.NavigateBack();
     }
 
-    public void EditTitleClicked()
-    {
-    }
-
     public void DeletePackageClicked()
     {
         _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
@@ -137,6 +136,36 @@ public class ChallengeScreenController : IChallengeScreenController
         _packageRepository.SavePackagesAsync().Forget();
     }
 
+    private CancellationTokenSource _cancellationTokenSource;
+    
+    public void PackageTitleChanged(string newTitle)
+    {
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
+
+       DebounceTitleUpdateAsync(newTitle, _cancellationTokenSource.Token).Forget();
+    }
+
+    private async UniTaskVoid DebounceTitleUpdateAsync(string title, CancellationToken token)
+    {
+        try
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(DEBOUNCE_PERIOD), cancellationToken: token);
+
+            string trimmed = title?.Trim() ?? string.Empty;
+
+            if (string.IsNullOrEmpty(trimmed))
+                return;
+
+            _packageModel.UpdateTitle(trimmed);
+        }
+        catch (OperationCanceledException)
+        {
+            // Ignore
+        }
+    }
+    
     public void SearchInputChanged(string searchText, MonoBehaviour view)
     {
         if (!view.gameObject.activeInHierarchy)
@@ -154,7 +183,8 @@ public class ChallengeScreenController : IChallengeScreenController
 
     private IEnumerator DebounceRoutine(string text)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(DEBOUNCE_PERIOD);
+        _debounceCoroutine = null;
         SearchCards(text);
     }
     
@@ -187,6 +217,7 @@ public class ChallengeScreenController : IChallengeScreenController
 
         _challengesListController?.SetCards(results);
     }
+    
     private void SetLabels()
     {
         _view.SetSelectAllLabel(_localizationService.GetLocalizedString(LocalizationKeys.FilterAll));
@@ -197,6 +228,7 @@ public class ChallengeScreenController : IChallengeScreenController
 
     private void SetTitle()
     {
+        Debug.Log("SET TITLE");
         _view.SetPackageTitle(_packageModel.Title);
     }
 }
