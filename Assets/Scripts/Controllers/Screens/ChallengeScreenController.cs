@@ -52,7 +52,7 @@ public class ChallengeScreenController : IChallengeScreenController
         _localizationService.LanguageChanged += OnLanguageChanged;
         if (_packageModel != null && _challengesListController != null)
         {
-            _challengesListController.Setup(_packageModel, _view.InfiniteListScrollController);
+            _challengesListController.Setup(_view, _packageModel, _view.InfiniteListScrollController);
             SetTitle();
         }
 

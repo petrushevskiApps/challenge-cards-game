@@ -2118,7 +2118,7 @@ MonoBehaviour:
   _verticalSpacing: 10
   _scrollSpeed: 100
   _scrollLength: 300
-  _bottomPadding: 0
+  _bottomPadding: 50
 --- !u!1 &7220292768486665864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   _randomChallengeButtonLabel: {fileID: 3615408149656422938}
   _selectAllCardsToggle: {fileID: 7300423292536263877}
   _searchInput: {fileID: 3234038848997557156}
-  _listView: {fileID: 1088811163258987175}
+  _listView: {fileID: 7115490467929604377}
   _selectAllLabel: {fileID: 9010907418951436153}
   _searchInputLabel: {fileID: 628573508490048252}
   _scrollController: {fileID: 7653150017551687672}

@@ -32,17 +32,14 @@ namespace UserInterface.Screens
         [SerializeField]
         private TMP_InputField _searchInput;
         [SerializeField]
-        private ListView _listView;
-
+        private InfiniteScrollList _listView;
         [SerializeField]
         private TextMeshProUGUI _selectAllLabel;
-
         [SerializeField]
         private TextMeshProUGUI _searchInputLabel;
         [SerializeField]
         private InfiniteScrollController _scrollController;
-        
-        public IListView ListView => _listView;
+
         public InfiniteScrollController InfiniteListScrollController => _scrollController;
 
         private IChallengeScreenController _controller;
@@ -94,6 +91,17 @@ namespace UserInterface.Screens
         {
             _packageTitle.text = title;
         }
+
+        public void ScrollToBottom()
+        {
+            _listView.ToBottom();
+        }
+
+        public void ScrollTo(int elementIndex)
+        {
+            _listView.ToElement(elementIndex);
+        }
+
         public void SetSelectAllLabel(string label)
         {
             _selectAllLabel.text = label;
