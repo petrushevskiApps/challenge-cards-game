@@ -1,4 +1,5 @@
 using TMPro;
+using TwoOneTwoGames.UIManager.InfiniteScrollList;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,8 +39,11 @@ namespace UserInterface.Screens
 
         [SerializeField]
         private TextMeshProUGUI _searchInputLabel;
+        [SerializeField]
+        private InfiniteScrollController _scrollController;
         
         public IListView ListView => _listView;
+        public InfiniteScrollController InfiniteListScrollController => _scrollController;
 
         private IChallengeScreenController _controller;
 
@@ -63,12 +67,7 @@ namespace UserInterface.Screens
             _selectAllCardsToggle.Toggle.onValueChanged.AddListener(_controller.SelectAllCardsToggled);
             _searchInput.onValueChanged.AddListener(InputFieldValueChanged);
             base.Show(navArguments);
-        }
-
-        public override void Resume()
-        {
-            base.Resume();
-            _controller.ScreenResumed();
+            _controller.ScreenShown();
         }
 
         public override void Hide()
@@ -111,7 +110,6 @@ namespace UserInterface.Screens
         {
             _randomChallengeButtonLabel.text = label;
         }
-
         private void InputFieldValueChanged(string text)
         {
             _controller.SearchInputChanged(text, this);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Localization;
+using TwoOneTwoGames.UIManager.InfiniteScrollList;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UserInterface.Popups;
@@ -14,29 +15,29 @@ public class ChallengeScreenController : IChallengeScreenController
     // Internal
     private IChallengeScreenView _view;
     private IPackageModel _packageModel;
+    private Coroutine _debounceCoroutine;
 
     // Injected
     private readonly IPackageRepository _packageRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPopupNavigation _popupNavigation;
-    private readonly IChallengeCardListController _challengeCardListController;
+    private readonly IChallengesListController _challengesListController;
     private readonly IRandomChallengeRepository _randomChallengeRepository;
-    private Coroutine _debounceCoroutine;
 
     public ChallengeScreenController(
         IPackageRepository packageRepository,
         ILocalizationService localizationService,
         IScreenNavigation screenNavigation,
         IPopupNavigation popupNavigation,
-        IChallengeCardListController challengeCardListController,
+        IChallengesListController challengesListController,
         IRandomChallengeRepository randomChallengeRepository)
     {
         _packageRepository = packageRepository;
         _localizationService = localizationService;
         _screenNavigation = screenNavigation;
         _popupNavigation = popupNavigation;
-        _challengeCardListController = challengeCardListController;
+        _challengesListController = challengesListController;
         _randomChallengeRepository = randomChallengeRepository;
     }
 
@@ -46,13 +47,12 @@ public class ChallengeScreenController : IChallengeScreenController
         _packageModel = packageModel;
     }
 
-    public void ScreenResumed()
+    public void ScreenShown()
     {
         _localizationService.LanguageChanged += OnLanguageChanged;
-        if (_packageModel != null && _challengeCardListController != null)
+        if (_packageModel != null && _challengesListController != null)
         {
-            _challengeCardListController.Setup(_view.ListView, _packageModel);
-            _challengeCardListController.SetCards(_packageModel.ChallengeCards);
+            _challengesListController.Setup(_packageModel, _view.InfiniteListScrollController);
             SetTitle();
         }
 
@@ -62,7 +62,7 @@ public class ChallengeScreenController : IChallengeScreenController
     public void ScreenHidden()
     {
         _localizationService.LanguageChanged -= OnLanguageChanged;
-        _challengeCardListController?.Clear();
+        _challengesListController?.Clear();
     }
 
     private void OnLanguageChanged()
@@ -82,16 +82,14 @@ public class ChallengeScreenController : IChallengeScreenController
     public void DeletePackageClicked()
     {
         _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
-            DeletePackage,
+            () =>
+            {
+                _packageRepository.DeletePackage(_packageModel);
+                _screenNavigation.NavigateBack();
+            },
             () => { },
             LocalizationKeys.ConfirmRemovePackage,
             LocalizationKeys.CannotBeUndone));
-    }
-
-    private void DeletePackage()
-    {
-        _packageRepository.DeletePackage(_packageModel);
-        _screenNavigation.NavigateBack();
     }
 
     public void CreateCustomChallengeClicked()
@@ -116,14 +114,18 @@ public class ChallengeScreenController : IChallengeScreenController
     
     private void OnRandomChallengePopupResult(int challengesCount)
     {
-        var challenges = _randomChallengeRepository.GetRandomChallenges(
+        var randomChallenges = _randomChallengeRepository.GetRandomChallenges(
             challengesCount, 
             _localizationService.GetCurrentLanguage().ToString().ToLower());
-        foreach (string challenge in challenges)
-        {
-            var challengeModel = new ChallengeCardModel("Who’s most likely to", challenge);
-            _packageModel.AddChallengeCardModel(challengeModel);
-        }
+        
+        List<IChallengeCardModel> challengeModels = randomChallenges
+            .Select(challenge => new ChallengeCardModel(
+                _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
+                challenge))
+            .Cast<IChallengeCardModel>()
+            .ToList();
+
+        _packageModel.AddChallengeModelsInBulk(challengeModels);
     }
 
     public void SelectAllCardsToggled(bool isOn)
@@ -160,7 +162,7 @@ public class ChallengeScreenController : IChallengeScreenController
     {
         if (string.IsNullOrWhiteSpace(searchText))
         {
-            _challengeCardListController?.SetCards(_packageModel.ChallengeCards);
+            _challengesListController?.SetCards(_packageModel.ChallengeCards);
             return;
         }
         
@@ -183,7 +185,7 @@ public class ChallengeScreenController : IChallengeScreenController
             }
         }
 
-        _challengeCardListController?.SetCards(results);
+        _challengesListController?.SetCards(results);
     }
     private void SetLabels()
     {

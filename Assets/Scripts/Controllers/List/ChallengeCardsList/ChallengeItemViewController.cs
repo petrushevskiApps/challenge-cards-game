@@ -5,35 +5,39 @@ using UserInterface.Popups;
 
 namespace UserInterface.Views
 {
-    public class CardItemViewController : ICardItemViewController
+    public class ChallengeItemViewController : IChallengeItemViewController
     {
+        private IChallengeCardModel _cardModel;
+        private IPackageModel _packageModel;
         private readonly IPackageRepository _packageRepository;
-        private readonly IChallengeCardModel _cardModel;
-        private readonly IPackageModel _packageModel;
-        private readonly ChallengeCardListItemView _view;
+        private readonly ChallengeItemView _view;
         private readonly IPopupNavigation _popupNavigation;
 
-        public CardItemViewController(
+        public ChallengeItemViewController(
             IPackageRepository packageRepository,
-            IChallengeCardModel cardModel, 
-            IPackageModel packageModel,
-            ChallengeCardListItemView view,
+            ChallengeItemView view,
             IPopupNavigation popupNavigation)
         {
             _packageRepository = packageRepository;
-            _cardModel = cardModel;
-            _packageModel = packageModel;
             _view = view;
             _popupNavigation = popupNavigation;
-
-            SubscribeToEvents();
-
-            view.SetTitle(cardModel.Title);
-            view.SetDescription(cardModel.Description);
-            view.SetSelection(cardModel.IsSelected);
         }
 
-        public void Clear()
+        public void Setup(
+            IChallengeCardModel cardModel, 
+            IPackageModel packageModel)
+        {
+            _cardModel = cardModel;
+            _packageModel = packageModel;
+            
+            _view.SetTitle(cardModel.Title);
+            _view.SetDescription(cardModel.Description);
+            _view.SetSelection(cardModel.IsSelected);
+
+            SubscribeToEvents();
+        }
+
+        public void ViewHidden()
         {
             UnsubscribeFromEvents();
         }
@@ -54,7 +58,7 @@ namespace UserInterface.Views
         {
             _cardModel.UpdateDescription(description);
         }
-        
+
         public void DeleteClicked()
         {
             _popupNavigation.ShowConfirmationPopup(new ConfirmationPopupNavigationArguments(
@@ -64,11 +68,6 @@ namespace UserInterface.Views
                 LocalizationKeys.CannotBeUndone));
         }
 
-        private void DeleteCard()
-        {
-            _packageModel.RemoveChallengeCardModel(_cardModel);
-        }
-        
         private void SubscribeToEvents()
         {
             _cardModel.TitleChanged += _view.SetTitle;
@@ -81,6 +80,11 @@ namespace UserInterface.Views
             _cardModel.TitleChanged -= _view.SetTitle;
             _cardModel.DescriptionChanged -= _view.SetDescription;
             _cardModel.SelectionChanged -= _view.SetSelection;
+        }
+
+        private void DeleteCard()
+        {
+            _packageModel.RemoveChallengeCardModel(_cardModel);
         }
     }
 }

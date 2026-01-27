@@ -1,6 +1,7 @@
 using DefaultNamespace;
 using DefaultNamespace.Controllers;
 using Localization;
+using TwoOneTwoGames.UIManager.InfiniteScrollList;
 using UnityEngine;
 using UserInterface.Views;
 using Zenject;
@@ -58,19 +59,19 @@ public class MainInstaller : MonoInstaller
             .To<PackageListController>()
             .AsSingle();
         Container
-            .Bind<IChallengeCardListController>()
-            .To<ChallengeCardListController>()
+            .Bind<IChallengesListController>()
+            .To<ChallengesListController>()
             .AsSingle();
         Container
             .Bind<ILocalizationService>()
             .To<LocalizationService>()
             .AsSingle();
-        
         Container
-            .BindMemoryPool<ChallengeCardListItemView, ChallengeCardListItemView.Pool>()
-            .WithInitialSize(5)
-            .FromComponentInNewPrefab(_challengeCardViewPrefab)
-            .UnderTransformGroup("CardListItemViewPool");
+            .Bind<IItemViewPool>()
+            .WithId("ChallengeItemViewPool")
+            .To<ItemViewPool>()
+            .AsTransient();
+        
         Container
             .BindMemoryPool<PackageListItemView, PackageListItemView.Pool>()
             .WithInitialSize(5)

@@ -1,5 +1,8 @@
+using System;
 using DefaultNamespace.Views;
 using TMPro;
+using TwoOneTwoGames.UIManager.InfiniteScrollList;
+using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -7,7 +10,7 @@ using Zenject;
 
 namespace UserInterface.Views
 {
-    public class ChallengeCardListItemView : MonoBehaviour
+    public class ChallengeItemView : MonoBehaviour, IItemView
     {
         [SerializeField]
         private TextMeshProUGUI _cardTitle;
@@ -23,12 +26,10 @@ namespace UserInterface.Views
         [SerializeField]
         private Button _deleteButton;
 
-        private ICardItemViewController _controller;
+        private IChallengeItemViewController _controller;
 
-        public void Setup(ICardItemViewController controller)
+        private void Awake()
         {
-            _controller = controller;
-            
             if (_selectToggle != null)
             {
                 _selectToggle.Toggle.onValueChanged.AddListener(OnToggleValueChanged);
@@ -44,11 +45,9 @@ namespace UserInterface.Views
                 _deleteButton.onClick.AddListener(OnDeleteClicked);
             }
         }
-
-        public void Cleanup()
+        
+        private void OnDestroy()
         {
-            _controller?.Clear();
-            
             if (_selectToggle != null)
             {
                 _selectToggle.Toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
@@ -62,6 +61,31 @@ namespace UserInterface.Views
             if (_deleteButton != null)
             {
                 _deleteButton.onClick.RemoveListener(OnDeleteClicked);
+            }
+        }
+
+        private void OnDisable()
+        {
+            _controller.ViewHidden();
+        }
+
+        public void Setup(
+            IPackageRepository packageRepository,
+            IChallengeCardModel cardModel, 
+            IPackageModel packageModel,
+            IPopupNavigation popupNavigation)
+        {
+            if (_controller == null)
+            {
+                _controller = new ChallengeItemViewController(
+                    packageRepository, 
+                    this,
+                    popupNavigation);
+                _controller.Setup(cardModel, packageModel);
+            }
+            else
+            {
+                _controller.Setup(cardModel, packageModel);
             }
         }
 
@@ -105,24 +129,7 @@ namespace UserInterface.Views
             _controller?.DeleteClicked();
         }
 
-        private void OnDestroy()
-        {
-            Cleanup();
-        }
-        
-        private void SetData(Transform parent)
-        {
-            transform.SetParent(parent);
-            transform.localScale = Vector3.one;
-            transform.localPosition = Vector3.zero;
-        }
-        
-        public class Pool : MonoMemoryPool<Transform, ChallengeCardListItemView>
-        {
-            protected override void Reinitialize(Transform parent, ChallengeCardListItemView view)
-            {
-                view.SetData(parent);
-            }
-        }
+        public int Index { get; set; }
+        public GameObject View => gameObject;
     }
 }

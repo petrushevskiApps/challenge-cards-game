@@ -3,6 +3,9 @@ using UserInterface.Screens;
 
 public interface IChallengeScreenController
 {
+    void Setup(IChallengeScreenView view, IPackageModel argumentsPackageModel);
+    void ScreenShown();
+    void ScreenHidden();
     void BackClicked();
     void EditTitleClicked();
     void DeletePackageClicked();
@@ -10,7 +13,4 @@ public interface IChallengeScreenController
     void CreateRandomChallengeClicked();
     void SelectAllCardsToggled(bool isOn);
     void SearchInputChanged(string searchText, MonoBehaviour view);
-    void Setup(IChallengeScreenView view, IPackageModel argumentsPackageModel);
-    void ScreenResumed();
-    void ScreenHidden();
 }

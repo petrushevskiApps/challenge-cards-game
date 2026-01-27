@@ -6,6 +6,7 @@ using System.Linq;
 public class PackageModel : IPackageModel
 {
     public event Action<IChallengeCardModel> CardAdded;
+    public event Action<List<IChallengeCardModel>> CardsAdded;
     public event Action<IChallengeCardModel> CardRemoved;
     public event Action CardsNumberChanged;
     public event Action<string> TitleChanged;
@@ -39,6 +40,14 @@ public class PackageModel : IPackageModel
         return true;
     }
 
+    public bool AddChallengeModelsInBulk(List<IChallengeCardModel> cards)
+    {
+        _challengeCards.AddRange(cards.Cast<ChallengeCardModel>());
+        CardsAdded?.Invoke(cards);
+        CardsNumberChanged?.Invoke();
+        return true;
+    }
+    
     public bool RemoveChallengeCardModel(IChallengeCardModel card)
     {
         if (card is not ChallengeCardModel challengeCard)

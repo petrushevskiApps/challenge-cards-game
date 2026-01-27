@@ -15,4 +15,6 @@ public interface IPackageModel
     bool RemoveChallengeCardModel(IChallengeCardModel card);
     void UpdateTitle(string title);
     int GetNumberOfActiveCards();
+    event Action<List<IChallengeCardModel>> CardsAdded;
+    bool AddChallengeModelsInBulk(List<IChallengeCardModel> cards);
 }
