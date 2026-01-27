@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UserInterface.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Views.List
 {
     public class ListView : MonoBehaviour, IListView
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool
 {
     public interface IItemViewPool
     {

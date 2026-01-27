@@ -1,7 +1,7 @@
-﻿using System;
-using UserInterface.Popups;
+using System;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup;
 
-namespace DefaultNamespace.Controllers
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Popups
 {
     public interface IRandomChallengePopupController
     {

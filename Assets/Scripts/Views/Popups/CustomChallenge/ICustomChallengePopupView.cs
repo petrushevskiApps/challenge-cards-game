@@ -1,6 +1,6 @@
-﻿namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge
 {
-    public interface IEditChallengePopupView
+    public interface ICustomChallengePopupView
     {
         void SetAddEditButtonTitle(string buttonTitle);
         void SetChallengeDescription(string description);

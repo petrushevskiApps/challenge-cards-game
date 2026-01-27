@@ -1,11 +1,12 @@
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Screens;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
 using TMPro;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Screens
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Screens
 {
     public class ChallengeScreen : UIScreen, IChallengeScreenView
     {

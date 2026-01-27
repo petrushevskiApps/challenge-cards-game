@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup
 {
     public class RandomChallengePopupNavigationArguments
     {

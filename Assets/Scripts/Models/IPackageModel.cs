@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
 
-public interface IPackageModel
+namespace PetrushevskiApps.WhosGame.Scripts.Models
 {
-    event Action<IChallengeCardModel> CardAdded;
-    event Action<IChallengeCardModel> CardRemoved;
+    public interface IPackageModel
+{
+    event Action<IChallengeModel> CardAdded;
+    event Action<IChallengeModel> CardRemoved;
     event Action<string> TitleChanged;
     event Action CardsNumberChanged;
-    
+    event Action<List<IChallengeModel>> CardsAdded;
+
     string Id { get; }
     string Title { get; }
-    IReadOnlyList<IChallengeCardModel> ChallengeCards { get; }
-    bool AddChallengeCardModel(IChallengeCardModel card);
-    bool RemoveChallengeCardModel(IChallengeCardModel card);
+    
+    IReadOnlyList<IChallengeModel> ChallengeCards { get; }
+    bool AddChallengeCardModel(IChallengeModel card);
+    bool RemoveChallengeCardModel(IChallengeModel card);
     void UpdateTitle(string title);
     int GetNumberOfActiveCards();
-    event Action<List<IChallengeCardModel>> CardsAdded;
-    bool AddChallengeModelsInBulk(List<IChallengeCardModel> cards);
+    bool AddChallengeModelsInBulk(List<IChallengeModel> cards);
+    }
 }

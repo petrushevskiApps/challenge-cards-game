@@ -1,10 +1,10 @@
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
+using InfiniteScrollControllerComponent = PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.InfiniteScrollController;
 
-namespace UserInterface.Screens
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Screens
 {
     public interface IChallengeScreenView
     {
-        InfiniteScrollController InfiniteListScrollController { get; }
+        InfiniteScrollControllerComponent InfiniteListScrollController { get; }
         void SetSelectAllLabel(string label);
         void SetSearchInputLabel(string label);
         void SetCustomChallengeButtonLabel(string label);

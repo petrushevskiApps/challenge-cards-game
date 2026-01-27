@@ -1,11 +1,14 @@
+using PetrushevskiApps.WhosGame.Scripts.Effects;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using PrimeTween;
 using Zenject;
 
-public class JellyButtonAnimation
-    : MonoBehaviour,
-        IPointerDownHandler
+namespace PetrushevskiApps.WhosGame.Scripts.Effects
+{
+    public class JellyButtonAnimation
+        : MonoBehaviour,
+            IPointerDownHandler
 {
     [SerializeField]
     private ButtonAnimationSettings _overrideSettings;
@@ -48,5 +51,6 @@ public class JellyButtonAnimation
                 Easing.Overshoot(_settings.OvershootStrength)))
             .Group(Tween.ScaleX(transform, _originalScale.x, _settings.BounceDuration,
                 Easing.Overshoot(_settings.OvershootStrength)));
+    }
     }
 }

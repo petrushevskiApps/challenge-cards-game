@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DTOs
+namespace PetrushevskiApps.WhosGame.Scripts.DTOs
 {
     [Serializable]
     public class PackagesSaveData

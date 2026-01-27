@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using Cysharp.Threading.Tasks;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Interfaces;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
 using UnityEngine;
 using Zenject;
 
-namespace DefaultNamespace
+namespace PetrushevskiApps.WhosGame.Scripts
 {
     public class GameManager: MonoBehaviour, IPauseGameController
     {

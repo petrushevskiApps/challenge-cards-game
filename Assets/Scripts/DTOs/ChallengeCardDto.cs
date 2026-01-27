@@ -1,6 +1,6 @@
 using System;
 
-namespace DTOs
+namespace PetrushevskiApps.WhosGame.Scripts.DTOs
 {
     [Serializable]
     public class ChallengeCardDto

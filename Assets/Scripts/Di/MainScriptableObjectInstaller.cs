@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Utilities
+namespace PetrushevskiApps.WhosGame.Scripts.Di
 {
     [CreateAssetMenu(
         fileName = "ScriptableObjectInstaller",

@@ -1,15 +1,15 @@
-﻿using System;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
-using UserInterface.Popups;
+using System;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge;
 
-namespace DefaultNamespace.Controllers
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Popups
 {
     public class AddEditChallengePopupController : IAddEditChallengePopupController
     {
         private const int DESCRIPTION_MAX_CHARACTERS = 200;
 
-        private IEditChallengePopupView _view;
+        private ICustomChallengePopupView _view;
         private Action<string> _onPopupResult;
         private string _challengeDescription;
         private bool _isEdit;
@@ -27,7 +27,7 @@ namespace DefaultNamespace.Controllers
         }
         
         public void Setup(
-            IEditChallengePopupView view, 
+            ICustomChallengePopupView view, 
             Action<string> onPopupResult, 
             string challengeDescriptionText = null)
         {

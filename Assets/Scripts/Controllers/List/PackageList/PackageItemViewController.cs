@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Text;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 
-namespace UserInterface.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList
 {
     public class PackageItemViewController: IPackageItemViewController
     {

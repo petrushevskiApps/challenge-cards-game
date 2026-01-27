@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Zenject;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation
 {
     public class BackController : MonoBehaviour
     {

@@ -1,11 +1,12 @@
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Screens;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 using TMPro;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.UI;
-using UserInterface.Views;
 using Zenject;
 
-namespace UserInterface.Screens
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Screens
 {
     public class MainScreen: UIScreen, IMainScreenView
     {

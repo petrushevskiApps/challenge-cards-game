@@ -1,14 +1,17 @@
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views;
 using System;
-using DefaultNamespace.Views;
 using TMPro;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Views.List
 {
     public class ChallengeItemView : MonoBehaviour, IItemView
     {
@@ -71,7 +74,7 @@ namespace UserInterface.Views
 
         public void Setup(
             IPackageRepository packageRepository,
-            IChallengeCardModel cardModel, 
+            IChallengeModel challengeModel, 
             IPackageModel packageModel,
             IPopupNavigation popupNavigation)
         {
@@ -81,11 +84,11 @@ namespace UserInterface.Views
                     packageRepository, 
                     this,
                     popupNavigation);
-                _controller.Setup(cardModel, packageModel);
+                _controller.Setup(challengeModel, packageModel);
             }
             else
             {
-                _controller.Setup(cardModel, packageModel);
+                _controller.Setup(challengeModel, packageModel);
             }
         }
 

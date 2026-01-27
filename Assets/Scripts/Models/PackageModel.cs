@@ -2,20 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[Serializable]
-public class PackageModel : IPackageModel
+namespace PetrushevskiApps.WhosGame.Scripts.Models
 {
-    public event Action<IChallengeCardModel> CardAdded;
-    public event Action<List<IChallengeCardModel>> CardsAdded;
-    public event Action<IChallengeCardModel> CardRemoved;
+    [Serializable]
+    public class PackageModel : IPackageModel
+{
+    public event Action<IChallengeModel> CardAdded;
+    public event Action<List<IChallengeModel>> CardsAdded;
+    public event Action<IChallengeModel> CardRemoved;
     public event Action CardsNumberChanged;
     public event Action<string> TitleChanged;
 
-    private readonly List<ChallengeCardModel> _challengeCards = new();
+    private readonly List<ChallengeModel> _challengeCards = new();
 
     public string Id { get; init; }
     public string Title { get; private set; }
-    public IReadOnlyList<IChallengeCardModel> ChallengeCards => _challengeCards;
+    public IReadOnlyList<IChallengeModel> ChallengeCards => _challengeCards;
 
     public PackageModel()
     {
@@ -27,9 +29,9 @@ public class PackageModel : IPackageModel
         Title = title;
     }
     
-    public bool AddChallengeCardModel(IChallengeCardModel card)
+    public bool AddChallengeCardModel(IChallengeModel card)
     {
-        if (card is not ChallengeCardModel challengeCard)
+        if (card is not ChallengeModel challengeCard)
         {
             return false;
         }
@@ -40,17 +42,17 @@ public class PackageModel : IPackageModel
         return true;
     }
 
-    public bool AddChallengeModelsInBulk(List<IChallengeCardModel> cards)
+    public bool AddChallengeModelsInBulk(List<IChallengeModel> cards)
     {
-        _challengeCards.AddRange(cards.Cast<ChallengeCardModel>());
+        _challengeCards.AddRange(cards.Cast<ChallengeModel>());
         CardsAdded?.Invoke(cards);
         CardsNumberChanged?.Invoke();
         return true;
     }
     
-    public bool RemoveChallengeCardModel(IChallengeCardModel card)
+    public bool RemoveChallengeCardModel(IChallengeModel card)
     {
-        if (card is not ChallengeCardModel challengeCard)
+        if (card is not ChallengeModel challengeCard)
         {
             return false;
         }
@@ -82,5 +84,6 @@ public class PackageModel : IPackageModel
     public int GetNumberOfActiveCards()
     {
         return _challengeCards.Count(card => card.IsSelected);
+    }
     }
 }

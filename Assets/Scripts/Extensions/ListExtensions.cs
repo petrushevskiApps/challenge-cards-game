@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace DefaultNamespace.Extensions
+namespace PetrushevskiApps.WhosGame.Scripts.Extensions
 {
     public static class ListExtensions
     {

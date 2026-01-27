@@ -1,6 +1,7 @@
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
 using System;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation
 {
     public interface INavigationManager
     {

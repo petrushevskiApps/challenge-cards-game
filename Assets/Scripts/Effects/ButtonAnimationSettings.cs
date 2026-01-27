@@ -2,10 +2,12 @@ using JetBrains.Annotations;
 using PrimeTween;
 using UnityEngine;
 
-[CreateAssetMenu(
-    fileName = "ButtonAnimationSettings", 
-    menuName = "Configuration/Button Animation Settings")]
-public class ButtonAnimationSettings : ScriptableObject, IButtonAnimationSettings
+namespace PetrushevskiApps.WhosGame.Scripts.Effects
+{
+    [CreateAssetMenu(
+        fileName = "ButtonAnimationSettings", 
+        menuName = "Configuration/Button Animation Settings")]
+    public class ButtonAnimationSettings : ScriptableObject, IButtonAnimationSettings
 {
     [field: Header("Squish Settings")]
     [field: SerializeField] 
@@ -27,4 +29,5 @@ public class ButtonAnimationSettings : ScriptableObject, IButtonAnimationSetting
 
     [field: SerializeField] 
     public float OvershootStrength {get; [UsedImplicitly] private set;}
+    }
 }

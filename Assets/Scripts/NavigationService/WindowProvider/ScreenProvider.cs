@@ -1,8 +1,9 @@
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.WindowProvider
 {
     public class ScreenProvider : MonoBehaviour, IWindowProvider
     {

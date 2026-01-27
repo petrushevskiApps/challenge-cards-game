@@ -1,11 +1,14 @@
-using UserInterface.Screens;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 
-public interface IMainScreenController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
 {
-    void CreatePackageClicked();
-    void PlayClicked();
-    void SettingsClicked();
-    void Setup(IMainScreenView view);
-    void ScreenResumed();
-    void ScreenHidden();
+    public interface IMainScreenController
+    {
+        void CreatePackageClicked();
+        void PlayClicked();
+        void SettingsClicked();
+        void Setup(IMainScreenView view);
+        void ScreenResumed();
+        void ScreenHidden();
+    }
 }

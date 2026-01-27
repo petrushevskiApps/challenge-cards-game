@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using DTOs;
+using PetrushevskiApps.WhosGame.Scripts.DTOs;
+using PetrushevskiApps.WhosGame.Scripts.Models;
 
-public static class ModelDtoExtensions
+namespace PetrushevskiApps.WhosGame.Scripts.Extensions
 {
-    public static ChallengeCardDto ToDto(this IChallengeCardModel model)
+    public static class ModelDtoExtensions
+{
+    public static ChallengeCardDto ToDto(this IChallengeModel model)
     {
         if (model == null)
         {
@@ -19,14 +22,14 @@ public static class ModelDtoExtensions
         );
     }
 
-    public static ChallengeCardModel ToModel(this ChallengeCardDto dto)
+    public static ChallengeModel ToModel(this ChallengeCardDto dto)
     {
         if (dto == null)
         {
             return null;
         }
 
-        return new ChallengeCardModel(dto.Title, dto.Description, dto.IsSelected)
+        return new ChallengeModel(dto.Title, dto.Description, dto.IsSelected)
         {
             Id = dto.Id
         };
@@ -81,5 +84,6 @@ public static class ModelDtoExtensions
     public static List<PackageModel> ToModelList(this IEnumerable<PackageDto> dtos)
     {
         return dtos?.Select(dto => dto.ToModel()).Where(model => model != null).ToList() ?? new List<PackageModel>();
+    }
     }
 }

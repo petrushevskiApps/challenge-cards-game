@@ -1,13 +1,13 @@
-﻿using DefaultNamespace.Controllers;
-using DefaultNamespace.Views;
-using Localization;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Popups;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+using PetrushevskiApps.WhosGame.Scripts.Views;
 using TMPro;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.Settings
 {
     public class SettingsPopupView: UIPopup, ISettingsPopupView
     {

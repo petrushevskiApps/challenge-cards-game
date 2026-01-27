@@ -1,7 +1,7 @@
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 using UnityEngine.UI;
-using UserInterface.Views;
 
-namespace UserInterface.Screens
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Screens
 {
     public interface IMainScreenView
     {

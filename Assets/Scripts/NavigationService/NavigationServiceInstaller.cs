@@ -1,7 +1,12 @@
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.WindowProvider;
 using Zenject;
 
-public class NavigationServiceInstaller : MonoInstaller
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService
+{
+    public class NavigationServiceInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
@@ -28,5 +33,6 @@ public class NavigationServiceInstaller : MonoInstaller
             .Bind<IPopupNavigation>()
             .To<PopupNavigation>()
             .AsSingle();
+    }
     }
 }

@@ -1,4 +1,6 @@
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.WindowProvider
 {
     public interface IWindowProvider
     {

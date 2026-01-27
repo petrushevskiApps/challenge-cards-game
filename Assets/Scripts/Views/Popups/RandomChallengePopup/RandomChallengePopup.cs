@@ -1,11 +1,11 @@
-using DefaultNamespace.Controllers;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Popups;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
 using TMPro;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup
 {
     public class RandomChallengePopup: UIPopup, IRandomChallengePopupView
     {

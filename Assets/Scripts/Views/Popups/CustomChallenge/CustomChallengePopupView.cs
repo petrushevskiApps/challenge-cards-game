@@ -1,13 +1,13 @@
-using DefaultNamespace.Controllers;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Popups;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
 using TMPro;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge
 {
-    public class AddEditChallengePopupView: UIPopup, IEditChallengePopupView
+    public class CustomChallengePopupView: UIPopup, ICustomChallengePopupView
     {
         [Header("Create Challenge Popup properties")]
         [SerializeField]
@@ -37,7 +37,7 @@ namespace UserInterface.Popups
             base.Show(navArguments);
             _actionButton.onClick.AddListener(_controller.ActionButtonClicked);
             _inputField.onValueChanged.AddListener(_controller.InputTextUpdated);
-            if (navArguments is EditChallengeNavigationArguments args)
+            if (navArguments is CustomChallengeNavigationArguments args)
             {
                 _controller.Setup(this, args.OnPopupResult, args.ChallengeDescription);
             }

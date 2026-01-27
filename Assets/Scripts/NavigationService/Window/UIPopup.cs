@@ -1,11 +1,13 @@
-﻿using System;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Interfaces;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using PrimeTween;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Window
 {
     public abstract class UIPopup : MonoBehaviour, IWindow, IUiPopup
     {

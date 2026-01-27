@@ -1,4 +1,6 @@
-﻿namespace UserInterface.Screens
+using PetrushevskiApps.WhosGame.Scripts.Models;
+
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Screens
 {
     public struct ChallengeScreenNavigationArguments
     {

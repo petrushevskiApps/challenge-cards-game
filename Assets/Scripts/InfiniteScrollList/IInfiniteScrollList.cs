@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public interface IInfiniteScrollList
         : IScrollableList

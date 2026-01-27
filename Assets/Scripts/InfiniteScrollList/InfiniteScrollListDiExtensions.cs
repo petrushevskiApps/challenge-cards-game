@@ -1,6 +1,7 @@
-﻿using Zenject;
+﻿using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
+using Zenject;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public static class InfiniteScrollListDiExtensions
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Localization
+namespace PetrushevskiApps.WhosGame.Scripts.LocalizationService
 {
     public interface ILocalizationService
     {

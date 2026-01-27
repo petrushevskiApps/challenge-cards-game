@@ -1,4 +1,6 @@
-﻿namespace UserInterface.Views
+using PetrushevskiApps.WhosGame.Scripts.Models;
+
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList
 {
     public interface IChallengeItemViewController
     {
@@ -7,7 +9,7 @@
         void DeleteClicked();
 
         void Setup(
-            IChallengeCardModel cardModel, 
+            IChallengeModel challengeModel, 
             IPackageModel packageModel);
 
         void ViewHidden();

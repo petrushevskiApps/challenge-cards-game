@@ -1,4 +1,6 @@
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
+
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public interface IListDataSource
     {

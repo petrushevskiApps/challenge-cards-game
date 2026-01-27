@@ -1,4 +1,4 @@
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Window
 {
     /// <summary>
     ///     This interface represents window which can be

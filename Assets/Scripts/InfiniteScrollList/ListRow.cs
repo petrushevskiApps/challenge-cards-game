@@ -1,4 +1,4 @@
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public struct ListRow
     {

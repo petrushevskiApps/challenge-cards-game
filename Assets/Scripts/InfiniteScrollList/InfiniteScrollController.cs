@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public class InfiniteScrollController : MonoBehaviour
     {

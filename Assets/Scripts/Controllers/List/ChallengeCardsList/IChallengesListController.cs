@@ -1,14 +1,17 @@
 using System.Collections.Generic;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
-using UserInterface.Screens;
-using UserInterface.Views;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 
-public interface IChallengesListController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList
+{
+    public interface IChallengesListController
 {
     void Setup(
         IChallengeScreenView challengeScreenView, 
         IPackageModel packageModel,
         InfiniteScrollController infiniteScrollController);
-    void SetCards(IEnumerable<IChallengeCardModel> challengeCards);
+    void SetCards(IEnumerable<IChallengeModel> challengeCards);
     void Clear();
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup
 {
     public interface IRandomChallengePopupView
     {

@@ -1,9 +1,12 @@
-﻿using System;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.WindowProvider
 {
     public class PopupProvider : MonoBehaviour, IWindowProvider
     {

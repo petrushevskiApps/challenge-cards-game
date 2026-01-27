@@ -1,12 +1,20 @@
-using DefaultNamespace;
-using DefaultNamespace.Controllers;
-using Localization;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
+using PetrushevskiApps.WhosGame.Scripts;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Popups;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.Screens;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.ChallengeRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 using UnityEngine;
-using UserInterface.Views;
 using Zenject;
+using LocalizationServiceComponent = PetrushevskiApps.WhosGame.Scripts.LocalizationService.LocalizationService;
 
-public class MainInstaller : MonoInstaller
+namespace PetrushevskiApps.WhosGame.Scripts.Di
+{
+    public class MainInstaller : MonoInstaller
 {
     [SerializeField]
     private GameObject _challengeCardViewPrefab;
@@ -63,8 +71,8 @@ public class MainInstaller : MonoInstaller
             .To<ChallengesListController>()
             .AsSingle();
         Container
-            .Bind<ILocalizationService>()
-            .To<LocalizationService>()
+            .Bind<PetrushevskiApps.WhosGame.Scripts.LocalizationService.ILocalizationService>()
+            .To<LocalizationServiceComponent>()
             .AsSingle();
         Container
             .Bind<IItemViewPool>()
@@ -77,5 +85,6 @@ public class MainInstaller : MonoInstaller
             .WithInitialSize(5)
             .FromComponentInNewPrefab(_packageViewPrefab)
             .UnderTransformGroup("PackageListItemViewPool");
+    }
     }
 }

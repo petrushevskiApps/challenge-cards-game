@@ -1,9 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using UserInterface.Views;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 
-public interface IPackageListController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList
 {
-    void Setup(IListView view, IReadOnlyList<IPackageModel> packages, Action<IPackageModel, bool> onPackageSelected);
-    void Clear();
+    public interface IPackageListController
+    {
+        void Setup(IListView view, IReadOnlyList<IPackageModel> packages, Action<IPackageModel, bool> onPackageSelected);
+        void Clear();
+    }
 }

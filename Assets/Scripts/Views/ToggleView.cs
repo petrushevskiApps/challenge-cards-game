@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Views
 {
     public class ToggleView : MonoBehaviour
     {

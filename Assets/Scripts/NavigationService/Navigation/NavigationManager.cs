@@ -1,9 +1,11 @@
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Window;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.WindowProvider;
 using System;
 using System.Collections.Generic;
 using ModestTree;
 using Zenject;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation
 {
     public class NavigationManager : 
         INavigationManager,

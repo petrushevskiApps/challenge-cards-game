@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 
-public interface IRandomChallengeRepository
+namespace PetrushevskiApps.WhosGame.Scripts.Repositories.ChallengeRepositoryService
 {
-    List<string> GetRandomChallenges(int count, string language);
+    public interface IRandomChallengeRepository
+    {
+        List<string> GetRandomChallenges(int count, string language);
+    }
 }

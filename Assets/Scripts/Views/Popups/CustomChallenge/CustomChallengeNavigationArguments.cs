@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 
-namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge
 {
-    public sealed class EditChallengeNavigationArguments
+    public sealed class CustomChallengeNavigationArguments
     {
         public Action<string> OnPopupResult  { get; }
         public string ChallengeDescription { get; }
 
-        public EditChallengeNavigationArguments(
+        public CustomChallengeNavigationArguments(
             Action<string> onPopupResult,
             string description = null)
         {

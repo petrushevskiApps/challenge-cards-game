@@ -1,11 +1,14 @@
+using PetrushevskiApps.WhosGame.Scripts.Extensions;
+using PetrushevskiApps.WhosGame.Scripts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DefaultNamespace.Extensions;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class RandomChallengeRepository : IRandomChallengeRepository
+namespace PetrushevskiApps.WhosGame.Scripts.Repositories.ChallengeRepositoryService
+{
+    public class RandomChallengeRepository : IRandomChallengeRepository
 {
     private const string CHALLENGES_FILE_PATH = "random_challenges";
     
@@ -75,4 +78,5 @@ public class RandomChallengeRepository : IRandomChallengeRepository
             _ => challenge.English
         };
     }
+}
 }

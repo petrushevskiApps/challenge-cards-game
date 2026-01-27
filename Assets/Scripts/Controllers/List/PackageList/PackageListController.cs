@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
 using UnityEngine;
-using UserInterface.Views;
 
-public class PackageListController: IPackageListController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList
+{
+    public class PackageListController: IPackageListController
 {
     // Internal
     private IListView _listView;
@@ -107,5 +111,6 @@ public class PackageListController: IPackageListController
     private void OnCardRemoved(IPackageModel package)
     {
         RemoveItem(package.Id);
+    }
     }
 }

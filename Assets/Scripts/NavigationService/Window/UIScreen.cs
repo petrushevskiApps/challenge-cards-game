@@ -1,9 +1,11 @@
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Window
 {
     /// <summary>
     ///     Base class for all Screens used with Unity.

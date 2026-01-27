@@ -1,9 +1,9 @@
-﻿using System;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
-using UserInterface.Popups;
+using System;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.ConfirmationPopup;
 
-namespace DefaultNamespace.Controllers
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Popups
 {
     public class ConfirmationPopupController: IConfirmationPopupController
     {

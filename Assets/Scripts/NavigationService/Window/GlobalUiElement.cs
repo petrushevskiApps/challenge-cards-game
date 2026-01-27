@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Window
 {
     /// <summary>
     /// Used to control global UI elements from screens.

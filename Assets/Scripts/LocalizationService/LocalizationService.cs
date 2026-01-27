@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Localization
+namespace PetrushevskiApps.WhosGame.Scripts.LocalizationService
 {
     public class LocalizationService : ILocalizationService
     {

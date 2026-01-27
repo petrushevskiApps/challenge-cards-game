@@ -1,6 +1,8 @@
-using UserInterface.Screens;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator
 {
     public class ScreenNavigation : IScreenNavigation
     {

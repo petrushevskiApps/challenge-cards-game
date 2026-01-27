@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class RandomChallengesData
+namespace PetrushevskiApps.WhosGame.Scripts.Models
 {
-    public List<RandomChallengeModel> RandomChallenges;
+    [Serializable]
+    public class RandomChallengesData
+        : IRandomChallengesData
+    {
+        public List<RandomChallengeModel> RandomChallenges  { get; set; }
+    }
 }

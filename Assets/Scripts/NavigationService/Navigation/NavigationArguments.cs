@@ -1,4 +1,4 @@
-﻿namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation
 {
     /// <summary>
     /// Default navigational arguments, to be used when

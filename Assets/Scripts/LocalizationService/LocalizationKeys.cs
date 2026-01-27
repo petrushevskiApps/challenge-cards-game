@@ -1,4 +1,4 @@
-namespace Localization
+namespace PetrushevskiApps.WhosGame.Scripts.LocalizationService
 {
     public static class LocalizationKeys
     {

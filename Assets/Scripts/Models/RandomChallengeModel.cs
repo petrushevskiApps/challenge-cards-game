@@ -1,8 +1,12 @@
 using System;
 
-[Serializable]
-public class RandomChallengeModel
+namespace PetrushevskiApps.WhosGame.Scripts.Models
 {
-    public string English;
-    public string Russian;
+    [Serializable]
+    public class RandomChallengeModel
+        : IRandomChallengeModel
+    {
+        public string English { get; set; }
+        public string Russian { get; set; }
+    }
 }

@@ -1,12 +1,15 @@
+using PetrushevskiApps.WhosGame.Scripts.Effects;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using PrimeTween;
 using Zenject;
 
-public class SquishyButtonAnimation
-    : MonoBehaviour,
-        IPointerDownHandler,
-        IPointerUpHandler
+namespace PetrushevskiApps.WhosGame.Scripts.Effects
+{
+    public class SquishyButtonAnimation
+        : MonoBehaviour,
+            IPointerDownHandler,
+            IPointerUpHandler
 {
     [SerializeField]
     private ButtonAnimationSettings _overrideSettings;
@@ -57,5 +60,6 @@ public class SquishyButtonAnimation
             Easing.Overshoot(_settings.OvershootStrength), useUnscaledTime: true);
         Tween.ScaleX(transform, _originalScale.x, _settings.BounceDuration,
             Easing.Overshoot(_settings.OvershootStrength), useUnscaledTime: true);
+    }
     }
 }

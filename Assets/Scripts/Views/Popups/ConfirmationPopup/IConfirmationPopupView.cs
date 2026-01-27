@@ -1,4 +1,4 @@
-﻿namespace UserInterface.Popups
+namespace PetrushevskiApps.WhosGame.Scripts.Views.Popups.ConfirmationPopup
 {
     public interface IConfirmationPopupView
     {

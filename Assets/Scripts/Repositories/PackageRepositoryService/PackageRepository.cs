@@ -1,12 +1,16 @@
+using PetrushevskiApps.WhosGame.Scripts.DTOs;
+using PetrushevskiApps.WhosGame.Scripts.Extensions;
+using PetrushevskiApps.WhosGame.Scripts.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
-using DTOs;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class PackageRepository : IPackageRepository
+namespace PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService
+{
+    public class PackageRepository : IPackageRepository
 {
     private const string SAVE_FILE_NAME = "packages";
     
@@ -127,7 +131,7 @@ public class PackageRepository : IPackageRepository
         package.TitleChanged -= OnPackageTitleChanged;
     }
 
-    private void OnCardUpdated(IChallengeCardModel card)
+    private void OnCardUpdated(IChallengeModel card)
     {
         SavePackagesAsync().Forget();
     }
@@ -136,5 +140,6 @@ public class PackageRepository : IPackageRepository
     {
         SavePackagesAsync().Forget();
     }
+}
 }
 

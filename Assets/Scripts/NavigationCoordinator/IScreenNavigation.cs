@@ -1,4 +1,6 @@
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+using PetrushevskiApps.WhosGame.Scripts.Models;
+
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator
 {
     public interface IScreenNavigation
     {

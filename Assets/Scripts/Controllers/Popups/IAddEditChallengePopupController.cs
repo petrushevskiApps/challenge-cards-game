@@ -1,14 +1,14 @@
 using System;
-using UserInterface.Popups;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge;
 
-namespace DefaultNamespace.Controllers
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Popups
 {
     public interface IAddEditChallengePopupController
     {
         void InputTextUpdated(string inputFieldValue);
 
         void Setup(
-            IEditChallengePopupView view,
+            ICustomChallengePopupView view,
             Action<string> onPopupResult,
             string challengeDescriptionText = null);
         

@@ -1,6 +1,6 @@
 using System;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public interface IScrollableList
     {

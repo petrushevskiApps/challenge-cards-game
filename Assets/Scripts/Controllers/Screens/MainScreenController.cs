@@ -1,10 +1,16 @@
 using Cysharp.Threading.Tasks;
-using Localization;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.ConfirmationPopup;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 using UnityEngine;
-using UserInterface.Screens;
 
-public class MainScreenController : IMainScreenController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
+{
+    public class MainScreenController : IMainScreenController
 {
     private const int MIN_ACTIVE_CARDS_REQUIRED = 10;
 
@@ -107,6 +113,7 @@ public class MainScreenController : IMainScreenController
     {
         _view.SetMessageGroupVisibility(!isValidPackageSelected);
         _view.SetPlayButton(isValidPackageSelected);
+    }
     }
 }
 

@@ -1,6 +1,6 @@
-﻿using UserInterface.Popups;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.Settings;
 
-namespace DefaultNamespace.Controllers
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Popups
 {
     public interface ISettingsPopupController
     {

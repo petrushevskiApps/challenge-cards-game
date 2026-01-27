@@ -2,8 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using PrimeTween;
 
-[RequireComponent(typeof(Toggle))]
-public class SwitchView : MonoBehaviour
+namespace PetrushevskiApps.WhosGame.Scripts.Views
+{
+    [RequireComponent(typeof(Toggle))]
+    public class SwitchView : MonoBehaviour
 {
     [SerializeField]
     private Toggle _toggle;
@@ -106,4 +108,5 @@ public class SwitchView : MonoBehaviour
         anchoredPosition.x = anchoredPos;
         _rectTransform.anchoredPosition = anchoredPosition;
     }
+}
 }

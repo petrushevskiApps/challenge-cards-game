@@ -1,10 +1,11 @@
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UserInterface.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Views.List
 {
     public class PackageListItemView : MonoBehaviour
     {

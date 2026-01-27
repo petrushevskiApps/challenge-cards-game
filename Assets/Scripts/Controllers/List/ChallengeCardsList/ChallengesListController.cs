@@ -2,20 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
-using UserInterface.Screens;
-using UserInterface.Views;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views.List;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 using Zenject;
 
-public class ChallengesListController : 
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList
+{
+    public class ChallengesListController : 
     IChallengesListController,
     IListDataSource
 {
     // Internal
     private IPackageModel _packageModel;
     private InfiniteScrollController _infiniteScrollController;
-    private List<IChallengeCardModel> _cards;
+    private List<IChallengeModel> _cards;
     private IChallengeScreenView _view;
 
     // Injected
@@ -60,7 +65,7 @@ public class ChallengesListController :
         _infiniteScrollController.Clear();
     }
 
-    public void SetCards(IEnumerable<IChallengeCardModel> challengeCards)
+    public void SetCards(IEnumerable<IChallengeModel> challengeCards)
     {
         _cards.Clear();
         _cards.AddRange(challengeCards);
@@ -93,14 +98,14 @@ public class ChallengesListController :
         }
     }
 
-    private void OnCardAdded(IChallengeCardModel card)
+    private void OnCardAdded(IChallengeModel card)
     {
         _infiniteScrollController.RowsAddedEvent += ScrollToBottom;
         _cards.Add(card);
         SetScrollController();
     }
 
-    private void OnCardsAdded(List<IChallengeCardModel> challenges)
+    private void OnCardsAdded(List<IChallengeModel> challenges)
     {
         
         _infiniteScrollController.RowsAddedEvent += ScrollToBottom;
@@ -117,7 +122,7 @@ public class ChallengesListController :
     }
 
     private int _scrollToElement;
-    private void OnCardRemoved(IChallengeCardModel card)
+    private void OnCardRemoved(IChallengeModel card)
     {
         _infiniteScrollController.RowsAddedEvent += ScrollToElement;
         _scrollToElement = _infiniteScrollController.GetFirstFullyVisibleItemView().Index;
@@ -139,5 +144,5 @@ public class ChallengesListController :
         _infiniteScrollController.Clear();
         _infiniteScrollController.AddPage(_cards.Count);
     }
-    
+}
 }

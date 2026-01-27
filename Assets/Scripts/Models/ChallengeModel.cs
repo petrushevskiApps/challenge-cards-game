@@ -1,7 +1,9 @@
 using System;
 
-[Serializable]
-public class ChallengeCardModel : IChallengeCardModel
+namespace PetrushevskiApps.WhosGame.Scripts.Models
+{
+    [Serializable]
+    public class ChallengeModel : IChallengeModel
 {
     public event Action<string> TitleChanged;
     public event Action<string> DescriptionChanged;
@@ -12,12 +14,12 @@ public class ChallengeCardModel : IChallengeCardModel
     public string Description { get; private set; }
     public bool IsSelected { get; private set; }
 
-    public ChallengeCardModel()
+    public ChallengeModel()
     {
         Id = Guid.NewGuid().ToString();
     }
 
-    public ChallengeCardModel(string title, string description, bool isSelected = false) : this()
+    public ChallengeModel(string title, string description, bool isSelected = false) : this()
     {
         UpdateTitle(title);
         UpdateDescription(description);
@@ -65,5 +67,6 @@ public class ChallengeCardModel : IChallengeCardModel
     private void SetSelectedInternal(bool selected)
     {
         IsSelected = selected;
+    }
     }
 }

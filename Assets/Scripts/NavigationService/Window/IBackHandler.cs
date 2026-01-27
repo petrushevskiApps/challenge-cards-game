@@ -1,4 +1,4 @@
-﻿namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationService.Window
 {
     public interface IBackHandler
     {

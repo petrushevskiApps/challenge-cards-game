@@ -4,14 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Localization;
-using TwoOneTwoGames.UIManager.InfiniteScrollList;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
+using PetrushevskiApps.WhosGame.Scripts.Controllers.List.ChallengeCardsList;
+using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
+using PetrushevskiApps.WhosGame.Scripts.Models;
+using PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.ChallengeRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.ConfirmationPopup;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup;
+using PetrushevskiApps.WhosGame.Scripts.Views.Screens;
 using UnityEngine;
-using UserInterface.Popups;
-using UserInterface.Screens;
 
-public class ChallengeScreenController : IChallengeScreenController
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
+{
+    public class ChallengeScreenController : IChallengeScreenController
 {
     private const float DEBOUNCE_PERIOD = 0.3f;
 
@@ -93,8 +100,8 @@ public class ChallengeScreenController : IChallengeScreenController
 
     public void CreateCustomChallengeClicked()
     {
-        _popupNavigation.ShowEditChallengePopup(
-            new EditChallengeNavigationArguments(OnCreateCustomChallengePopupResult));
+        _popupNavigation.ShowCustomChallengePopup(
+            new CustomChallengeNavigationArguments(OnCreateCustomChallengePopupResult));
     }
 
     public void CreateRandomChallengeClicked()
@@ -105,7 +112,7 @@ public class ChallengeScreenController : IChallengeScreenController
 
     private void OnCreateCustomChallengePopupResult(string challengeDescription)
     {
-        var challengeCardModel = new ChallengeCardModel(
+        var challengeCardModel = new ChallengeModel(
             _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
             challengeDescription);
         _packageModel.AddChallengeCardModel(challengeCardModel);
@@ -117,11 +124,11 @@ public class ChallengeScreenController : IChallengeScreenController
             challengesCount, 
             _localizationService.GetCurrentLanguage().ToString().ToLower());
         
-        List<IChallengeCardModel> challengeModels = randomChallenges
-            .Select(challenge => new ChallengeCardModel(
+        List<IChallengeModel> challengeModels = randomChallenges
+            .Select(challenge => new ChallengeModel(
                 _localizationService.GetLocalizedString(LocalizationKeys.WhosMostLikely), 
                 challenge))
-            .Cast<IChallengeCardModel>()
+            .Cast<IChallengeModel>()
             .ToList();
 
         _packageModel.AddChallengeModelsInBulk(challengeModels);
@@ -198,7 +205,7 @@ public class ChallengeScreenController : IChallengeScreenController
         
         searchText = searchText.Trim();
 
-        var results = new List<IChallengeCardModel>();
+        var results = new List<IChallengeModel>();
 
         foreach (var card in _packageModel.ChallengeCards)
         {
@@ -229,5 +236,6 @@ public class ChallengeScreenController : IChallengeScreenController
     private void SetTitle()
     {
         _view.SetPackageTitle(_packageModel.Title);
+    }
     }
 }

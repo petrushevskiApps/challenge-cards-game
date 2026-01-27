@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService.ViewPool;
 using UnityEngine;
 
-namespace TwoOneTwoGames.UIManager.InfiniteScrollList
+namespace PetrushevskiApps.WhosGame.Scripts.InfiniteScrollListService
 {
     public class RowView : MonoBehaviour, IItemView, ISpawnable
     {

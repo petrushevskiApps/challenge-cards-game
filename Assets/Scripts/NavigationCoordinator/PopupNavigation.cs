@@ -1,6 +1,10 @@
-﻿using UserInterface.Popups;
+using PetrushevskiApps.WhosGame.Scripts.NavigationService.Navigation;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.ConfirmationPopup;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.CustomChallenge;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.RandomChallengePopup;
+using PetrushevskiApps.WhosGame.Scripts.Views.Popups.Settings;
 
-namespace TwoOneTwoGames.UIManager.ScreenNavigation
+namespace PetrushevskiApps.WhosGame.Scripts.NavigationCoordinator
 {
     public class PopupNavigation : IPopupNavigation
     {
@@ -16,9 +20,9 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             _navigationManager.ShowPopup<ConfirmationPopup, ConfirmationPopupNavigationArguments>(navArguments);
         }
 
-        public void ShowEditChallengePopup(EditChallengeNavigationArguments navArguments)
+        public void ShowCustomChallengePopup(CustomChallengeNavigationArguments navArguments)
         {
-            _navigationManager.ShowPopup<AddEditChallengePopupView, EditChallengeNavigationArguments>(navArguments);
+            _navigationManager.ShowPopup<CustomChallengePopupView, CustomChallengeNavigationArguments>(navArguments);
         }
 
         public void ShowRandomChallengePopup(RandomChallengePopupNavigationArguments navArguments)

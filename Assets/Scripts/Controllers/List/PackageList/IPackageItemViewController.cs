@@ -1,4 +1,4 @@
-﻿namespace UserInterface.Views
+namespace PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList
 {
     public interface IPackageItemViewController
     {
