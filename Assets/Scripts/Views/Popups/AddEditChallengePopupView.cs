@@ -9,17 +9,15 @@ namespace UserInterface.Popups
 {
     public class AddEditChallengePopupView: UIPopup, IEditChallengePopupView
     {
+        [Header("Create Challenge Popup properties")]
         [SerializeField]
         private Button _actionButton;
-
         [SerializeField]
         private TextMeshProUGUI _actionButtonTitle;
-
         [SerializeField]
         private TMP_InputField _inputField;
         [SerializeField]
         private TextMeshProUGUI _inputFieldPlaceholderLabel;
-
         [SerializeField]
         private TextMeshProUGUI _characterCount;
         [SerializeField]

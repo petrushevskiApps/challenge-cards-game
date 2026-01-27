@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 2982674076206102552}
   - component: {fileID: 5409321819319361818}
   - component: {fileID: 7032261284252254067}
+  - component: {fileID: 1418087871924599899}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -456,7 +457,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.8117647, g: 0.8117647, b: 0.8117647, a: 1}
+    m_PressedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
     m_SelectedColor: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -523,6 +524,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1418087871924599899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560604231080152988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 0}
 --- !u!1 &4224386856477019009
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +550,7 @@ GameObject:
   - component: {fileID: 894259909866774145}
   - component: {fileID: 4334949511591946418}
   - component: {fileID: 4177308136002357622}
+  - component: {fileID: 4979776532521466199}
   m_Layer: 5
   m_Name: CreatePackageButton
   m_TagString: Untagged
@@ -596,8 +611,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
-    m_SelectedColor: {r: 1, g: 0.9882353, b: 0.9529412, a: 1}
+    m_PressedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -663,6 +678,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &4979776532521466199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224386856477019009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 11400000, guid: dbf41ecfbbc2bbf48a33afa9ddeca58c, type: 2}
 --- !u!1 &5693194993998544685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1364,7 @@ GameObject:
   - component: {fileID: 541495741060110874}
   - component: {fileID: 2592810582910744586}
   - component: {fileID: 9035017777817831408}
+  - component: {fileID: 5901253648905723198}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -1444,6 +1473,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5901253648905723198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892438420775856713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 0}
 --- !u!1 &7969901785545724625
 GameObject:
   m_ObjectHideFlags: 0

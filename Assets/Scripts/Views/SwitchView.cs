@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PrimeTween;
 
 [RequireComponent(typeof(Toggle))]
 public class SwitchView : MonoBehaviour
@@ -15,8 +13,13 @@ public class SwitchView : MonoBehaviour
     private Image _checkmarkBackground;
     [SerializeField]
     private Color _toggleOnBackgroundColor;
+    [SerializeField]
+    private float _animationDuration = 0.3f;
+    [SerializeField]
+    private float _scaleMultiplier = 1.3f;
     
     private RectTransform _rectTransform;
+    private Sequence _currentAnimation;
 
     public Toggle Toggle => _toggle;
     
@@ -44,16 +47,49 @@ public class SwitchView : MonoBehaviour
 
     private void OnValueChanged(bool isOn)
     {
-        if (isOn)
-        {
-            SetAnchorMinAndMax(1, -10);
-            _checkmarkBackground.color = _toggleOnBackgroundColor;
-        }
-        else
-        {
-            SetAnchorMinAndMax(0, 10);
-            _checkmarkBackground.color = Color.white;
-        }
+        _currentAnimation.Stop();
+
+        float targetAnchor = isOn ? 1f : 0f;
+        float targetPosition = isOn ? -10f : 10f;
+        Color targetColor = isOn ? _toggleOnBackgroundColor : Color.white;
+
+        AnimateSwitching(isOn, targetAnchor, targetPosition, targetColor);
+    }
+
+    private void AnimateSwitching(bool isOn, float targetAnchor, float targetPosition, Color targetColor)
+    {
+        _currentAnimation = Sequence.Create()
+            .Group(Tween.Custom(
+                _rectTransform.anchorMin.x,
+                targetAnchor,
+                _animationDuration,
+                onValueChange: value => SetAnchorMinAndMax(value, Mathf.Lerp(
+                    isOn ? 10f : -10f,
+                    targetPosition,
+                    (value - (isOn ? 0f : 1f)) / (targetAnchor - (isOn ? 0f : 1f))
+                )),
+                ease: Ease.OutCubic
+            ))
+            .Group(Tween.Color(
+                _checkmarkBackground,
+                targetColor,
+                _animationDuration,
+                ease: Ease.OutCubic
+            ))
+            .Group(Tween.Scale(
+                _checkmark.transform,
+                Vector3.one * _scaleMultiplier,
+                _animationDuration / 2f,
+                ease: Ease.OutQuad
+            ).OnComplete(() =>
+            {
+                Tween.Scale(
+                    _checkmark.transform,
+                    Vector3.one,
+                    _animationDuration / 2f,
+                    ease: Ease.InQuad
+                );
+            }));
     }
 
     private void SetAnchorMinAndMax(float value, float anchoredPos)

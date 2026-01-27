@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 1489351730516300909}
   - component: {fileID: 3053808684254779426}
   - component: {fileID: 4650005291564629421}
+  - component: {fileID: 2068130798085380267}
   m_Layer: 5
   m_Name: NegativeButton
   m_TagString: Untagged
@@ -395,6 +396,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2068130798085380267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092557818640623356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 11400000, guid: 480dd10da9826074aab081fd4b0e6c10, type: 2}
 --- !u!1 &2833516604024562646
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +687,7 @@ GameObject:
   - component: {fileID: 6197527288142001863}
   - component: {fileID: 1083001694851116514}
   - component: {fileID: 8550851474255389248}
+  - component: {fileID: 699469499609706994}
   m_Layer: 5
   m_Name: PositiveButton (1)
   m_TagString: Untagged
@@ -773,6 +788,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &699469499609706994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325611713267674095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 11400000, guid: 480dd10da9826074aab081fd4b0e6c10, type: 2}
 --- !u!1 &5756541595688163190
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +875,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7628043422469512028}
   - component: {fileID: 2234105324690086457}
+  - component: {fileID: 3112542787180797092}
   m_Layer: 5
   m_Name: ConfirmationPopup
   m_TagString: Untagged
@@ -890,13 +919,29 @@ MonoBehaviour:
   _isBackStackable: 1
   _pauseGameWhenActive: 1
   _popupClickableBackground: {fileID: 2301759377837715354}
+  _contentGroup: {fileID: 6426354994657829227}
   _closeButton: {fileID: 0}
+  _animationDuration: 0.3
+  _maxScale: 1.1
+  _canvasGroup: {fileID: 3112542787180797092}
   _title: {fileID: 4406036030245375919}
   _description: {fileID: 887498070903038741}
   _positiveButton: {fileID: 1083001694851116514}
   _positiveButtonLabel: {fileID: 2788297890603710116}
   _negativeButton: {fileID: 3053808684254779426}
   _negativeButtonLabel: {fileID: 3677576860150585462}
+--- !u!225 &3112542787180797092
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814745213812244290}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6199876109110749610
 GameObject:
   m_ObjectHideFlags: 0

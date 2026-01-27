@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 7690774089154394078}
   - component: {fileID: 1416214580798913863}
   - component: {fileID: 8797551004581131918}
+  - component: {fileID: 7485765546421853820}
   m_Layer: 5
   m_Name: CardListItemView
   m_TagString: Untagged
@@ -595,6 +596,19 @@ MonoBehaviour:
   - Text: {fileID: 5224301021823283795}
     ColorOn: {r: 1, g: 1, b: 1, a: 1}
     ColorOff: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &7485765546421853820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407064924788767788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 11400000, guid: 79a05bb7cf5faf24e96e2f5fdcc495d4, type: 2}
 --- !u!1 &6854877254936902784
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +622,7 @@ GameObject:
   - component: {fileID: 5420704865870663861}
   - component: {fileID: 1535185495335527493}
   - component: {fileID: 1971462558775674726}
+  - component: {fileID: 5096450048686773540}
   m_Layer: 5
   m_Name: DeletePackageButton (1)
   m_TagString: Untagged
@@ -736,6 +751,19 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5096450048686773540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6854877254936902784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 0}
 --- !u!1 &8141206499062310213
 GameObject:
   m_ObjectHideFlags: 0

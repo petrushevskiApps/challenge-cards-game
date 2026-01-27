@@ -11,14 +11,13 @@ namespace UserInterface.Popups
 {
     public class SettingsPopupView: UIPopup, ISettingsPopupView
     {
+        [Header("Settings Popup properties")]
         [SerializeField]
         private TextMeshProUGUI _title;
-        
         [SerializeField]
         private ToggleView _englishToggle;
         [SerializeField]
         private TextMeshProUGUI _englishToggleLabel;
-        
         [SerializeField]
         private ToggleView _russianToggle;
         [SerializeField]

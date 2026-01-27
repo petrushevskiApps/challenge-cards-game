@@ -9,6 +9,7 @@ namespace UserInterface.Popups
 {
     public class RandomChallengePopup: UIPopup, IRandomChallengePopupView
     {
+        [Header("Random Challenge Popup properties")]
         [SerializeField]
         private TextMeshProUGUI _title;
         [SerializeField]

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1abcfc5cfa541dbbb0a3ea6629fa490, type: 3}
   m_Name: MainScriptableObjectInstaller
   m_EditorClassIdentifier: 
-  _scriptableObjectsToBind: []
+  _scriptableObjectsToBind:
+  - {fileID: 11400000, guid: 4ae1e6ec11f6a8e419c5b6764e10b5d2, type: 2}

@@ -9,6 +9,7 @@ namespace UserInterface.Popups
 {
     public class ConfirmationPopup: UIPopup, IConfirmationPopupView
     {
+        [Header("Confirmation Popup properties")]
         [SerializeField]
         private TextMeshProUGUI _title;
         [SerializeField]

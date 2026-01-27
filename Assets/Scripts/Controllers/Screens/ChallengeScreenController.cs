@@ -228,7 +228,6 @@ public class ChallengeScreenController : IChallengeScreenController
 
     private void SetTitle()
     {
-        Debug.Log("SET TITLE");
         _view.SetPackageTitle(_packageModel.Title);
     }
 }

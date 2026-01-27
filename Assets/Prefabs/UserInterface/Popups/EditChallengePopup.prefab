@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 186371817654734977}
   - component: {fileID: 8320057077770765638}
   - component: {fileID: 1487479566799027333}
+  - component: {fileID: 4379729977557241103}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -588,6 +589,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4379729977557241103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674205994779164242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69601079c66ce2742baad0fececf0948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 0}
 --- !u!1 &5592913494107174585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1083,7 @@ GameObject:
   - component: {fileID: 5096982141706487638}
   - component: {fileID: 601059078043019846}
   - component: {fileID: 2679494858143551460}
+  - component: {fileID: 6005435716373290994}
   m_Layer: 5
   m_Name: ActionButton
   m_TagString: Untagged
@@ -1178,6 +1193,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6005435716373290994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699214583818467768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f91525e36cee47ba385254786f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideSettings: {fileID: 11400000, guid: 480dd10da9826074aab081fd4b0e6c10, type: 2}
 --- !u!1 &8922378565444683749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7353185763594757509}
   - component: {fileID: 5835003435537674656}
+  - component: {fileID: 5486313457036901218}
   m_Layer: 5
   m_Name: EditChallengePopup
   m_TagString: Untagged
@@ -1231,13 +1260,29 @@ MonoBehaviour:
   _isBackStackable: 1
   _pauseGameWhenActive: 1
   _popupClickableBackground: {fileID: 1476558654574981639}
+  _contentGroup: {fileID: 829028599180087310}
   _closeButton: {fileID: 1487479566799027333}
+  _animationDuration: 0.3
+  _maxScale: 1.1
+  _canvasGroup: {fileID: 5486313457036901218}
   _actionButton: {fileID: 2679494858143551460}
   _actionButtonTitle: {fileID: 8139548949679283783}
   _inputField: {fileID: 285746516289273485}
   _inputFieldPlaceholderLabel: {fileID: 7590260875898475991}
   _characterCount: {fileID: 4173453147894730283}
   _title: {fileID: 8597413921548424087}
+--- !u!225 &5486313457036901218
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922378565444683749}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8983545728677158304
 GameObject:
   m_ObjectHideFlags: 0
