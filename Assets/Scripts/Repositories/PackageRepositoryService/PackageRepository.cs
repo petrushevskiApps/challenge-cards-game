@@ -11,135 +11,137 @@ using UnityEngine;
 namespace PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryService
 {
     public class PackageRepository : IPackageRepository
-{
-    private const string SAVE_FILE_NAME = "packages";
-    
-    public event Action<IPackageModel> PackageAdded;
-    public event Action<IPackageModel> PackageRemoved;
-    public event Action PackagesChanged;
-    public IReadOnlyList<IPackageModel> Packages => _packages;
-    public bool IsLoaded { get; private set; }
-    
-    private readonly List<IPackageModel> _packages = new();
-    private string SaveFilePath => Path.Combine(Application.persistentDataPath, $"{SAVE_FILE_NAME}.json");
-
-    public IPackageModel CreatePackage(string title)
     {
-        if (string.IsNullOrWhiteSpace(title))
+        private const string SAVE_FILE_NAME = "packages";
+
+        public event Action<IPackageModel> PackageAdded;
+        public event Action<IPackageModel> PackageRemoved;
+        public event Action PackagesChanged;
+        public IReadOnlyList<IPackageModel> Packages => _packages;
+        public RepositoryState State { get; private set; }
+
+        private readonly List<IPackageModel> _packages = new();
+        private string SaveFilePath => Path.Combine(Application.persistentDataPath, $"{SAVE_FILE_NAME}.json");
+
+        public IPackageModel CreatePackage(string title)
         {
-            throw new ArgumentException("Package title cannot be null or empty", nameof(title));
-        }
-
-        var package = new PackageModel(title);
-        _packages.Add(package);
-        
-        SubscribeToPackageEvents(package);
-        
-        PackageAdded?.Invoke(package);
-        PackagesChanged?.Invoke();
-        SavePackagesAsync().Forget();
-        
-        return package;
-    }
-
-    public bool DeletePackage(IPackageModel package)
-    {
-        if (package == null || !_packages.Contains(package))
-        {
-            return false;
-        }
-
-        UnsubscribeFromPackageEvents(package);
-        _packages.Remove(package);
-        
-        PackageRemoved?.Invoke(package);
-        PackagesChanged?.Invoke();
-        SavePackagesAsync().Forget();
-        
-        return true;
-    }
-
-    public async UniTask SavePackagesAsync()
-    {
-        try
-        {
-            var packageDtos = _packages.ToDtoList();
-            
-            var settings = new JsonSerializerSettings
+            if (string.IsNullOrWhiteSpace(title))
             {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore
-            };
-            
-            string json = JsonConvert.SerializeObject(packageDtos, settings);
-            await File.WriteAllTextAsync(SaveFilePath, json);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Failed to save packages: {ex.Message}");
-        }
-    }
-
-    public async UniTask LoadPackagesAsync()
-    {
-        try
-        {
-            if (!File.Exists(SaveFilePath))
-            {
-                Debug.Log("No saved packages found. Starting fresh.");
-                return;
+                throw new ArgumentException("Package title cannot be null or empty", nameof(title));
             }
 
-            string json = await File.ReadAllTextAsync(SaveFilePath);
-            var packageDtos = JsonConvert.DeserializeObject<List<PackageDto>>(json);
+            var package = new PackageModel(title);
+            _packages.Add(package);
 
-            if (packageDtos == null)
-            {
-                Debug.LogWarning("Save file exists but contains no valid data.");
-                return;
-            }
+            SubscribeToPackageEvents(package);
 
-            _packages.Clear();
+            PackageAdded?.Invoke(package);
+            PackagesChanged?.Invoke();
+            SavePackagesAsync().Forget();
 
-            var loadedPackages = packageDtos.ToModelList();
-            foreach (var package in loadedPackages)
-            {
-                _packages.Add(package);
-                SubscribeToPackageEvents(package);
-            }
-
-            IsLoaded = true;
-            Debug.Log($"Loaded {_packages.Count} packages from: {SaveFilePath}");
+            return package;
         }
-        catch (Exception ex)
+
+        public bool DeletePackage(IPackageModel package)
         {
-            Debug.LogError($"Failed to load packages: {ex.Message}");
+            if (package == null || !_packages.Contains(package))
+            {
+                return false;
+            }
+
+            UnsubscribeFromPackageEvents(package);
+            _packages.Remove(package);
+
+            PackageRemoved?.Invoke(package);
+            PackagesChanged?.Invoke();
+            SavePackagesAsync().Forget();
+
+            return true;
         }
-    }
 
-    private void SubscribeToPackageEvents(IPackageModel package)
-    {
-        package.CardAdded += OnCardUpdated;
-        package.CardRemoved += OnCardUpdated;
-        package.TitleChanged += OnPackageTitleChanged;
-    }
+        public async UniTask SavePackagesAsync()
+        {
+            try
+            {
+                var packageDtos = _packages.ToDtoList();
 
-    private void UnsubscribeFromPackageEvents(IPackageModel package)
-    {
-        package.CardAdded -= OnCardUpdated;
-        package.CardRemoved -= OnCardUpdated;
-        package.TitleChanged -= OnPackageTitleChanged;
-    }
+                var settings = new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                };
 
-    private void OnCardUpdated(IChallengeModel card)
-    {
-        SavePackagesAsync().Forget();
-    }
+                string json = JsonConvert.SerializeObject(packageDtos, settings);
+                await File.WriteAllTextAsync(SaveFilePath, json);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to save packages: {ex.Message}");
+            }
+        }
 
-    private void OnPackageTitleChanged(string title)
-    {
-        SavePackagesAsync().Forget();
+        public async UniTask LoadPackagesAsync()
+        {
+            try
+            {
+                State = RepositoryState.Loading;
+                if (!File.Exists(SaveFilePath))
+                {
+                    Debug.Log("No saved packages found. Starting fresh.");
+                    var fs = File.Create(SaveFilePath);
+                    fs.Close();
+                }
+
+                string json = await File.ReadAllTextAsync(SaveFilePath);
+                var packageDtos = JsonConvert.DeserializeObject<List<PackageDto>>(json);
+
+                // if (packageDtos == null)
+                // {
+                //     Debug.LogWarning("Save file exists but contains no valid data.");
+                //     return;
+                // }
+
+                _packages.Clear();
+
+                var loadedPackages = packageDtos.ToModelList();
+                foreach (var package in loadedPackages)
+                {
+                    _packages.Add(package);
+                    SubscribeToPackageEvents(package);
+                }
+
+                State = RepositoryState.Loaded;
+                Debug.Log($"Loaded {_packages.Count} packages from: {SaveFilePath}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to load packages: {ex.Message}");
+                State = RepositoryState.Failed;
+            }
+        }
+
+        private void SubscribeToPackageEvents(IPackageModel package)
+        {
+            package.CardAdded += OnCardUpdated;
+            package.CardRemoved += OnCardUpdated;
+            package.TitleChanged += OnPackageTitleChanged;
+        }
+
+        private void UnsubscribeFromPackageEvents(IPackageModel package)
+        {
+            package.CardAdded -= OnCardUpdated;
+            package.CardRemoved -= OnCardUpdated;
+            package.TitleChanged -= OnPackageTitleChanged;
+        }
+
+        private void OnCardUpdated(IChallengeModel card)
+        {
+            SavePackagesAsync().Forget();
+        }
+
+        private void OnPackageTitleChanged(string title)
+        {
+            SavePackagesAsync().Forget();
+        }
     }
 }
-}
-

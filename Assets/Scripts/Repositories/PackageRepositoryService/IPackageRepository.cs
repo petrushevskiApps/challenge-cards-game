@@ -10,7 +10,7 @@ namespace PetrushevskiApps.WhosGame.Scripts.Repositories.PackageRepositoryServic
     event Action<IPackageModel> PackageAdded;
     event Action<IPackageModel> PackageRemoved;
     event Action PackagesChanged;
-    bool IsLoaded { get; }
+    RepositoryState State { get; }
     IReadOnlyList<IPackageModel> Packages { get; }
     IPackageModel CreatePackage(string title);
     bool DeletePackage(IPackageModel package);

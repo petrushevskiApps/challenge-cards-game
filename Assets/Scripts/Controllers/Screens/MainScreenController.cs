@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using PetrushevskiApps.WhosGame.Scripts.Controllers.List.PackageList;
 using PetrushevskiApps.WhosGame.Scripts.LocalizationService;
@@ -17,7 +18,8 @@ namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
     // Internal
     private IMainScreenView _view;
     private UniTask _initializationTask;
-    
+    private CancellationTokenSource _cancellationToken;
+
     // Injected
     private readonly IScreenNavigation _screenNavigation;
     private readonly IPopupNavigation _popupNavigation;
@@ -48,10 +50,13 @@ namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
     {
         _localizationService.LanguageChanged += OnLanguageChanged;
 
+        _cancellationToken = new CancellationTokenSource();
         UniTask.Create(async () =>
         {
-            await UniTask.WaitUntil(() => _packageRepository.IsLoaded);
-            if (_view.ListView != null)
+            await UniTask.WaitUntil(
+                () => _packageRepository.State == RepositoryState.Loaded, 
+                cancellationToken: _cancellationToken.Token);
+            if (_view.ListView != null && _packageRepository.State == RepositoryState.Loaded)
             {
                 _packageListController.Setup(_view.ListView, _packageRepository.Packages, PackageSelected);
             }
@@ -65,6 +70,13 @@ namespace PetrushevskiApps.WhosGame.Scripts.Controllers.Screens
     {
         _packageListController.Clear();
         _localizationService.LanguageChanged -= OnLanguageChanged;
+        
+        if (_cancellationToken != null)
+        {
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
+            _cancellationToken = null;
+        }
     }
 
     private void SetTexts()
