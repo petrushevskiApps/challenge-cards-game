@@ -22,6 +22,7 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         public event EventHandler<IItemView> ScrollPageCompleted;
         public event EventHandler ListViewsReadyEvent;
         public event EventHandler ListEndEvent;
+        public event EventHandler RowsAddedEvent;
         
         private readonly SortedDictionary<int, IItemView> _itemViews = new();
 
@@ -44,6 +45,7 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
             _scrollList.RowHiddenEvent += OnRowHidden;
             _scrollList.RowsVisibilityUpdatedEvent += OnRowsVisibilityUpdated;
             _scrollList.OnListEndEvent += OnListEndEvent;
+            _scrollList.RowsAddedEvent += OnRowsAdded;
         }
 
         private void Start()
@@ -57,8 +59,14 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
             _scrollList.RowHiddenEvent -= OnRowHidden;
             _scrollList.RowsVisibilityUpdatedEvent -= OnRowsVisibilityUpdated;
             _scrollList.OnListEndEvent -= OnListEndEvent;
+            _scrollList.RowsAddedEvent -= OnRowsAdded;
         }
-        
+
+        private void OnRowsAdded(object sender, EventArgs e)
+        {
+            RowsAddedEvent?.Invoke(sender, e);
+        }
+
         private void OnListEndEvent(object sender, EventArgs e)
         {
             ListEndEvent?.Invoke(sender, e);

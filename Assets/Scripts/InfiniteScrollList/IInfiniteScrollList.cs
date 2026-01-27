@@ -51,5 +51,7 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         ///     <c>false</c>If any of the corners is outside the viewport.
         /// </returns>
         bool IsViewFullyVisible(RectTransform rect);
+
+        event EventHandler RowsAddedEvent;
     }
 }

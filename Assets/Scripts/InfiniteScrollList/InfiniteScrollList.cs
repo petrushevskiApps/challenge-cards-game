@@ -42,6 +42,7 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         public event EventHandler<ListRow> RowHiddenEvent;
         public event EventHandler RowsVisibilityUpdatedEvent;
         public event EventHandler ScrollingCompletedEvent;
+        public event EventHandler RowsAddedEvent;
         
         private readonly List<ListRow> _rows = new();
 
@@ -134,6 +135,7 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
                         {
                             ToElement(scrollToRow);
                         }
+                        RowsAddedEvent?.Invoke(this, EventArgs.Empty);
                         NotifyRowsVisibility();
                     }));
         }
@@ -149,7 +151,10 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         /// <inheritdoc cref="IInfiniteScrollList.ScrollUp" />
         public void ScrollUp()
         {
-            if (_scrollUpCoroutine != null || !gameObject.activeInHierarchy) return;
+            if (_scrollUpCoroutine != null || !gameObject.activeInHierarchy)
+            {
+                return;
+            }
             StopActiveCoroutine(ref _scrollDownCoroutine);
             _scrollUpCoroutine = StartCoroutine(Scroll(-1));
         }
@@ -157,7 +162,10 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         /// <inheritdoc cref="IInfiniteScrollList.ScrollDown" />
         public void ScrollDown()
         {
-            if (_scrollDownCoroutine != null) return;
+            if (_scrollDownCoroutine != null)
+            {
+                return;
+            }
             StopActiveCoroutine(ref _scrollUpCoroutine);
             _scrollDownCoroutine = StartCoroutine(Scroll(1));
         }
@@ -179,7 +187,10 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         /// <inheritdoc cref="IInfiniteScrollList.ToElement" />
         public void ToElement(int rowIndex, AlignAt elementAlignment = AlignAt.Top)
         {
-            if (!_isScrollActive || rowIndex >= _rows.Count) return;
+            if (!_isScrollActive || rowIndex >= _rows.Count)
+            {
+                return;
+            }
             StopAllScrollCoroutines();
             var index = Mathf.Clamp(rowIndex, 0, int.MaxValue);
 
